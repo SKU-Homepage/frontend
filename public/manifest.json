@@ -1,7 +1,8 @@
 {
-  "name": "SKU PWA",
-  "short_name": "SKU PWA",
-  "/icons": [
+  "name": "서경대 홈페이지",
+  "short_name": "SKU",
+  "description": "서경대 홈페이지 재구축",
+  "icons": [
     {
       "src": "/icons/icon-48x48.png",
       "sizes": "48x48",

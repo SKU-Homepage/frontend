@@ -1,6 +1,21 @@
 import "normalize.css";
 import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
+import Providers from "@/utils/Providers";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
 
 const APP_NAME = "SKU PWA";
 const APP_DEFAULT_TITLE = "SKU";
@@ -47,15 +62,3 @@ export const viewport: Viewport = {
   initialScale: 1.0,
   themeColor: "#FFFFFF",
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
-}
