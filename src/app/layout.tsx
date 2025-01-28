@@ -2,6 +2,7 @@ import "normalize.css";
 import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import Providers from "@/utils/Providers";
+import { noto_sans_kr } from "@/styles/fonts/noto_sans_kr";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={noto_sans_kr.className}>
       <body>
         <Providers>{children}</Providers>
       </body>
