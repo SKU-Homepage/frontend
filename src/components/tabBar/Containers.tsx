@@ -6,14 +6,14 @@ import { ReactNode, useState } from "react";
 
 export default function Containers({ children }: ChildrenProp) {
   return (
-    <div className="flex justify-between items-center h-[95px] px-[51px] pb-[33.69px] pt-[10px] fixed bottom-0 w-full shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
+    <div className="flex justify-between pt-[10px] items-start h-[95px] px-[51px] fixed bottom-0 w-full shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
       {children}
     </div>
   );
 }
 
 function Content({ children }: ChildrenProp) {
-  return <div className="flex justify-between w-full">{children}</div>;
+  return <div className="flex justify-between w-full h-full">{children}</div>;
 }
 
 function Item({ src, alt, href, label, isActive }: ItemProps) {
