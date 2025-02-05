@@ -1,4 +1,3 @@
-import "normalize.css";
 import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import Providers from "@/utils/Providers";
