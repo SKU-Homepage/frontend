@@ -4,19 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
 
-export default function Containers({ children }: ChildrenProp) {
+export const Containers = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex justify-between pt-[10px] items-start h-[95px] px-[51px] fixed bottom-0 w-full shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
+    <div className="flex z-10 justify-between pt-[10px] items-start h-[95px] px-[51px] fixed bottom-0 w-full shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
       {children}
     </div>
   );
-}
+};
 
-function Content({ children }: ChildrenProp) {
+const Content = ({ children }: ChildrenProp) => {
   return <div className="flex justify-between w-full h-full">{children}</div>;
-}
+};
 
-function Item({ src, alt, href, label, isActive }: ItemProps) {
+const Item = ({ src, alt, href, label, isActive }: ItemProps) => {
   const [isTouched, setIsTouched] = useState(false);
   return (
     <Link
@@ -41,7 +41,7 @@ function Item({ src, alt, href, label, isActive }: ItemProps) {
       </span>
     </Link>
   );
-}
+};
 
 interface ItemProps {
   src: string;
@@ -57,3 +57,5 @@ interface ChildrenProp {
 
 Containers.Item = Item;
 Containers.Content = Content;
+
+export default Containers;
