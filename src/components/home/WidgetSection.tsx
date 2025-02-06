@@ -1,4 +1,5 @@
 import H from "@/components/home";
+import AddWidget from "./AddWidget/AddWidget";
 
 export const WidgetSection = () => {
   return (
@@ -6,7 +7,7 @@ export const WidgetSection = () => {
       <H.Widget />
       <H.Widget />
       <H.Widget />
-      <H.AddWidget />
+      <AddWidget />
     </H.WidgetWrapper>
   );
 };
