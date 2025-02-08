@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Home = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex box flex-col bg-[#F6F6F6] bg-[url('/images/home_background.png')] bg-no-repeat items-center px-[24px] h-[calc(100vh-75px)] overflow-y-auto">
+    <div className="flex box flex-col bg-[#F6F6F6] bg-[url('/images/home_background.png')] bg-no-repeat bg-[100%_auto] items-center px-[4.6%] h-[calc(100vh-75px)] overflow-y-auto">
       {children}
     </div>
   );
@@ -64,17 +64,8 @@ const Lecture = () => {
   );
 };
 
-const Tip = () => {
-  return (
-    <div className="flex gap-[14.5px] w-full h-[48px] px-[17px] py-[12px] mt-[22px] mb-[14px] rounded-[12px] bg-[#E9EFF7] items-center">
-      <span className="text-[12px] font-bold">TIP !</span>
-      <span className="text-[11px]">위젯을 자유롭게 설정해봐요</span>
-    </div>
-  );
-};
-
 const WidgetWrapper = ({ children }: ChildrenProp) => {
-  return <div className="grid grid-cols-2 w-full gap-[2.8%] mb-[28px]">{children}</div>;
+  return <div className="grid grid-cols-2 w-full gap-[2.8%] mt-[14px] mb-[28px]">{children}</div>;
 };
 
 const Widget = () => {
@@ -99,7 +90,6 @@ const Widget = () => {
 Home.Header = Header;
 Home.TimeTable = TimeTable;
 Home.Lecture = Lecture;
-Home.Tip = Tip;
 Home.WidgetWrapper = WidgetWrapper;
 Home.Widget = Widget;
 
