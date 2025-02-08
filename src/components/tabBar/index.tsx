@@ -2,13 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import T from "./Containers";
-import { isPWA } from "@/utils/isPWA";
+import useIsPWA from "@/utils/isPWA";
 
 export default function TabBar() {
   const pathname = usePathname();
 
+  if (!useIsPWA()) return;
   if (pathname !== "/" && !pathname.includes("profile")) return;
-  if (!isPWA) return;
 
   return (
     <T>
