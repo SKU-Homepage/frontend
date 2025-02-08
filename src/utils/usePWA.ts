@@ -1,3 +1,5 @@
+"use client";
+
 interface NavigatorWithStandalone extends Navigator {
   standalone?: boolean;
 }
