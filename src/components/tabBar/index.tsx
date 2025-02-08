@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import T from "./Containers";
-import { isPWA } from "@/utils/usePWA";
+import { isPWA } from "@/utils/isPWA";
 
 export default function TabBar() {
   const pathname = usePathname();
