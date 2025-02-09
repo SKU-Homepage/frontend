@@ -1,4 +1,6 @@
-const HeaderRootLayout = ({ children }: { children: React.ReactNode }) => {
+import { ReactNode } from "react";
+
+const HeaderRootLayout = ({ children }: { children: ReactNode }) => {
   return <header>{children}</header>;
 };
 
