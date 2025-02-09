@@ -6,17 +6,19 @@ import HeaderNavLayout from "./Header.NavLayout";
 import HeaderRootLayout from "./Header.RootLayout";
 import HeaderTitle from "./Header.Title";
 
-const Header = () => {
+interface HeaderProps {
+  title: string;
+  mention: string;
+}
+
+const Header = ({ title, mention }: HeaderProps) => {
   const [isClicked, setIsCliked] = useState({
     allNoctice: true,
     calledDibsOnNotice: false,
   });
   return (
     <HeaderRootLayout>
-      <HeaderTitle
-        title="공지사항"
-        mention="전체 학사 일정과 개인 일정을 추가하여 한눈에 정리할 수 있어요"
-      />
+      <HeaderTitle title={title} mention={mention} />
 
       <HeaderNavLayout>
         <HeaderNavItem
