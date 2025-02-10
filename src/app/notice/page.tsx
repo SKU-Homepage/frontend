@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import { Header, NoticeBtn, NoticeBtnSection, TimeInformation } from "@/components/notice";
 
