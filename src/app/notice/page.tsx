@@ -1,3 +1,5 @@
+"use server";
+
 import { Header, NoticeBtn, NoticeBtnSection, TimeInformation } from "@/components/notice";
 
 export default function Notice() {
