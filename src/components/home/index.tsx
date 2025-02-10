@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const Home = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex box flex-col bg-[#F6F6F6] bg-[url('/images/home_background.png')] bg-no-repeat bg-[100%_auto] items-center px-[4.6%] h-[calc(100vh-75px)] overflow-y-auto">
+    <div className="flex box flex-col bg-[#F6F6F6] bg-[url('/images/home_background.png')] bg-no-repeat bg-[100%_auto] items-center px-[4.6%] h-full overflow-y-auto">
       {children}
     </div>
   );
