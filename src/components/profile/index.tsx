@@ -1,5 +1,9 @@
 import { ChildrenProp } from "@/utils/children.type";
 import Image from "next/image";
+import grayCalendar from "@/assets/images/gray-calendar.svg";
+import grayHeart from "@/assets/images/gray-heart.svg";
+import graySpeaker from "@/assets/images/gray-speaker.svg";
+import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
   return <div className="flex flex-col px-[4.6%] pt-[30px]">{children}</div>;
@@ -48,6 +52,46 @@ const UserInfo = () => {
   );
 };
 
+const WidgetSection = () => {
+  const serviceWidgets = [
+    {
+      title: "내 시간표",
+      src: grayCalendar,
+      url: "#",
+    },
+    {
+      title: "키워드 알림",
+      src: graySpeaker,
+      url: "#",
+    },
+    {
+      title: "공지사항 찜 목록",
+      src: grayHeart,
+      url: "#",
+    },
+  ];
+
+  return (
+    <div className="flex w-full justify-center gap-[2.2%] mt-[11px] mb-[30px]">
+      {serviceWidgets.map(({ title, src, url }) => (
+        <Widget key={title} url={url} title={title} src={src} />
+      ))}
+    </div>
+  );
+};
+
+const Widget = ({ src, title, url }: WidgetProps) => {
+  return (
+    <Link
+      href={url}
+      className="flex flex-col items-center justify-center gap-[8px] flex-1 aspect-[111/78]"
+    >
+      <Image src={src} width={23} height={23} alt={title} />
+      <p className="text-[11px] leading-[11.8px]">{title}</p>
+    </Link>
+  );
+};
+
 const ServiceSection = ({ children }: ChildrenProp) => {
   return <div className="flex flex-col mt-[29px]">{children}</div>;
 };
@@ -76,10 +120,17 @@ const Service = () => {
   );
 };
 
+interface WidgetProps {
+  url: string;
+  src: string;
+  title: string;
+}
+
 Profile.Header = Header;
 Profile.InfoWrapper = InfoWrapper;
 Profile.ProfileImg = ProfileImg;
 Profile.UserInfo = UserInfo;
+Profile.WidgetSection = WidgetSection;
 Profile.ServiceSection = ServiceSection;
 Profile.ServiceHeader = ServiceHeader;
 Profile.ServiceWrapper = ServiceWrapper;

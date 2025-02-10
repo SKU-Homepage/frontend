@@ -1,7 +1,7 @@
 import Tip from "@/components/common/Tip";
 import P from "@/components/profile";
-import UserInfo from "./UserInfo";
-import Service from "./Service";
+import UserInfo from "../../components/profile/UserInfo";
+import Service from "../../components/profile/Service";
 
 export default function Profile() {
   return (

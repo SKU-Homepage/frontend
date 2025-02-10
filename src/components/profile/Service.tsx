@@ -3,6 +3,7 @@ import P from "@/components/profile";
 const Service = () => {
   return (
     <P.ServiceSection>
+      <P.WidgetSection />
       <P.ServiceHeader />
       <P.ServiceWrapper>
         <P.Service />
