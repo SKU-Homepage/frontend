@@ -25,21 +25,6 @@ const InfoWrapper = ({ children }: ChildrenProp) => {
   );
 };
 
-const ProfileImg = () => {
-  return (
-    <div className="relative">
-      <Image src="/images/ex.svg" width={79} height={98} alt="예시 이미지" />
-      <Image
-        className="absolute bottom-[0px] right-[0px] translate-x-[50%] translate-y-[50%]"
-        src="/images/edit.svg"
-        width={26}
-        height={26}
-        alt="수정 이미지"
-      />
-    </div>
-  );
-};
-
 const UserInfo = () => {
   return (
     <div className="flex flex-col justify-end gap-[10px] leading-normal mb-[7px]">
@@ -128,7 +113,6 @@ interface WidgetProps {
 
 Profile.Header = Header;
 Profile.InfoWrapper = InfoWrapper;
-Profile.ProfileImg = ProfileImg;
 Profile.UserInfo = UserInfo;
 Profile.WidgetSection = WidgetSection;
 Profile.ServiceSection = ServiceSection;

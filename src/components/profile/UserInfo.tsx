@@ -1,9 +1,10 @@
 import P from "@/components/profile";
+import ProfileImg from "./ProfileImg";
 
 const UserInfo = () => {
   return (
     <P.InfoWrapper>
-      <P.ProfileImg />
+      <ProfileImg />
       <P.UserInfo />
     </P.InfoWrapper>
   );
