@@ -1,8 +1,5 @@
 import { ChildrenProp } from "@/utils/children.type";
 import Image from "next/image";
-import grayCalendar from "@/assets/images/gray-calendar.svg";
-import grayHeart from "@/assets/images/gray-heart.svg";
-import graySpeaker from "@/assets/images/gray-speaker.svg";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
@@ -41,17 +38,17 @@ const WidgetSection = () => {
   const serviceWidgets = [
     {
       title: "내 시간표",
-      src: grayCalendar,
+      src: "/images/gray-calendar.svg",
       url: "#",
     },
     {
       title: "키워드 알림",
-      src: graySpeaker,
+      src: "/images/gray-speaker.svg",
       url: "#",
     },
     {
       title: "공지사항 찜 목록",
-      src: grayHeart,
+      src: "/images/gray-heart.svg",
       url: "#",
     },
   ];
