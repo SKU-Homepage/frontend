@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
-  return <div className="flex flex-col px-[4.6%] pt-[30px]">{children}</div>;
+  return <div className="flex flex-col pt-[30px] pb-[18px] h-full">{children}</div>;
 };
 
 const Header = () => {
@@ -12,6 +12,10 @@ const Header = () => {
       마이 페이지
     </h1>
   );
+};
+
+const InfoSection = ({ children }: ChildrenProp) => {
+  return <div className="flex flex-col px-[4.6%]">{children}</div>;
 };
 
 const InfoWrapper = ({ children }: ChildrenProp) => {
@@ -54,7 +58,7 @@ const WidgetSection = () => {
   ];
 
   return (
-    <div className="flex w-full justify-center gap-[2.2%] mt-[11px] mb-[30px]">
+    <div className="flex w-full justify-center gap-[2.2%] px-[4.6%] mt-[11px] mb-[30px]">
       {serviceWidgets.map(({ title, src, url }) => (
         <Widget key={title} url={url} title={title} src={src} />
       ))}
@@ -75,30 +79,70 @@ const Widget = ({ src, title, url }: WidgetProps) => {
 };
 
 const ServiceSection = ({ children }: ChildrenProp) => {
-  return <div className="flex flex-col mt-[29px]">{children}</div>;
+  return <div className="flex flex-col">{children}</div>;
 };
 
 const ServiceHeader = () => {
   return (
-    <header className="text-[17px] font-semibold leading-normal mb-[27px]">전체 서비스</header>
+    <header className="text-[17px] font-semibold leading-normal ml-[4.6%] mb-[27px]">
+      전체 서비스
+    </header>
   );
 };
 
-const ServiceWrapper = ({ children }: ChildrenProp) => {
-  return <div className="flex flex-col gap-[22px]">{children}</div>;
+const Services = () => {
+  const services = [
+    {
+      title: "공지사항",
+      url: "#",
+      src: "/images/color-speaker.svg",
+    },
+    {
+      title: "캠퍼스맵",
+      url: "#",
+      src: "/images/school.svg",
+    },
+    {
+      title: "학사일정",
+      url: "#",
+      src: "/images/sound-speaker.svg",
+    },
+    {
+      title: "수업 시간표",
+      url: "#",
+      src: "/images/note.svg",
+    },
+    {
+      title: "비교과 프로그램",
+      url: "#",
+      src: "/images/book.svg",
+    },
+    {
+      title: "문의사항",
+      url: "#",
+      src: "/images/warning.svg",
+    },
+  ];
+  return (
+    <div className="flex flex-col">
+      {services.map(({ title, src, url }) => (
+        <Service key={title} title={title} src={src} url={url} />
+      ))}
+    </div>
+  );
 };
 
-const Service = () => {
+const Service = ({ title, url, src }: WidgetProps) => {
   return (
-    <div className="flex w-full justify-between">
+    <Link href={url} className="flex w-full h-[47px] justify-between last:bg-[#FFD095] px-[4.6%]">
       <div className="flex items-center gap-[18px]">
         <div className="flex justify-center items-center rounded-[4px] w-[29px] aspect-square bg-[#E9EFF7]">
-          <Image src="/images/color-speaker.svg" width={22} height={22} alt="공지사항 버튼" />
+          <Image src={src} width={22} height={22} alt={title} />
         </div>
-        <h3 className="text-[15px] font-medium text-[#143967]">공지사항</h3>
+        <h3 className="text-[15px] font-medium text-[#143967]">{title}</h3>
       </div>
       <Image src="/images/direction.svg" width={8} height={14} alt="바로가기" />
-    </div>
+    </Link>
   );
 };
 
@@ -109,11 +153,12 @@ interface WidgetProps {
 }
 
 Profile.Header = Header;
+Profile.InfoSection = InfoSection;
 Profile.InfoWrapper = InfoWrapper;
 Profile.UserInfo = UserInfo;
 Profile.WidgetSection = WidgetSection;
 Profile.ServiceSection = ServiceSection;
 Profile.ServiceHeader = ServiceHeader;
-Profile.ServiceWrapper = ServiceWrapper;
-Profile.Service = Service;
+Profile.Services = Services;
+
 export default Profile;
