@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
-  return <div className="flex flex-col pt-[30px] pb-[18px] h-full">{children}</div>;
+  return <div className="flex flex-col pt-[30px] pb-[18px] h-full overflow-y-auto">{children}</div>;
 };
 
 const Header = () => {
