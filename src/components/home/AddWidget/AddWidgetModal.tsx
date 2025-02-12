@@ -11,7 +11,10 @@ export default function MyModal({ isOpen, setIsOpen }: AddWidgetModalProps) {
     <Dialog
       as="div"
       open={isOpen}
-      className="fixed focus:outline-none inset-0 flex w-full items-center justify-center bg-black/30 p-4"
+      className={`
+        fixed focus:outline-none inset-0 flex w-full items-center justify-center
+        ${isOpen ? "bg-black/30 p-4" : ""}
+      `}
       onClose={close}
     >
       <div className="fixed inset-0 z-10 w-full overflow-y-auto">
