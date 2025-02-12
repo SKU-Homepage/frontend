@@ -8,7 +8,7 @@ export default function TabBar() {
   const pathname = usePathname();
 
   if (!useIsPWA()) return;
-  if (pathname !== "/" && !pathname.includes("profile")) return;
+  if (pathname !== "/" && !pathname.includes("profile") && !pathname.includes("notice")) return;
 
   return (
     <T>
