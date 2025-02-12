@@ -2,12 +2,10 @@ import { Dialog, DialogPanel, TransitionChild } from "@headlessui/react";
 import { Fragment, ReactNode } from "react";
 
 interface SlideUpModalProps {
-  children: (props: { setIsOpen: (open: boolean) => void }) => ReactNode;
+  children: ReactNode;
   isOpen: boolean;
   setIsOpen: (boolean: boolean) => void;
 }
-// children props로 setIsOpen 전달
-// children에서 닫기 버튼 사용 가능
 
 export default function SlideUpModal({ children, isOpen, setIsOpen }: SlideUpModalProps) {
   return (
@@ -24,7 +22,7 @@ export default function SlideUpModal({ children, isOpen, setIsOpen }: SlideUpMod
           leaveTo="translate-y-full opacity-0"
         >
           <DialogPanel className="w-full max-w-md bg-[#F6F6F6] rounded-t-[20px] p-[20px] pb-[50px] shadow-lg">
-            {children({ setIsOpen })}
+            {children}
           </DialogPanel>
         </TransitionChild>
       </div>
