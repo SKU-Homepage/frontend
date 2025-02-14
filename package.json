@@ -18,7 +18,9 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.5.1",
     "react": "^19.0.0",
+    "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0",
+    "sass": "^1.85.0",
     "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
