@@ -104,7 +104,7 @@ const Services = () => {
     },
     {
       title: "학사일정",
-      url: "#",
+      url: "/calendar",
       src: "/images/sound-speaker.svg",
     },
     {
