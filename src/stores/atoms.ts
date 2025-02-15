@@ -1,4 +1,7 @@
-// import { atom } from "jotai";
+import { atom } from "jotai";
 
-// 예시 atom
-// export const countAtom = atom(0);
+//Widget 전역상태
+const storedData = localStorage.getItem("selectedWidgets");
+const widgets = storedData ? JSON.parse(storedData) : [];
+
+export const myWidgets = atom(widgets);
