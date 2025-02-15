@@ -3,7 +3,7 @@
 import "react-calendar/dist/Calendar.css";
 import "./Grid.scss";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 import dayjs from "dayjs";
 
@@ -14,9 +14,7 @@ type ValuePiece = Date | null;
 
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-interface CalendarProps {}
-
-const Calendar = ({}: CalendarProps) => {
+const Calendar = () => {
   const [currentDate, setCurrentDate] = useState<Value>(new Date());
 
   //dummy
@@ -61,7 +59,7 @@ const Calendar = ({}: CalendarProps) => {
       selectRange={false}
       showNavigation={false}
       formatDay={(locale, date) => dayjs(date).format("D")}
-      tileContent={({ activeStartDate, date, view }) => {
+      tileContent={({ date }) => {
         const events = dummy?.[dayjs(date).format("YYYY-MM-DD")];
 
         return (

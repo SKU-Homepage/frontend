@@ -7,7 +7,7 @@ const EVENT_COLORS = ["#5387E5", "#FF9272", "#9CA8D4"] as const;
 
 const BAR_HEIGHT = 14 as const;
 
-const EventBar = ({ id, title, single, adjacent, order }: EventProps) => {
+const EventBar = ({ title, single, adjacent, order }: EventProps) => {
   return (
     <div
       className={cn("absolute w-full", {
