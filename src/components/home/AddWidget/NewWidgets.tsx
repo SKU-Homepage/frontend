@@ -1,72 +1,36 @@
-import { useState } from "react";
+import { data, WidgetProps } from "@/constants/widgets";
 import Widget from "./Widget";
 
-const NewWidgets = () => {
-  const [selected, setSelected] = useState<number[]>([]);
-
-  const data = [
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-    {
-      title: "공지사항",
-      description: "공지사항을 빠르게 확인해보세요.",
-    },
-  ];
-
+const NewWidgets = ({ selected, setSelected }: NewWidgetsProps) => {
   const toggleSelect = (index: number) => {
-    setSelected((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+    const selectedWidget = data[index];
+
+    setSelected((prev) => {
+      const exists = prev.some((widget) => widget.title === selectedWidget.title);
+      return exists
+        ? prev.filter((widget) => widget.title !== selectedWidget.title) // 이미 있으면 제거
+        : [...prev, selectedWidget]; // 없으면 추가
+    });
   };
 
   return (
     <div className="w-full grid grid-cols-3 mt-[28px] gap-2">
-      {data.map((item: Dataprops, index: number) => (
+      {data.map((item, index) => (
         <Widget
           key={index}
           index={index}
           toggleSelect={toggleSelect}
           title={item.title}
-          selected={selected}
+          selected={selected.some((widget) => widget.title === item.title)}
         />
       ))}
     </div>
   );
 };
 
-interface Dataprops {
-  title: string;
-  description: string;
+interface NewWidgetsProps {
+  selected: WidgetProps[];
+  setSelected: React.Dispatch<React.SetStateAction<WidgetProps[]>>;
 }
 
 export default NewWidgets;
