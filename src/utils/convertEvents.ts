@@ -1,4 +1,7 @@
 import dayjs from "dayjs";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+
+dayjs.extend(isSameOrBefore);
 
 export interface InputEvent {
   id: number;
@@ -10,52 +13,56 @@ export interface InputEvent {
 export interface OutputEventItem {
   id: number;
   title: string;
+  single: boolean;
   adjacent: "right" | "left" | "both" | "none";
   order: number;
 }
 
-export interface OutputEvent {
+export interface OutputFormat {
   [date: string]: OutputEventItem[];
 }
 
-const getAdjacentType = (
-  currentDate: string,
-  startDate: string,
-  endDate: string
-): "right" | "left" | "both" | "none" => {
-  if (startDate === endDate) return "none";
-  if (currentDate === startDate) return "right";
-  if (currentDate === endDate) return "left";
-  return "both";
-};
+const convertEvents = (events: InputEvent[]): OutputFormat => {
+  const result: OutputFormat = {};
 
-const convertEvents = (events: InputEvent[]): OutputEvent => {
-  const result: OutputEvent = {};
+  events.forEach(({ id, title, startDate, endDate }, eventIndex) => {
+    let currentDate = dayjs(startDate);
+    const lastDate = dayjs(endDate);
 
-  events.forEach((event) => {
-    const start = dayjs(event.startDate);
-    const end = dayjs(event.endDate);
-    const daysCount = end.diff(start, "day") + 1;
-
-    // Generate all dates at once using Array.from
-    const dates = Array.from({ length: daysCount }, (_, index) =>
-      start.add(index, "day").format("YYYY-MM-DD")
-    );
-
-    dates.forEach((dateStr) => {
-      const adjacent = getAdjacentType(dateStr, event.startDate, event.endDate);
-
-      if (!result[dateStr]) {
-        result[dateStr] = [];
-      }
+    // For single day events
+    const isSingle = startDate === endDate;
+    if (isSingle) {
+      const dateStr = startDate;
+      if (!result[dateStr]) result[dateStr] = [];
 
       result[dateStr].push({
-        id: event.id,
-        title: event.title,
-        adjacent,
-        order: result[dateStr].length + 1,
+        id,
+        title,
+        single: isSingle,
+        adjacent: "none",
+        order: eventIndex + 1,
       });
-    });
+    } else {
+      // For multi-day events
+      while (currentDate.isSameOrBefore(lastDate, "day")) {
+        const dateStr = currentDate.format("YYYY-MM-DD");
+        if (!result[dateStr]) result[dateStr] = [];
+
+        const isStart = dateStr === startDate;
+        const isEnd = dateStr === endDate;
+        const adjacent = isStart ? "right" : isEnd ? "left" : "both";
+
+        result[dateStr].push({
+          id,
+          title,
+          single: false,
+          adjacent,
+          order: eventIndex + 1,
+        });
+
+        currentDate = currentDate.add(1, "day");
+      }
+    }
   });
 
   return result;

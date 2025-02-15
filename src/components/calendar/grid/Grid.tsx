@@ -31,9 +31,21 @@ const Calendar = ({}: CalendarProps) => {
         },
         {
           id: 2,
-          title: "test",
+          title: "test2",
           startDate: "2025-02-17",
           endDate: "2025-02-17",
+        },
+        {
+          id: 3,
+          title: "test3",
+          startDate: "2025-02-17",
+          endDate: "2025-02-18",
+        },
+        {
+          id: 4,
+          title: "test4",
+          startDate: "2025-02-27",
+          endDate: "2025-03-18",
         },
       ]),
     []
