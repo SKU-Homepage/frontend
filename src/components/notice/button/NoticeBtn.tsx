@@ -7,9 +7,10 @@ interface NoticeBtnProps {
   noticeTitle: string;
   department: string;
   type: ButtonType;
+  onClick: (openState: boolean) => void;
 }
 
-const NoticeBtn = ({ noticeTitle, department, type }: NoticeBtnProps) => {
+const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) => {
   const colorVariant = {
     normal:
       "flex w-full h-16 justify-center items-center cursor-pointer bg-[#EEF0F1] rounded-xl mb-5",
@@ -33,6 +34,7 @@ const NoticeBtn = ({ noticeTitle, department, type }: NoticeBtnProps) => {
           ? colorVariant.favorite
           : undefined
       }
+      onClick={() => onClick(true)}
     >
       <div className="flex flex-1 justify-center items-center h-[20px] relative">
         <Image src={emptyHeart} alt="empty-heart" fill={true} />
