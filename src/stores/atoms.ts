@@ -1,4 +1,6 @@
-// import { atom } from "jotai";
+import { WidgetProps } from "@/constants/widgets";
+import { atom } from "jotai";
 
-// 예시 atom
-// export const countAtom = atom(0);
+//Widget 전역상태
+
+export const myWidgets = atom<WidgetProps[]>([]);

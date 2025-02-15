@@ -1,3 +1,4 @@
+import { WidgetProps } from "@/constants/widgets";
 import { ChildrenProp } from "@/utils/children.type";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,19 +69,19 @@ const WidgetWrapper = ({ children }: ChildrenProp) => {
   return <div className="grid grid-cols-2 w-full gap-[2.8%] mt-[14px] mb-[28px]">{children}</div>;
 };
 
-const Widget = () => {
+const Widget = ({ title, description, src, url }: WidgetProps) => {
   return (
     <div className="flex flex-col p-[15px] !bg-[white] rounded-[15px]">
-      <Link className="aspect-square flex flex-col justify-between" href="#">
+      <Link className="aspect-square flex flex-col justify-between" href={url || "#"}>
         <div>
           <div className="flex w-full justify-between mb-[4.7px] text-[15.7px] font-semibold items-center text-[#143967]">
-            <h2>공지사항</h2>
+            <h2>{title}</h2>
             <Image src="/images/direction.svg" alt="화살표" width={8.6} height={14} />
           </div>
-          <p className="text-[12px] font-medium">공지사항을 빠르게 확인해보세요.</p>
+          <p className="text-[12px] font-medium">{description}</p>
         </div>
         <div className="flex w-full justify-end">
-          <Image src="/images/color-speaker.svg" width={58} height={58} alt="공지사항" />
+          <Image src={src} width={58} height={58} alt="공지사항" />
         </div>
       </Link>
     </div>
