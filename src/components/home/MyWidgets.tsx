@@ -13,7 +13,7 @@ const MyWidgets = () => {
       const widgets = storedData ? JSON.parse(storedData) : [];
       setWidgets(widgets);
     }
-  });
+  }, []);
 
   return widgets.map((item: WidgetProps) => (
     <H.Widget
