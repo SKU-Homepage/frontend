@@ -8,12 +8,13 @@ import { useEffect } from "react";
 const MyWidgets = () => {
   const [widgets, setWidgets] = useAtom(myWidgets);
   useEffect(() => {
-    if (widgets.length === 0) {
+    if (!widgets.length) {
       const storedData = localStorage.getItem("selectedWidgets");
       const widgets = storedData ? JSON.parse(storedData) : [];
       setWidgets(widgets);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [widgets]);
 
   return widgets.map((item: WidgetProps) => (
     <H.Widget
