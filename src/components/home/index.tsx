@@ -66,13 +66,13 @@ const Lecture = () => {
 };
 
 const WidgetWrapper = ({ children }: ChildrenProp) => {
-  return <div className="grid grid-cols-2 w-full gap-[2.8%] mt-[14px] mb-[28px]">{children}</div>;
+  return <div className="grid grid-cols-2 w-full gap-[10px] mt-[14px] mb-[28px]">{children}</div>;
 };
 
 const Widget = ({ title, description, src, url }: WidgetProps) => {
   return (
-    <div className="flex flex-col p-[15px] !bg-[white] rounded-[15px]">
-      <Link className="aspect-square flex flex-col justify-between" href={url || "#"}>
+    <div className="flex flex-col aspect-square p-[15px] bg-[white] rounded-[15px]">
+      <Link className="flex flex-col justify-between" href={url || "#"}>
         <div>
           <div className="flex w-full justify-between mb-[4.7px] text-[15.7px] font-semibold items-center text-[#143967]">
             <h2>{title}</h2>
