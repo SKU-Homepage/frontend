@@ -10,7 +10,7 @@ const LoginBtn = () => {
   return (
     <button
       onClick={handleLogin}
-      className="flex items-center bg-[#809DF2] justify-center w-full h-[60px] relative rounded-[32px] bg-[rgba(128, 157, 242, 1)] bg-linear-[258deg,rgba(125,154,241,0.00)_1.21%,rgba(84,104,213,0.17)_82.51%,#809DF2]"
+      className="flex absolute bottom-[60px] items-center bg-white justify-center w-[85.2%] aspect-[335/47] rounded-[32px]"
     >
       <Image
         className="absolute left-[20px]"
@@ -19,7 +19,7 @@ const LoginBtn = () => {
         src="/images/google.svg"
         alt="구글 로그인"
       />
-      <span className="text-[#fff] text-[16px] font-semibold">학교 이메일로 로그인하기</span>
+      <span className="text-[#446081] text-[14px] font-semibold">학교 이메일로 로그인하기</span>
     </button>
   );
 };
