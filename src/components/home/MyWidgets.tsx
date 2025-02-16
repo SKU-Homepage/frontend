@@ -13,8 +13,9 @@ const MyWidgets = () => {
       const widgets = storedData ? JSON.parse(storedData) : [];
       setWidgets(widgets);
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [widgets]);
+  }, []);
 
   return widgets.map((item: WidgetProps) => (
     <H.Widget
