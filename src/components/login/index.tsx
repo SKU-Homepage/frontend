@@ -3,7 +3,14 @@ import Image from "next/image";
 
 const Login = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex bg-[url('/images/login_background.png')] h-[100vh] items-center px-[7.4%]">
+    <div className="flex h-[100vh] items-center px-[7.4%]">
+      <Image
+        src="/images/login_background.png"
+        fill
+        alt="로그인 배경"
+        quality={100}
+        className="relative object-cover z-[-1]"
+      />
       {children}
     </div>
   );
