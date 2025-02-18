@@ -14,13 +14,6 @@ interface NoticeBtnProps {
 }
 
 const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) => {
-  // const colorVariant = {
-  //   normal:
-  //     "flex w-full h-16 justify-center items-center cursor-pointer bg-[#EEF0F1] rounded-xl mb-5",
-  //   favorite:
-  //     "flex w-full h-16 justify-center items-center cursor-pointer bg-[#436185] rounded-xl mb-5",
-  // };
-
   if (
     typeof noticeTitle === "undefined" ||
     typeof department === "undefined" ||
