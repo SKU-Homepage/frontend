@@ -1,11 +1,9 @@
-import Image from "next/image";
-
 import { cn } from "@/utils/cn";
 
-import emptyHeart from "@/assets/images/notice/empty-heart.svg";
-import rigthArrow from "@/assets/images/notice/direction.svg";
-import rightArrow_favorite from "@/assets/images/notice/arrow-favorite.svg";
-import emptyHeart_favorite from "@/assets/images/notice/heart-favortie.svg";
+import EmptyHeart from "@/assets/images/notice/empty-heart.svg";
+import RigthArrow from "@/assets/images/notice/direction.svg";
+import RightArrow_Favorite from "@/assets/images/notice/arrow-favorite.svg";
+import EmptyHeart_Favorite from "@/assets/images/notice/heart-favortie.svg";
 
 type ButtonType = "favorite" | "normal";
 interface NoticeBtnProps {
@@ -39,13 +37,11 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
       onClick={() => onClick()}
     >
       <div className="flex flex-1 justify-center items-center h-[20px] relative">
-        <Image
-          src={
-            type === "normal" ? emptyHeart : type === "favorite" ? emptyHeart_favorite : undefined
-          }
-          alt="empty-heart"
-          fill={true}
-        />
+        {type === "normal" ? (
+          <EmptyHeart className="block mb-5" />
+        ) : (
+          <EmptyHeart_Favorite className="block mb-5" />
+        )}
       </div>
 
       <div className="flex flex-col flex-4 h-full justify-evenly">
@@ -68,14 +64,11 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
       </div>
 
       <div className="flex flex-1 h-[20px] relative">
-        <Image
-          src={
-            type === "normal" ? rigthArrow : type === "favorite" ? rightArrow_favorite : undefined
-          }
-          alt="empty-heart"
-          height={50}
-          width={50}
-        />
+        {type === "normal" ? (
+          <RigthArrow className="block ml-7" />
+        ) : (
+          <RightArrow_Favorite className="block ml-7" width="100%" height="100%" />
+        )}
       </div>
     </button>
   );
