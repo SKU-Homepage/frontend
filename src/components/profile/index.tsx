@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
-  return <div className="flex flex-col pt-[30px] pb-[18px] h-full overflow-y-auto">{children}</div>;
+  return <div className="flex h-full flex-col overflow-y-auto pt-[64px] pb-[18px]">{children}</div>;
 };
 
 const Header = () => {
   return (
-    <h1 className="w-full text-center text-[17px] font-semibold leading-normal mb-[22px] text-[#143967]">
+    <h1 className="mb-[22px] w-full text-center text-[17px] leading-normal font-semibold text-[#143967]">
       마이 페이지
     </h1>
   );
@@ -20,7 +20,7 @@ const InfoSection = ({ children }: ChildrenProp) => {
 
 const InfoWrapper = ({ children }: ChildrenProp) => {
   return (
-    <div className="bg-[url('/images/profile_background.png')] pt-[20px] pl-[5.36%] h-[155px] rounded-[9.4px] shadow-[0_1.5px_6.4px_#F6F6F6]">
+    <div className="h-[155px] rounded-[9.4px] bg-[url('/images/profile_background.png')] pt-[20px] pl-[5.36%] shadow-[0_1.5px_6.4px_#F6F6F6]">
       <div className="flex gap-[25px]">{children}</div>
     </div>
   );
@@ -28,7 +28,7 @@ const InfoWrapper = ({ children }: ChildrenProp) => {
 
 const UserInfo = () => {
   return (
-    <div className="flex flex-col justify-end gap-[10px] leading-normal mb-[7px]">
+    <div className="mb-[7px] flex flex-col justify-end gap-[10px] leading-normal">
       <h2 className="text-[18px] font-semibold">김서경</h2>
       <div className="text-[11px] font-medium">
         <p>예술대학 디자인학부 생활문화디자인전공</p>
@@ -58,7 +58,7 @@ const WidgetSection = () => {
   ];
 
   return (
-    <div className="flex w-full justify-center gap-[2.2%] px-[4.6%] mt-[11px] mb-[30px]">
+    <div className="mt-[11px] mb-[30px] flex w-full justify-center gap-[2.2%] px-[4.6%]">
       {serviceWidgets.map(({ title, src, url }) => (
         <Widget key={title} url={url} title={title} src={src} />
       ))}
@@ -70,7 +70,7 @@ const Widget = ({ src, title, url }: WidgetProps) => {
   return (
     <Link
       href={url}
-      className="flex flex-col items-center justify-center gap-[8px] flex-1 aspect-[111/78]"
+      className="flex aspect-[111/78] flex-1 flex-col items-center justify-center gap-[8px] rounded-[9px] shadow-[1px_1px_3.9px_0px_rgba(68,96,129,0.09)]"
     >
       <Image src={src} width={23} height={23} alt={title} />
       <p className="text-[11px] leading-[11.8px]">{title}</p>
@@ -84,7 +84,7 @@ const ServiceSection = ({ children }: ChildrenProp) => {
 
 const ServiceHeader = () => {
   return (
-    <header className="text-[17px] font-semibold leading-normal ml-[4.6%] mb-[27px]">
+    <header className="mb-[27px] ml-[4.6%] text-[17px] leading-normal font-semibold">
       전체 서비스
     </header>
   );
@@ -94,7 +94,7 @@ const Services = () => {
   const services = [
     {
       title: "공지사항",
-      url: "#",
+      url: "/notice",
       src: "/images/color-speaker.svg",
     },
     {
@@ -134,9 +134,9 @@ const Services = () => {
 
 const Service = ({ title, url, src }: WidgetProps) => {
   return (
-    <Link href={url} className="flex w-full h-[47px] justify-between last:bg-[#FFD095] px-[4.6%]">
+    <Link href={url} className="flex h-[47px] w-full justify-between px-[4.6%] last:bg-[#FFD095]">
       <div className="flex items-center gap-[18px]">
-        <div className="flex justify-center items-center rounded-[4px] w-[29px] aspect-square bg-[#E9EFF7]">
+        <div className="flex aspect-square w-[29px] items-center justify-center rounded-[4px] bg-[#E9EFF7]">
           <Image src={src} width={22} height={22} alt={title} />
         </div>
         <h3 className="text-[15px] font-medium text-[#143967]">{title}</h3>
