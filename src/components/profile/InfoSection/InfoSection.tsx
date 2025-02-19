@@ -1,6 +1,6 @@
 import P from "@/components/profile";
 import UserInfo from "./UserInfo";
-import Tip from "../common/Tip";
+import Tip from "../../common/Tip";
 
 const InfoSection = () => {
   return (

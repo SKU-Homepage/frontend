@@ -5,8 +5,12 @@ const Widget = ({ index, toggleSelect, selected, title }: WidgetProps) => {
     <button
       onClick={() => toggleSelect(index)}
       className={`relative flex items-center justify-center aspect-square rounded-[15px]
-          bg-[#F1F6FC] bg-linear-[247deg,rgba(222,234,255,0.03)_-8.71%,rgba(154,191,255,0.05)_108.48%,#F1F6FC] border-[2.4px]
-          ${selected ? "border-[#143967]" : "border-[#FFF]"}`}
+          bg-[#F1F6FC] border-[2.4px] transition duration-300
+          ${
+            selected
+              ? "border-[#143967] bg-linear-[247deg,rgba(222,234,255,0.23)_-8.71%,rgba(154,191,255,0.42)_108.48%,#F1F6FC]"
+              : "border-[#FFF]"
+          }`}
     >
       <span className="text-[12.5px] font-semibold text-[#143967]">{title}</span>
       <div className="absolute top-[-6px] right-[-6px]">

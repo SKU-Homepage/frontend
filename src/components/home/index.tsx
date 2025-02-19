@@ -5,7 +5,15 @@ import Link from "next/link";
 
 export const Home = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex box flex-col bg-[#F6F6F6] bg-[url('/images/home_background.png')] bg-no-repeat bg-[100%_auto] items-center px-[4.6%] h-full overflow-y-auto">
+    <div className="relative flex box flex-col w-full pt-[73px] items-center px-[4.6%] h-full overflow-y-auto">
+      <div className="absolute top-0 w-full h-[343px]">
+        <Image
+          className="h-full z-[-1]"
+          fill
+          src="/images/home_background.png"
+          alt="메인페이지 배경화면"
+        />
+      </div>
       {children}
     </div>
   );
@@ -66,13 +74,13 @@ const Lecture = () => {
 };
 
 const WidgetWrapper = ({ children }: ChildrenProp) => {
-  return <div className="grid grid-cols-2 w-full gap-[2.8%] mt-[14px] mb-[28px]">{children}</div>;
+  return <div className="grid grid-cols-2 w-full gap-[10px] mt-[14px] mb-[28px]">{children}</div>;
 };
 
 const Widget = ({ title, description, src, url }: WidgetProps) => {
   return (
-    <div className="flex flex-col p-[15px] !bg-[white] rounded-[15px]">
-      <Link className="aspect-square flex flex-col justify-between" href={url || "#"}>
+    <div className="flex flex-col aspect-square p-[15px] border-[3px] border-[rgba(233,235,240,0.83)] bg-[white] rounded-[15px]">
+      <Link className="flex flex-col justify-between" href={url || "#"}>
         <div>
           <div className="flex w-full justify-between mb-[4.7px] text-[15.7px] font-semibold items-center text-[#143967]">
             <h2>{title}</h2>
