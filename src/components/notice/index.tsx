@@ -9,3 +9,5 @@ export { default as NoticeBtn } from "./button/NoticeBtn";
 export { default as NoticeButtonSection } from "./section/NoticeButtonSection";
 
 export { default as NoticeKeywordButtonSection } from "./section/NoticeKeywordButtonSection";
+
+export { default as NoticeKeywordInputSection } from "./section/NoticeKeywordInputSection";
