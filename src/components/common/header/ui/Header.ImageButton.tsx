@@ -8,6 +8,10 @@ interface HeaderImageButtonProps {
   onClick?: (boolean: boolean) => void;
 }
 
+/**
+ * HeaderWithBackButton에 사용하는 ImageButton 컴포넌트
+ * 이미지 버튼 or msg 
+ */
 const HeaderImageButton = ({ src, msg, onClick }: HeaderImageButtonProps) => {
   return (
     <button
