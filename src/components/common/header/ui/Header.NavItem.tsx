@@ -21,9 +21,9 @@ const HeaderNavItem = ({ path, pathName }: HeaderNavItemProps) => {
     <li
       className={
         cn("flex-1 text-center text-base text-[#143967] font-medium border-b-[3px] rounded-xs cursor-pointer", {
-          'opacity-50': currentPathName === pathName
+          'opacity-50': currentPathName !== path
         })}
-      onClick={() => router.push(`/${path}`)}
+      onClick={() => router.push(`${path}`)}
     >
       {pathName}
     </li>
