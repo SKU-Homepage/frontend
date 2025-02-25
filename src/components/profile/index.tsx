@@ -26,18 +26,6 @@ const InfoWrapper = ({ children }: ChildrenProp) => {
   );
 };
 
-const UserInfo = () => {
-  return (
-    <div className="mb-[7px] flex flex-col justify-end gap-[10px] leading-normal">
-      <h2 className="text-[18px] font-semibold">김서경</h2>
-      <div className="text-[11px] font-medium">
-        <p>예술대학 디자인학부 생활문화디자인전공</p>
-        <p>2021418008 4학년 재학</p>
-      </div>
-    </div>
-  );
-};
-
 const WidgetSection = () => {
   const serviceWidgets = [
     {
@@ -155,7 +143,6 @@ interface WidgetProps {
 Profile.Header = Header;
 Profile.InfoSection = InfoSection;
 Profile.InfoWrapper = InfoWrapper;
-Profile.UserInfo = UserInfo;
 Profile.WidgetSection = WidgetSection;
 Profile.ServiceSection = ServiceSection;
 Profile.ServiceHeader = ServiceHeader;
