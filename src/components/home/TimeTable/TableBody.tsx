@@ -10,7 +10,7 @@ const TableBody = () => {
 
   return (
     <>
-      <TableHeader number={data.length} />
+      <TableHeader number={data?.length || 0} />
       <Lectures lectures={data} />
     </>
   );
