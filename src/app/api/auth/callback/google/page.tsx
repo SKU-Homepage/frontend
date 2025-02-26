@@ -1,16 +1,22 @@
 "use client";
 
-import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Loading from "@/components/common/Loading";
 import { loginHook } from "./loginHook";
 
 export default function LoginRedirect() {
-  const params = useSearchParams();
-  const code = params.get("code");
+  const [code, setCode] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!code) return;
+    const params = new URLSearchParams(window.location.search);
+    setCode(params.get("code"));
+  }, []);
+
+  useEffect(() => {
+    if (!code) {
+      console.log("code값이 없습니다.");
+      return;
+    }
 
     const login = async () => {
       if (await loginHook(code)) location.href = "/";
