@@ -4,6 +4,7 @@ import Providers from "@/utils/Providers";
 import { noto_sans_kr } from "@/styles/fonts/noto_sans_kr";
 import TabBar from "@/components/tabBar";
 import MainWrapper from "@/utils/MainWrapper";
+import Script from "next/script";
 
 export default function RootLayout({
   children,
@@ -12,15 +13,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={noto_sans_kr.className}>
-      <head>
-        <meta name="apple-touch-fullscreen" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-      </head>
       <body>
         <Providers>
           <MainWrapper>{children}</MainWrapper>
           <TabBar />
         </Providers>
+        <Script src="/service-worker.js" />
       </body>
     </html>
   );
@@ -51,7 +49,7 @@ export const metadata: Metadata = {
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "black",
     title: APP_DEFAULT_TITLE,
     startupImage: [
       {
