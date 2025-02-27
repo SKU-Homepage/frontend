@@ -37,7 +37,7 @@ export const requestNotificationPermission = async (): Promise<void | string> =>
 
   const permission = await Notification.requestPermission();
   const token = await getToken(messaging, {
-    vapidKey: process.env.VITE_FCM_KEY,
+    vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
   });
   localStorage.setItem("fcmToken", token);
   return permission;
