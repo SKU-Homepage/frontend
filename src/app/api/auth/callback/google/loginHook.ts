@@ -10,7 +10,7 @@ export const loginHook = async (code: string) => {
       {
         params: {
           code,
-          env: 0,
+          env: process.env.VITE_PUBLIC_LOGIN_ENV,
         },
       }
     );
