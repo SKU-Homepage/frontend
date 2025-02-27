@@ -4,13 +4,14 @@ import Image from "next/image";
 
 const LoginBtn = () => {
   const handleLogin = () => {
-    location.href = "/";
+    location.href =
+      "https://accounts.google.com/o/oauth2/v2/auth?client_id=198007563456-703p8smpd6b7ujujqva20gn0qvjbm85a.apps.googleusercontent.com&redirect_uri=http://localhost:3000/api/auth/callback/google&response_type=code&scope=openid%20email%20profile";
   };
 
   return (
     <button
       onClick={handleLogin}
-      className="flex absolute bottom-[60px] items-center bg-white justify-center w-[85.2%] aspect-[335/47] rounded-[32px]"
+      className="absolute bottom-[60px] flex aspect-[335/47] w-[85.2%] items-center justify-center rounded-[32px] bg-white"
     >
       <Image
         className="absolute left-[20px]"
@@ -19,7 +20,7 @@ const LoginBtn = () => {
         src="/images/google.svg"
         alt="구글 로그인"
       />
-      <span className="text-[#446081] text-[14px] font-semibold">학교 이메일로 로그인하기</span>
+      <span className="text-[14px] font-semibold text-[#446081]">학교 이메일로 로그인하기</span>
     </button>
   );
 };

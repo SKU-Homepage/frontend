@@ -3,7 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
-  return <div className="flex h-full flex-col overflow-y-auto pt-[73px] pb-[18px]">{children}</div>;
+  return (
+    <div className="flex h-full w-full flex-col overflow-y-auto pt-[73px] pb-[18px]">
+      {children}
+    </div>
+  );
 };
 
 const Header = () => {
@@ -22,18 +26,6 @@ const InfoWrapper = ({ children }: ChildrenProp) => {
   return (
     <div className="h-[155px] rounded-[9.4px] bg-[url('/images/profile_background.png')] pt-[20px] pl-[5.36%] shadow-[0_1.5px_6.4px_#F6F6F6]">
       <div className="flex gap-[25px]">{children}</div>
-    </div>
-  );
-};
-
-const UserInfo = () => {
-  return (
-    <div className="mb-[7px] flex flex-col justify-end gap-[10px] leading-normal">
-      <h2 className="text-[18px] font-semibold">김서경</h2>
-      <div className="text-[11px] font-medium">
-        <p>예술대학 디자인학부 생활문화디자인전공</p>
-        <p>2021418008 4학년 재학</p>
-      </div>
     </div>
   );
 };
@@ -155,7 +147,6 @@ interface WidgetProps {
 Profile.Header = Header;
 Profile.InfoSection = InfoSection;
 Profile.InfoWrapper = InfoWrapper;
-Profile.UserInfo = UserInfo;
 Profile.WidgetSection = WidgetSection;
 Profile.ServiceSection = ServiceSection;
 Profile.ServiceHeader = ServiceHeader;

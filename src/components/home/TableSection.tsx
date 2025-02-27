@@ -1,11 +1,19 @@
-import H from "@/components/home";
+import TimeTable from "./TimeTable/TimeTable";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getQueryClient } from "@/utils/get-query-client";
+import { useTimeTable } from "@/hooks/homeHooks";
+import TableBody from "./TimeTable/TableBody";
 
 export const TableSection = () => {
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(useTimeTable);
+
   return (
-    <H.TimeTable>
-      <H.Lecture />
-      <H.Lecture />
-    </H.TimeTable>
+    <TimeTable>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <TableBody />
+      </HydrationBoundary>
+    </TimeTable>
   );
 };
 
