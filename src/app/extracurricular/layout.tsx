@@ -5,7 +5,7 @@ import { HeaderWithBackButton, HeaderWithTitleAndMentionAndNav } from "@/compone
 export default function ExtraCurricularLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <HeaderWithBackButton />
+      <HeaderWithBackButton src="/images/extracurricular/favorite.png" />
       <HeaderWithTitleAndMentionAndNav
         title="비교과 프로그램"
         mention="전체 학사 일정과 개인 일정을 추가하여 한 눈에 정리할 수 있어요"
