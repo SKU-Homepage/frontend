@@ -1,23 +1,19 @@
-import Image from "next/image";
-import emptyHeart from "@/assets/images/notice/empty-heart.svg";
-import rigthArrow from "@/assets/images/notice/direction.svg";
+import { cn } from "@/utils/cn";
+
+import EmptyHeart from "@/assets/images/notice/empty-heart.svg";
+import RigthArrow from "@/assets/images/notice/direction.svg";
+import RightArrow_Favorite from "@/assets/images/notice/arrow-favorite.svg";
+import EmptyHeart_Favorite from "@/assets/images/notice/heart-favortie.svg";
 
 type ButtonType = "favorite" | "normal";
 interface NoticeBtnProps {
   noticeTitle: string;
   department: string;
   type: ButtonType;
-  onClick: (openState: boolean) => void;
+  onClick: () => void;
 }
 
 const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) => {
-  const colorVariant = {
-    normal:
-      "flex w-full h-16 justify-center items-center cursor-pointer bg-[#EEF0F1] rounded-xl mb-5",
-    favorite:
-      "flex w-full h-16 justify-center items-center cursor-pointer bg-[#436185] rounded-xl mb-5",
-  };
-
   if (
     typeof noticeTitle === "undefined" ||
     typeof department === "undefined" ||
@@ -27,26 +23,45 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
 
   return (
     <button
-      className={
-        type === "normal"
-          ? colorVariant.normal
-          : type === "favorite"
-          ? colorVariant.favorite
-          : undefined
-      }
-      onClick={() => onClick(true)}
+      className={cn("flex w-full h-16 justify-center items-center cursor-pointer rounded-xl mb-5", {
+        "bg-[#EEF0F1]": type === "normal",
+        " bg-[#436185]": type === "favorite",
+      })}
+      onClick={() => onClick()}
     >
       <div className="flex flex-1 justify-center items-center h-[20px] relative">
-        <Image src={emptyHeart} alt="empty-heart" fill={true} />
+        {type === "normal" ? (
+          <EmptyHeart className="block mb-5" />
+        ) : (
+          <EmptyHeart_Favorite className="block mb-5" />
+        )}
       </div>
 
       <div className="flex flex-col flex-4 h-full justify-evenly">
-        <p className="font-bold text-xs text-[#143967] text-left">{noticeTitle}</p>
-        <p className="font-normal text-[11px] text-[#143967] text-left opacity-60">{department}</p>
+        <p
+          className={cn("font-bold text-xs  text-left", {
+            "text-[#143967]": type === "normal",
+            "text-white": type === "favorite",
+          })}
+        >
+          {noticeTitle}
+        </p>
+        <p
+          className={cn("font-bold text-xs  text-left", {
+            "text-[#143967]": type === "normal",
+            "text-white": type === "favorite",
+          })}
+        >
+          {department}
+        </p>
       </div>
 
       <div className="flex flex-1 h-[20px] relative">
-        <Image src={rigthArrow} alt="empty-heart" fill={true} />
+        {type === "normal" ? (
+          <RigthArrow className="block ml-7" />
+        ) : (
+          <RightArrow_Favorite className="block ml-7" width="100%" height="100%" />
+        )}
       </div>
     </button>
   );
