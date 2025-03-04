@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export const Home = ({ children }: ChildrenProp) => {
   return (
-    <div className="box relative flex h-full w-full flex-col items-center overflow-y-auto px-[4.6%] pt-[73px]">
-      <div className="absolute top-0 h-[343px] w-full">
+    <div className="flex h-full w-full flex-col items-center overflow-y-scroll px-[4.6%]">
+      <div className="absolute top-0 h-[343px] w-full max-w-[600px]">
         <Image
           className="z-[-1] h-full"
           fill
