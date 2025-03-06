@@ -3,19 +3,17 @@
 import "react-calendar/dist/Calendar.css";
 import "./Grid.scss";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 import dayjs from "dayjs";
 
 import convertEvents from "@/utils/convertEvents";
 import Events from "./Events";
-
-type ValuePiece = Date | null;
-
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import { useAtom } from "jotai";
+import { calendarAtom } from "@/stores/calendar";
 
 const Calendar = () => {
-  const [currentDate, setCurrentDate] = useState<Value>(new Date());
+  const [{ currentDate }, setCalendarAtom] = useAtom(calendarAtom);
 
   //dummy
   const dummy = useMemo(
@@ -55,7 +53,7 @@ const Calendar = () => {
       locale="ko"
       view="month"
       value={currentDate}
-      onChange={setCurrentDate}
+      onChange={(value) => setCalendarAtom((prev) => ({ ...prev, currentDate: value as Date }))}
       selectRange={false}
       showNavigation={false}
       formatDay={(locale, date) => dayjs(date).format("D")}

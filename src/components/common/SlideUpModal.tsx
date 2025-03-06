@@ -21,7 +21,7 @@ export default function SlideUpModal({ children, isOpen, setIsOpen }: SlideUpMod
           leaveFrom="translate-y-0 opacity-100"
           leaveTo="translate-y-full opacity-0"
         >
-          <DialogPanel className="w-full max-w-md bg-[#F6F6F6] rounded-t-[20px] p-[20px] pb-[50px] shadow-lg">
+          <DialogPanel className="w-full max-w-md rounded-t-[20px] bg-white p-[20px] pb-[50px] shadow-lg">
             {children}
           </DialogPanel>
         </TransitionChild>
