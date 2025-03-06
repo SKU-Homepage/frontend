@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 
-import NoticeBtn from "../button/NoticeBtn";
-import SectionLayout from "./Section.Layout";
+import NoticeBtn from "./NoticeBtn";
 import NoticeModal from "../modal/NoticeModal";
 
 const NoticeButtonSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <SectionLayout>
+    <section>
       <NoticeBtn
         noticeTitle="2024 콘텐츠 인사이트 : 상상은 현실이 된다"
         type="normal"
@@ -17,7 +16,7 @@ const NoticeButtonSection = () => {
         onClick={() => setIsOpen(true)}
       />
       <NoticeModal isOpen={isOpen} onClose={setIsOpen} />
-    </SectionLayout>
+    </section>
   );
 };
 

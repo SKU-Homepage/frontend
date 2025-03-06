@@ -1,11 +1,10 @@
-import NoticeKeywordButton from "../button/NoticeKeywordButton";
-import SectionLayout from "./Section.Layout";
+import NoticeKeywordButton from "./NoticeKeywordButton";
 
 const NoticeKeywordButtonSection = () => {
   return (
-    <SectionLayout>
+    <section>
       <NoticeKeywordButton keyword="장학" />
-    </SectionLayout>
+    </section>
   );
 };
 
