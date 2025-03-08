@@ -1,11 +1,16 @@
 "use server";
 
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const privateApi = axios.create({
+export const publicApi: AxiosInstance = axios.create({
+  baseURL: BASE_URL,
+  timeout: 30000,
+});
+
+export const privateApi: AxiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 30000,
   withCredentials: true, // 쿠키 자동 포함
