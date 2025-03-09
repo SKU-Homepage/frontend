@@ -1,8 +1,17 @@
-import ExtraCurricularPost from './ExtraCurricularPost'
+"use client";
+
+import { useSuspenseQuery } from "@tanstack/react-query";
+import ExtraCurricularPost from "./ExtraCurricularPost";
+import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 
 const ExtraCurricularPostSection = () => {
-  return(
-    <section className='w-full grid grid-cols-2 gap-5 mt-9 px-[4.6%]'>
+  const { data } = useSuspenseQuery({
+    queryKey: ["extra-curricular-posts"],
+    queryFn: getExtraCurricularPosts,
+  });
+
+  return (
+    <section className="mt-9 grid w-full grid-cols-2 gap-5 px-[4.6%]">
       <ExtraCurricularPost />
       <ExtraCurricularPost />
       <ExtraCurricularPost />
@@ -20,7 +29,7 @@ const ExtraCurricularPostSection = () => {
       <ExtraCurricularPost />
       <ExtraCurricularPost />
     </section>
-  )
-}
+  );
+};
 
 export default ExtraCurricularPostSection;
