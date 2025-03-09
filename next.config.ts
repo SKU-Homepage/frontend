@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  images: {
+    domains: ["www.skuniv.ac.kr"],
+  },
 };
 
 const withPWA = withPWAInit({
