@@ -5,10 +5,10 @@ import { getQueryClient } from "@/utils/get-query-client";
 
 import { ExtraCurricularPostSection } from "@/components/extraCurricular";
 
-export default async function ExtraCurricularPage() {
+export default function ExtraCurricularPage() {
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
+  queryClient.prefetchQuery({
     queryKey: ["extra-curricular-posts"],
     queryFn: getExtraCurricularPosts,
   });
