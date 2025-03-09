@@ -15,13 +15,13 @@ interface ExtranCurricularGetResponse {
   isSuccess: boolean;
   message: string;
   result: {
-    ecNoitceList: ExtraCurricularPost[];
+    ecNoticeList: ExtraCurricularPost[];
   };
 }
 
-export async function getExtraCurricularPosts(): Promise<ExtranCurricularGetResponse> {
+export async function getExtraCurricularPosts(): Promise<ExtraCurricularPost[]> {
   const res: AxiosResponse<ExtranCurricularGetResponse> =
     await publicApi.get<ExtranCurricularGetResponse>("/api/notices/sku/extra-curricular");
 
-  return res.data;
+  return res.data.result.ecNoticeList;
 }
