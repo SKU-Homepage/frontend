@@ -2,7 +2,6 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 import { getQueryClient } from "@/utils/get-query-client";
-
 import { ExtraCurricularPostSection } from "@/components/extraCurricular";
 
 export default function ExtraCurricularPage() {

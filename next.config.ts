@@ -25,7 +25,12 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    domains: ["www.skuniv.ac.kr"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.skuniv.ac.kr",
+      },
+    ],
   },
 };
 
