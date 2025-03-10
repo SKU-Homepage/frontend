@@ -10,7 +10,7 @@ interface ExtraCurricularPost {
   date: string;
 }
 
-interface ExtranCurricularGetResponse {
+interface ExtraCurricularGetResponse {
   code: string;
   isSuccess: boolean;
   message: string;
@@ -20,8 +20,8 @@ interface ExtranCurricularGetResponse {
 }
 
 export async function getExtraCurricularPosts(): Promise<ExtraCurricularPost[]> {
-  const res: AxiosResponse<ExtranCurricularGetResponse> =
-    await publicApi.get<ExtranCurricularGetResponse>("/api/notices/sku/extra-curricular");
+  const res: AxiosResponse<ExtraCurricularGetResponse> =
+    await publicApi.get<ExtraCurricularGetResponse>("/api/notices/sku/extra-curricular");
 
   return res.data.result.ecNoticeList;
 }
