@@ -5,10 +5,12 @@ import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 import { ExtraCurricularPostSection } from "@/components/extraCurricular";
 import { getQueryClient } from "@/utils/get-query-client";
 
-export default function ExtraCurricularPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ExtraCurricularPage() {
   const queryClient = getQueryClient();
 
-  queryClient.prefetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: ["extra-curricular-posts"],
     queryFn: getExtraCurricularPosts,
   });
