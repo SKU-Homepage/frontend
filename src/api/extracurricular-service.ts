@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { publicApi } from "./axios";
+import { privateApi } from "./axios";
 
 interface ExtraCurricularPost {
   id: number;
@@ -21,7 +21,7 @@ interface ExtraCurricularGetResponse {
 
 export async function getExtraCurricularPosts(): Promise<ExtraCurricularPost[]> {
   const res: AxiosResponse<ExtraCurricularGetResponse> =
-    await publicApi.get<ExtraCurricularGetResponse>("/api/notices/sku/extra-curricular");
+    await privateApi.get<ExtraCurricularGetResponse>("/api/notices/sku/extra-curricular");
 
   return res.data.result.ecNoticeList;
 }
