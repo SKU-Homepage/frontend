@@ -7,7 +7,7 @@ import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 const ExtraCurricularPostSection = () => {
   const { data } = useSuspenseQuery({
     queryKey: ["extra-curricular-posts"],
-    queryFn: () => getExtraCurricularPosts(),
+    queryFn: async () => await getExtraCurricularPosts(),
   });
 
   return (
