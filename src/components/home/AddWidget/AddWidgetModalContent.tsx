@@ -33,22 +33,22 @@ const AddWidgetModalContent = ({ setIsOpen }: ModalContentProp) => {
         width={105}
         height={105}
         alt="위젯 추가 설정 이미지"
-        className="absolute top-[-65px]"
+        className="animate-fade-in absolute top-[-65px]"
       />
-      <DialogTitle as="h3" className="flex flex-col items-center text-[#143967] gap-[7px]">
-        <p className="font-semibold text-[20px]">위젯을 자유롭게 설정해보세요</p>
+      <DialogTitle as="h3" className="flex flex-col items-center gap-[7px] text-[#143967]">
+        <p className="text-[20px] font-semibold">위젯을 자유롭게 설정해보세요</p>
         <p className="text-[11px]">최근 학교 공지사항을 가장 빠르게 확인해보세요.</p>
       </DialogTitle>
       <NewWidgets selected={selectedWidgets} setSelected={setSelectedWidgets} />
-      <div className="flex justify-between mt-[28px] w-full font-semibold text-[12.5px]">
+      <div className="mt-[28px] flex w-full justify-between text-[12.5px] font-semibold">
         <Button
-          className="text-[#75869B] w-[48%] border-[1px] rounded-[9px] border-[#75869B94] "
+          className="w-[48%] rounded-[9px] border-[1px] border-[#75869B94] text-[#75869B] transition-all duration-200 hover:bg-gray-100 active:scale-95 active:bg-gray-200"
           onClick={handleClose}
         >
           닫기
         </Button>
         <Button
-          className="text-[#fff] w-[48%] rounded-[9px] bg-[#1A4C89] aspect-[139/42]"
+          className="aspect-[139/42] w-[48%] rounded-[9px] bg-[#1A4C89] text-[#fff] transition-all duration-200 hover:bg-[#163E6E] active:scale-95 active:bg-[#4a6c96]"
           onClick={handleSaveWidget}
         >
           선택 완료
