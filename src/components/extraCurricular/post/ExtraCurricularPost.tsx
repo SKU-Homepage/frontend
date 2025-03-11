@@ -24,6 +24,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
             width: "100%",
             objectFit: "fill",
           }}
+          placeholder="blur"
         />
         {/* <button className="absolute top-3 right-3">
           <Image src="/images/extracurricular/favorite.png" alt="찜" width={11} height={11} />

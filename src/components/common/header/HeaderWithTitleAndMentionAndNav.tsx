@@ -1,4 +1,4 @@
-import HeaderNavItem from './ui/Header.NavItem';
+import HeaderNavItem from "./ui/Header.NavItem";
 
 interface PathItem {
   path: string;
@@ -16,25 +16,27 @@ interface HeaderWithTitleAndMentionProps {
  *  noticePage, extracurricuar에 사용
  */
 
-const HeaderWithTitleAndMentionAndNav = ({title, mention, pathList}: HeaderWithTitleAndMentionProps) => {
-  return(
-    <header className='w-full'>
-
-      <div className="mb-6">
-        <h1 className="text-xl text-[#143967] font-semibold">{title}</h1>
-        <p className="text-xs text-[#75869B] font-normal mt-2.5">{mention}</p>
+const HeaderWithTitleAndMentionAndNav = ({
+  title,
+  mention,
+  pathList,
+}: HeaderWithTitleAndMentionProps) => {
+  return (
+    <header className="w-full">
+      <div className="mb-6 px-6">
+        <h1 className="text-xl font-semibold text-[#143967]">{title}</h1>
+        <p className="mt-2.5 text-xs font-normal text-[#75869B]">{mention}</p>
       </div>
 
       <nav>
         <ul className="flex">
-          {
-            pathList.map((item) => <HeaderNavItem key={item.path} path={item.path} pathName={item.pathName}/>)
-          }
+          {pathList.map((item) => (
+            <HeaderNavItem key={item.path} path={item.path} pathName={item.pathName} />
+          ))}
         </ul>
       </nav>
-
     </header>
   );
-}
+};
 
 export default HeaderWithTitleAndMentionAndNav;
