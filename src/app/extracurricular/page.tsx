@@ -10,7 +10,7 @@ export default function ExtraCurricularPage() {
 
   queryClient.prefetchQuery({
     queryKey: ["extra-curricular-posts"],
-    queryFn: getExtraCurricularPosts,
+    queryFn: () => getExtraCurricularPosts(),
   });
 
   const state = dehydrate(queryClient);
