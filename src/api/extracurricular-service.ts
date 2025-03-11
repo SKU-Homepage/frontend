@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { publicApi } from "./axios";
+import { publicApi } from "./axios-test";
 
 interface ExtraCurricularPost {
   id: number;
