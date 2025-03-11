@@ -38,7 +38,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
 
         <div className="flex items-center justify-between">
           <p className="text-left text-[10px] text-[#B0B0B0]"> {date}</p>
-          <div className="flex">
+          {/* <div className="flex">
             <div className="mr-1 flex items-center justify-center">
               <Image
                 src="/images/extracurricular/favoriteCount.png"
@@ -65,7 +65,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
               />
               <p className="ml-0.5 text-[6px]">10</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </article>
