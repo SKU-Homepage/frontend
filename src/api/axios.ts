@@ -4,7 +4,7 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api`;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const privateApi = axios.create({
   baseURL: BASE_URL,
