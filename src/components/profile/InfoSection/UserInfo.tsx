@@ -14,7 +14,7 @@ const UserInfo = () => {
           {data?.college} {data?.department} {data?.major}
         </p>
         <p>
-          {data?.studentNumber} {data?.grade} {data?.status}
+          {data?.studentNumber} {data?.grade}
         </p>
       </div>
     </div>
