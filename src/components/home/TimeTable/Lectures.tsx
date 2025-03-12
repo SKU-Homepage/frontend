@@ -1,7 +1,7 @@
 "use client";
 
-import Lecture, { EmptyLecture, LecturesContainer } from "./Lecture";
 import { TimeTable } from "@/hooks/homeHooks";
+import Lecture, { EmptyLecture, LecturesContainer } from "./Lecture";
 
 const Lectures = ({ lectures }: LecturesProps) => {
   return (
@@ -23,7 +23,7 @@ const Lectures = ({ lectures }: LecturesProps) => {
 };
 
 interface LecturesProps {
-  lectures: TimeTable[];
+  lectures: TimeTable[] | null;
 }
 
 export default Lectures;
