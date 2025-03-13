@@ -2,6 +2,7 @@
 
 import axios, { AxiosInstance } from "axios";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -19,18 +20,27 @@ export const privateApi: AxiosInstance = axios.create({
 // 서버에서 직접 리프레시 토큰 요청
 async function refreshAccessToken() {
   try {
+    const cookieHeader = Object.entries((await cookies()).getAll())
+      .map(([key, cookie]) => `${key}=${cookie.value}`)
+      .join("; ");
+
     const refreshResponse = await axios.post(
       `${BASE_URL}/auth/refresh`,
       {},
       {
         headers: {
-          Cookie: cookies().toString(), // 현재 쿠키 전달
+          Cookie: cookieHeader,
         },
         withCredentials: true,
       }
     );
 
-    return refreshResponse.data.token; // 새로운 토큰 반환
+    const newToken = refreshResponse.data.token;
+
+    // 새로운 토큰을 쿠키에 저장
+    (await cookies()).set("token", newToken, { path: "/" });
+
+    return newToken;
   } catch {
     throw new Error("Unauthorized");
   }
@@ -40,6 +50,7 @@ async function refreshAccessToken() {
 privateApi.interceptors.request.use(
   async (config) => {
     const token = (await cookies()).get("token"); // 최신 토큰 가져오기
+
     if (token) {
       config.headers.Authorization = `Bearer ${token.value}`;
     }
@@ -53,6 +64,8 @@ privateApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    if (!originalRequest) return Promise.reject(error);
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -66,7 +79,11 @@ privateApi.interceptors.response.use(
         // 원래 요청 다시 보내기
         return privateApi(originalRequest);
       } catch (refreshError) {
-        window.location.href = "/login"; // 인증 실패 시 로그인 페이지로 이동
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
+        } else {
+          redirect("/login");
+        }
         return Promise.reject(refreshError);
       }
     }

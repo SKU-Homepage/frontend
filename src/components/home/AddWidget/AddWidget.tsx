@@ -10,7 +10,7 @@ const AddWidget = () => {
     <>
       <button
         onClick={() => setShowModal(true)}
-        className="flex aspect-square items-center text-[#98AABF] text-[20px] opacity-78 justify-center p-[22px] rounded-[15px] border-[3px] border-[rgba(233,235,240,0.83)]"
+        className="flex aspect-square items-center justify-center rounded-[15px] border-[3px] border-[rgba(233,235,240,0.83)] p-[22px] text-[20px] text-[#98AABF] opacity-78 transition-all duration-200 hover:bg-gray-100 hover:shadow-lg active:bg-gray-200 active:shadow-md"
       >
         +
       </button>
