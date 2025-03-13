@@ -1,7 +1,7 @@
 import { privateApi } from "@/api/axios";
 import { queryOptions } from "@tanstack/react-query";
 
-export const getMyProfile = async () => {
+export const getMyProfile = async (): Promise<UserProfile | null> => {
   try {
     const baseURL = "/mypage/sku";
     const res = await privateApi.get(baseURL);
@@ -19,12 +19,11 @@ export const useProfile = queryOptions({
   enabled: false,
 });
 
-export type TimeTable = {
+export type UserProfile = {
   name: string;
   college: string;
   department: string;
   major: string;
   studentNumber: string;
   grade: string;
-  status: string;
 };
