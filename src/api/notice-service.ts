@@ -18,7 +18,7 @@ interface NoticeGetResponse {
   code: string;
   message: string;
   result: {
-    skNoticeList: Notice[];
+    skuNoticeList: Notice[];
   };
 }
 
@@ -29,7 +29,7 @@ interface NoticeGetResponse {
  * @returns {Promise<Notice[]>} - 공지 목록의 배열을 Promise로 반환
  */
 export async function getNoticeByPageAndSearchKeyword(
-  page: number = 0,
+  page: number,
   searchKeyword: string | undefined
 ): Promise<Notice[]> {
   // searchKeyword가 없는 경우
@@ -38,7 +38,7 @@ export async function getNoticeByPageAndSearchKeyword(
       `/api/notice/sku?page=${page}`
     );
 
-    return res.data.result.skNoticeList;
+    return res.data.result.skuNoticeList;
   }
 
   // searchKeyword가 있는 경우
@@ -46,5 +46,5 @@ export async function getNoticeByPageAndSearchKeyword(
     `/api/notice/sku?search_keyword=${searchKeyword}&page=${page}`
   );
 
-  return res.data.result.skNoticeList;
+  return res.data.result.skuNoticeList;
 }
