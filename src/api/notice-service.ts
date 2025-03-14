@@ -35,7 +35,7 @@ export async function getNoticeByPageAndSearchKeyword(
   // searchKeyword가 없는 경우
   if (typeof searchKeyword === "undefined") {
     const res: AxiosResponse<NoticeGetResponse> = await privateApi.get(
-      `/api/notice/sku?page=${page}`
+      `/api/notices/sku?page=${page}`
     );
 
     return res.data.result.skuNoticeList;
@@ -43,7 +43,7 @@ export async function getNoticeByPageAndSearchKeyword(
 
   // searchKeyword가 있는 경우
   const res: AxiosResponse<NoticeGetResponse> = await privateApi.get(
-    `/api/notice/sku?search_keyword=${searchKeyword}&page=${page}`
+    `/api/notices/sku?search_keyword=${searchKeyword}&page=${page}`
   );
 
   return res.data.result.skuNoticeList;
