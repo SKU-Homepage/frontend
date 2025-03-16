@@ -1,10 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 
 const LoginBtn = () => {
-  const domain = window.location.origin;
+  let domain = "";
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    domain = window.location.origin;
+  }, []);
+
   const handleLogin = () => {
+    if (!domain) return;
     location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=198007563456-703p8smpd6b7ujujqva20gn0qvjbm85a.apps.googleusercontent.com&redirect_uri=${domain}/api/auth/callback/google&response_type=code&scope=openid%20email%20profile`;
   };
 
