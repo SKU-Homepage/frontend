@@ -10,7 +10,7 @@ export const loginHook = async (code: string) => {
       {
         params: {
           code,
-          env: process.env.VITE_PUBLIC_LOGIN_ENV, //개발서버 0, 배포서버 1
+          env: process.env.NEXT_PUBLIC_LOGIN_ENV, //개발서버 0, 배포서버 1
         },
       }
     );
