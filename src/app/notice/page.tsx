@@ -5,10 +5,10 @@ import { Header, NoticeButtonSection, TimeInformation } from "@/components/notic
 import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
 import { getQueryClient } from "@/utils/get-query-client";
 
-export default function Notice() {
+export default async function Notice() {
   const queryClient = getQueryClient();
 
-  void queryClient.prefetchInfiniteQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ["notice"],
     queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
     initialPageParam: 0,
