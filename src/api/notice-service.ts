@@ -32,7 +32,7 @@ interface NoticeGetResponse {
  */
 export async function getNoticeByPageAndSearchKeyword(
   page: number,
-  searchKeyword: string | undefined
+  searchKeyword?: string
 ): Promise<Notice[]> {
   // searchKeyword가 없는 경우
   if (typeof searchKeyword === "undefined") {
