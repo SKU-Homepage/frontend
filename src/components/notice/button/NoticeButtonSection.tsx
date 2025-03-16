@@ -15,7 +15,7 @@ const NoticeButtonSection = () => {
 
   const { data, fetchNextPage } = useSuspenseInfiniteQuery({
     queryKey: ["notice"],
-    queryFn: async ({ pageParam = 0 }) => await getNoticeByPageAndSearchKeyword(pageParam),
+    queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (allPages.length <= 9 ? allPages.length : undefined),
   });

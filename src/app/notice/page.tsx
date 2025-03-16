@@ -8,9 +8,9 @@ import { getQueryClient } from "@/utils/get-query-client";
 export default function Notice() {
   const queryClient = getQueryClient();
 
-  queryClient.prefetchInfiniteQuery({
+  void queryClient.prefetchInfiniteQuery({
     queryKey: ["notice"],
-    queryFn: async ({ pageParam = 0 }) => await getNoticeByPageAndSearchKeyword(pageParam),
+    queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
     initialPageParam: 0,
   });
 
