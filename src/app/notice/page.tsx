@@ -17,8 +17,8 @@ export default function Notice() {
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Header />
-        <TimeInformation />
+        {/* <Header />
+        <TimeInformation /> */}
         <NoticeButtonSection />
       </HydrationBoundary>
     </>
