@@ -2,7 +2,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { Header, NoticeButtonSection, TimeInformation } from "@/components/notice";
 
-import { getNoticeByPageAndSearchKeyword } from "@/api/notice-service";
+import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
 import { getQueryClient } from "@/utils/get-query-client";
 
 export default function Notice() {

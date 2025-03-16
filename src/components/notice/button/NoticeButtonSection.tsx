@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import NoticeBtn from "./NoticeBtn";
 import NoticeModal from "../modal/NoticeModal";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { getNoticeByPageAndSearchKeyword } from "@/api/notice-service";
+import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
 import { useInView } from "react-intersection-observer";
 
 const NoticeButtonSection = () => {
