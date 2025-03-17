@@ -5,6 +5,8 @@ import { Header, NoticeButtonSection, TimeInformation } from "@/components/notic
 import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
 import { getQueryClient } from "@/utils/get-query-client";
 
+export const dynamic = "force-dynamic";
+
 export default function Notice() {
   const queryClient = getQueryClient();
 
