@@ -1,13 +1,11 @@
-export { default as HeaderWithNav } from "./header/HeaderWithNav";
-
 export { default as Header } from "./header/Header";
 
 export { default as TimeInformation } from "./timeInfro/TimeInformation";
 
 export { default as NoticeBtn } from "./button/NoticeBtn";
 
-export { default as NoticeButtonSection } from "./section/NoticeButtonSection";
+export { default as NoticeButtonSection } from "./button/NoticeButtonSection";
 
-export { default as NoticeKeywordButtonSection } from "./section/NoticeKeywordButtonSection";
+export { default as NoticeKeywordButtonSection } from "./button/NoticeKeywordButtonSection";
 
 export { default as NoticeKeywordInputSection } from "./section/NoticeKeywordInputSection";

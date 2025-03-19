@@ -1,16 +1,29 @@
-import HeaderRootLayout from "./Header.RootLayout";
-import HeaderTitle from "./Header.Title";
+"use client";
+import { useRouter } from "next/navigation";
 
-interface HeaderProps {
-  title: string;
-  mention: string;
-}
+import { HeaderWithBackButton, HeaderWithTitleAndMentionAndNav } from "@/components/common";
 
-const Header = ({ title, mention }: HeaderProps) => {
+const Header = () => {
+  const router = useRouter();
+
   return (
-    <HeaderRootLayout>
-      <HeaderTitle title={title} mention={mention} />
-    </HeaderRootLayout>
+    <>
+      <HeaderWithBackButton msg="찜목록" onClick={() => router.push("/notice/favorite")} />
+      <HeaderWithTitleAndMentionAndNav
+        title="공지사항"
+        mention="전체 학사 일정과 개인 일정을 추가하여 한눈에 정리할 수 있어요"
+        pathList={[
+          {
+            path: "/notice",
+            pathName: "전체",
+          },
+          {
+            path: "/notice/keyword",
+            pathName: "키워드",
+          },
+        ]}
+      />
+    </>
   );
 };
 

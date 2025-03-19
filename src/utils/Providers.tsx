@@ -1,4 +1,6 @@
 "use client";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import { QueryClientProvider } from "@tanstack/react-query";
 import type * as React from "react";
 import { getQueryClient } from "./get-query-client";
@@ -10,6 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryStreamedHydration> {children}</ReactQueryStreamedHydration>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
