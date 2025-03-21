@@ -25,11 +25,11 @@ const HeaderWithTitleAndMentionAndNav = ({
     <header className="w-full">
       <div className="mb-6 px-6">
         <h1 className="text-xl font-semibold text-[#143967]">{title}</h1>
-        <p className="mt-2.5 text-xs font-normal text-[#75869B]">{mention}</p>
+        <p className="mt-2.5 text-[11px] font-normal text-[#75869B]">{mention}</p>
       </div>
 
-      <nav>
-        <ul className="flex">
+      <nav className="border-b-[1px] border-[#75869B21]">
+        <ul className="flex px-[25px]">
           {pathList.map((item) => (
             <HeaderNavItem key={item.path} path={item.path} pathName={item.pathName} />
           ))}
