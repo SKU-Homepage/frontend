@@ -17,7 +17,7 @@ const MainWrapper = ({ children }: ChildrenProp) => {
     <div
       className={cn("pt-[73px]", {
         "h-[calc(100vh-75px)]": useIsPWA() === true,
-        "pt-0": pathname === "/" || pathname?.includes("getInfo"),
+        "pt-0": pathname === "/" || pathname?.includes("getInfo") || pathname?.includes("login"),
       })}
     >
       {children}
