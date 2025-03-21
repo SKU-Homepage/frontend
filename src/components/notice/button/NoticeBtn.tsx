@@ -25,10 +25,13 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
 
   return (
     <button
-      className={cn("mb-5 flex h-16 w-full cursor-pointer items-center justify-center rounded-xl", {
-        "bg-[#EEF0F1]": type === "normal",
-        "bg-[#436185]": type === "favorite",
-      })}
+      className={cn(
+        "mb-[15px] flex h-[70px] w-full cursor-pointer items-center justify-center rounded-xl",
+        {
+          "bg-[#EEF0F1]": type === "normal",
+          "bg-[#436185]": type === "favorite",
+        }
+      )}
       onClick={() => onClick()}
     >
       <div className="relative flex h-[20px] flex-1 items-center justify-center">
@@ -39,9 +42,9 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
         )}
       </div>
 
-      <div className="flex h-full flex-4 flex-col justify-evenly">
+      <div className="h-full flex-5 flex-col overflow-hidden">
         <p
-          className={cn("text-left text-xs font-bold", {
+          className={cn("w-full truncate pt-[15px] text-left text-[14px] font-bold", {
             "text-[#143967]": type === "normal",
             "text-white": type === "favorite",
           })}
@@ -49,8 +52,8 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
           {noticeTitle}
         </p>
         <p
-          className={cn("text-left text-xs font-bold", {
-            "text-[#143967]": type === "normal",
+          className={cn("pt-[3px] text-left text-[11px] font-bold", {
+            "text-[#1439679E]": type === "normal",
             "text-white": type === "favorite",
           })}
         >
