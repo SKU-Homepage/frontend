@@ -1,5 +1,5 @@
 import H from "@/components/home";
-import AddWidget from "./AddWidget/AddWidget";
+import AddWidget from "../AddWidget/AddWidget";
 import MyWidgets from "./MyWidgets";
 
 export const WidgetSection = () => {

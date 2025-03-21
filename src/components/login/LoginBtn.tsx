@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { Button } from "@heroui/button";
 
 const LoginBtn = () => {
   let domain = "";
@@ -17,9 +18,9 @@ const LoginBtn = () => {
   };
 
   return (
-    <button
-      onClick={handleLogin}
-      className="absolute bottom-[60px] flex aspect-[335/47] w-[85.2%] items-center justify-center rounded-[32px] bg-white"
+    <Button
+      onPress={handleLogin}
+      className="absolute bottom-[60px] flex aspect-[335/47] h-auto w-[85.2%] items-center justify-center rounded-[32px] bg-white"
     >
       <Image
         className="absolute left-[20px]"
@@ -29,7 +30,7 @@ const LoginBtn = () => {
         alt="구글 로그인"
       />
       <span className="text-[14px] font-semibold text-[#446081]">학교 이메일로 로그인하기</span>
-    </button>
+    </Button>
   );
 };
 

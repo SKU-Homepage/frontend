@@ -3,6 +3,7 @@ export type WidgetProps = {
   description: string;
   url: string;
   src: string;
+  onEditing?: boolean;
 };
 
 export const data = [
