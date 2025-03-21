@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@heroui/button";
 import Image from "next/image";
 
 interface HeaderImageButtonProps {
@@ -15,7 +16,7 @@ interface HeaderImageButtonProps {
  */
 const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) => {
   return (
-    <button
+    <Button
       className="flex w-[10%] items-center justify-center"
       onClick={() => onClick && onClick(true)}
     >
@@ -24,7 +25,7 @@ const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) =
       ) : (
         <span>{msg}</span>
       )}
-    </button>
+    </Button>
   );
 };
 
