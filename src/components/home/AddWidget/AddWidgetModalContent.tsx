@@ -1,10 +1,11 @@
-import { Button, DialogTitle } from "@headlessui/react";
+import { DialogTitle } from "@headlessui/react";
 import NewWidgets from "./NewWidgets";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { WidgetProps } from "@/constants/widgets";
 import { useAtom } from "jotai";
 import { myWidgets } from "@/stores/atoms";
+import { Button } from "@heroui/button";
 
 const AddWidgetModalContent = ({ setIsOpen }: ModalContentProp) => {
   const [selectedWidgets, setSelectedWidgets] = useState<WidgetProps[]>([]);
@@ -42,14 +43,14 @@ const AddWidgetModalContent = ({ setIsOpen }: ModalContentProp) => {
       <NewWidgets selected={selectedWidgets} setSelected={setSelectedWidgets} />
       <div className="mt-[28px] flex w-full justify-between text-[12.5px] font-semibold">
         <Button
-          className="w-[48%] rounded-[9px] border-[1px] border-[#75869B94] text-[#75869B] transition-all duration-200 hover:bg-gray-100 active:scale-95 active:bg-gray-200"
-          onClick={handleClose}
+          className="h-auto w-[48%] rounded-[9px] border-[1px] border-[#75869B94] text-[#75869B] transition-all duration-200 hover:bg-gray-100 active:scale-95 active:bg-gray-200 active:shadow-md"
+          onPress={handleClose}
         >
           닫기
         </Button>
         <Button
-          className="aspect-[139/42] w-[48%] rounded-[9px] bg-[#1A4C89] text-[#fff] transition-all duration-200 hover:bg-[#163E6E] active:scale-95 active:bg-[#4a6c96]"
-          onClick={handleSaveWidget}
+          className="aspect-[139/42] h-auto w-[48%] rounded-[9px] bg-[#1A4C89] text-[#fff] transition-all duration-200 hover:bg-[#163E6E] active:scale-95 active:bg-[#163E65] active:shadow-md"
+          onPress={handleSaveWidget}
         >
           선택 완료
         </Button>
