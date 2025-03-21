@@ -7,7 +7,7 @@ interface HeaderImageButtonProps {
   src?: string;
   msg?: string;
   alt?: string;
-  onClick?: (boolean: boolean) => void;
+  onClick?: () => void;
 }
 
 /**
@@ -18,7 +18,7 @@ const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) =
   return (
     <Button
       className="flex w-[10%] items-center justify-center"
-      onClick={() => onClick && onClick(true)}
+      onClick={() => onClick && onClick()}
     >
       {src ? (
         <Image src={src} width={18} height={21} alt={alt ? alt : '"삭제"'} />
