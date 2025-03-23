@@ -27,7 +27,7 @@ const NoticeButtonSection = () => {
   }, [inView, fetchNextPage]);
 
   return (
-    <section>
+    <section className="px-6">
       {data.pages.map((page) =>
         page.map((notice) => (
           <NoticeBtn
