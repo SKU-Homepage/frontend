@@ -9,6 +9,7 @@ export const loginHook = async (code: string) => {
           code,
           env: process.env.NEXT_PUBLIC_LOGIN_ENV, //개발서버 0, 배포서버 1
         },
+        withCredentials: true,
       }
     );
 
