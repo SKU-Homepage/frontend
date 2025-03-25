@@ -2,7 +2,7 @@ import NoticeKeywordInput from "./NoticeKeywordInput";
 
 const NoticeKeywordInputSection = () => {
   return (
-    <section className="my-4 px-6">
+    <section className="mb-8 px-6">
       <NoticeKeywordInput />
     </section>
   );
