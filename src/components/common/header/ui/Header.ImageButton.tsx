@@ -17,7 +17,7 @@ interface HeaderImageButtonProps {
 const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) => {
   return (
     <Button
-      className="flex w-[10%] items-center justify-center"
+      className="flex w-[15%] items-center justify-center"
       onClick={() => onClick && onClick()}
     >
       {src ? (
