@@ -12,9 +12,9 @@ const NoticeKeywordInput = () => {
   };
 
   return (
-    <div className="w-full h-10 flex bg-[#EEF0F1]">
+    <div className="flex h-10 w-full rounded-sm bg-[#EEF0F1]">
       <input
-        className="w-[80%] placeholder-shown:font-normal text-[14px] p-1.5 text-[#14396769] focus:border-none outline-none"
+        className="w-[80%] p-1.5 text-[14px] text-[#14396769] outline-none placeholder-shown:font-normal focus:border-none"
         placeholder="알림 받을 키워드를 입력해주세요"
         value={inputValue}
         onChange={handleInputChange}
