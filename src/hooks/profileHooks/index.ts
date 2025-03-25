@@ -16,7 +16,7 @@ export const useProfile = queryOptions({
   queryKey: ["profile"],
   queryFn: getMyProfile,
   staleTime: 1000 * 60 * 60,
-  enabled: false,
+  enabled: true,
 });
 
 export type UserProfile = {

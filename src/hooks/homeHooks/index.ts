@@ -16,7 +16,7 @@ export const useTimeTable = queryOptions({
   queryKey: ["time-table"],
   queryFn: getTodayTimeTable,
   staleTime: 1000 * 60 * 60,
-  enabled: false,
+  enabled: true,
 });
 
 export type TimeTable = {
