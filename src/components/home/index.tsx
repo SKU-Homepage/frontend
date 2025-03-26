@@ -21,7 +21,7 @@ export const Home = ({ children }: ChildrenProp) => {
 
 const Header = () => {
   return (
-    <header className="flex w-full flex-col gap-[6px] pt-[36px] pb-[21px] leading-normal text-[#fff]">
+    <header className="flex w-full flex-col pt-[36px] pb-[21px] leading-normal text-[#fff]">
       <span className="text-[18.86px] font-bold">안녕하세요! 서경대님!</span>
       <span className="text-[18.86px] font-medium">오늘도 열심히 준비해볼까요?</span>
     </header>
@@ -36,7 +36,7 @@ const Widget = ({ title, description, src, url, onEditing }: WidgetProps) => {
   return (
     <Link
       href={url}
-      className={`flex aspect-square flex-col items-end justify-between rounded-[15px] border-[3px] border-[rgba(233,235,240,0.83)] bg-[white] p-[15px] transition-all duration-200 hover:bg-gray-100 hover:shadow-lg active:scale-95 active:bg-gray-200 active:shadow-md ${
+      className={`flex aspect-square flex-col items-end justify-between rounded-[15px] border-[rgba(233,235,240,0.83)] bg-[white] p-[15px] shadow-[0_4px_8.2px_0px_rgba(77,102,236,0.09)] transition-all duration-200 hover:bg-gray-100 hover:shadow-lg active:scale-95 active:bg-gray-200 active:shadow-md ${
         onEditing ? "animate-wiggle" : ""
       }`}
     >
