@@ -2,8 +2,8 @@
 
 import { calendarAtom } from "@/stores/calendar";
 import { useAtom } from "jotai";
-import SilverDot from "../../../../public/images/silver_dot.svg";
 import { cn } from "@/utils/cn";
+import SilverDot from "../../../../public/images/silver_dot.svg";
 
 const List = () => {
   const [{ date }] = useAtom(calendarAtom);

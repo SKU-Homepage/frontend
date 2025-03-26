@@ -1,5 +1,6 @@
 "use client";
 
+import { BaseResponse } from "@/api/interfaces/BaseResponse";
 import EventSheet from "@/components/calendar/EventSheet";
 import FloatingActionButton from "@/components/calendar/FloatingActionButton";
 import Grid from "@/components/calendar/grid/Grid";
@@ -8,10 +9,34 @@ import MonthAndYear from "@/components/calendar/MonthAndYear";
 import SwitchButton from "@/components/calendar/SwitchButton";
 import { calendarAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useAtom } from "jotai";
 
+export type CalendarResponse = {
+  title: string;
+  endDate: string;
+  startDate: string;
+}[];
+
 export default function Schedule() {
-  const [{ viewMode }] = useAtom(calendarAtom);
+  const [{ viewMode, currentDate }] = useAtom(calendarAtom);
+
+  const { data } = useQuery<BaseResponse<CalendarResponse>>({
+    queryKey: ["calendar", currentDate.getMonth()],
+    queryFn: () =>
+      axios
+        .get("https://api.skuniv.co.kr/api/calendars/sku", {
+          params: {
+            year: currentDate.getFullYear(),
+            month: currentDate.getMonth() + 1,
+            day: currentDate.getDay(),
+          },
+          withCredentials: true,
+        })
+        .then((response) => response.data),
+    enabled: !!currentDate,
+  });
 
   return (
     <div className="relative flex h-full flex-col">
@@ -25,13 +50,17 @@ export default function Schedule() {
         <MonthAndYear />
         <SwitchButton />
       </div>
+
+      {/* 달력 */}
       {viewMode === "grid" && (
         <>
-          <Grid />
+          <Grid events={data?.result} />
           <EventSheet />
           <FloatingActionButton />
         </>
       )}
+
+      {/* 목록 */}
       {viewMode === "list" && <List />}
     </div>
   );

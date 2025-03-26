@@ -3,7 +3,6 @@
 import "react-calendar/dist/Calendar.css";
 import "./Grid.scss";
 
-import { useMemo } from "react";
 import { Calendar as ReactCalendar } from "react-calendar";
 import dayjs from "dayjs";
 
@@ -11,41 +10,14 @@ import convertEvents from "@/utils/convertEvents";
 import Events from "./Events";
 import { useAtom } from "jotai";
 import { calendarAtom } from "@/stores/calendar";
+import { CalendarResponse } from "@/app/calendar/page";
 
-const Calendar = () => {
+interface GridProps {
+  events: CalendarResponse | undefined;
+}
+
+const Grid = ({ events }: GridProps) => {
   const [{ currentDate }, setCalendarAtom] = useAtom(calendarAtom);
-
-  //dummy
-  const dummy = useMemo(
-    () =>
-      convertEvents([
-        {
-          id: 1,
-          title: "제 75회 전기 학위수여식",
-          startDate: "2025-02-15",
-          endDate: "2025-02-20",
-        },
-        {
-          id: 2,
-          title: "test2",
-          startDate: "2025-02-17",
-          endDate: "2025-02-17",
-        },
-        {
-          id: 3,
-          title: "test3",
-          startDate: "2025-02-17",
-          endDate: "2025-02-18",
-        },
-        {
-          id: 4,
-          title: "test4",
-          startDate: "2025-02-27",
-          endDate: "2025-03-18",
-        },
-      ]),
-    []
-  );
 
   return (
     <ReactCalendar
@@ -58,11 +30,11 @@ const Calendar = () => {
       showNavigation={false}
       formatDay={(locale, date) => dayjs(date).format("D")}
       tileContent={({ date }) => {
-        const events = dummy?.[dayjs(date).format("YYYY-MM-DD")];
+        const _events = events ? convertEvents(events)?.[dayjs(date).format("YYYY-MM-DD")] : [];
 
         return (
           <div className="react-calendar__event">
-            {events?.length > 0 ? <Events events={events} /> : null}
+            {events && events?.length > 0 ? <Events events={_events} /> : null}
           </div>
         );
       }}
@@ -70,4 +42,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default Grid;
