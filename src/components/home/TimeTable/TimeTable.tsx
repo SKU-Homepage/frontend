@@ -10,7 +10,7 @@ const TimeTable = ({ children }: ChildrenProp) => {
   }요일`;
 
   return (
-    <div className="border-[rgba(228, 228, 228, 1)] flex w-full flex-col rounded-[15px] border-[0.5px] bg-[#FFF] p-[18px] shadow-[0_4px_8.2px_0px_rgba(77,102,236,0.08)]">
+    <div className="flex w-full flex-col rounded-[15px] border-[0.39px] border-[#E4E4E4] bg-[#FFF] p-[18px] shadow-[0_4px_8.2px_0px_rgba(77,102,236,0.08)]">
       <div className="flex items-center gap-[7px]">
         <div className="w-[23px]" />
         <span className="text-[9px] leading-normal text-[#75869B]">{today}</span>
