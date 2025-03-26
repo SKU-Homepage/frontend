@@ -1,7 +1,60 @@
 @import "tailwindcss";
 
+@theme {
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-fade-in-scale: fade-in-scale 0.5s ease-out;
+  --animate-wiggle: wiggle 0.8s infinite ease-in-out;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: rotate(-1deg) translateX(-1px) translateY(-1px);
+    }
+    25% {
+      transform: rotate(1deg) translateX(1px) translateY(1px);
+    }
+    50% {
+      transform: rotate(-1deg) translateX(-1px) translateY(1px);
+    }
+    75% {
+      transform: rotate(1deg) translateX(1px) translateY(-1px);
+    }
+    100% {
+      transform: rotate(-1deg) translateX(-1px) translateY(-1px);
+    }
+  }
+
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
 :root {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  margin: 0 auto;
+  max-width: 600px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none;
 }

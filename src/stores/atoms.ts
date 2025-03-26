@@ -1,4 +1,23 @@
-// import { atom } from "jotai";
+import { SubmitInfoType } from "@/constants/userInfo";
+import { WidgetProps } from "@/constants/widgets";
+import { atom } from "jotai";
 
-// 예시 atom
-// export const countAtom = atom(0);
+//Widget 전역상태
+
+export const myWidgets = atom<WidgetProps[]>([]);
+
+//알림목록 전역상태
+
+export const willDelete = atom<boolean>(false);
+
+//학과정보 전역상태
+
+export const userInfo = atom<SubmitInfoType>({
+  college: "",
+  department: "",
+  major: "",
+  grade: "",
+  studentNumber: 0,
+});
+
+export const isEditing = atom<boolean>(false);
