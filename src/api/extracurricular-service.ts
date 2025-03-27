@@ -4,10 +4,13 @@ import { privateApi } from "./axios";
 interface ExtraCurricularPost {
   id: number;
   title: string;
+  author: string;
   url: string;
   thumbnail: string;
-  department: string;
+  category: string;
   date: string;
+  like: boolean;
+  viewCount: number;
 }
 
 interface ExtraCurricularGetResponse {
