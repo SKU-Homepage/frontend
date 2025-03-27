@@ -12,7 +12,7 @@ interface ExtraCurricularPostProps {
 const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurricularPostProps) => {
   return (
     <article>
-      <figure className="relative h-48 w-full">
+      <figure className="relative h-38 w-full">
         <Image
           src={thumbnail ? thumbnail : "/images/extracurricular/default.png"}
           alt="썸네일 사진"
@@ -29,7 +29,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
         {/* <button className="absolute top-3 right-3">
           <Image src="/images/extracurricular/favorite.png" alt="찜" width={11} height={11} />
         </button> */}
-        <figcaption className="mt-4 text-left text-[14px] font-semibold text-[#143967]">
+        <figcaption className="mt-1 truncate text-left text-[14px] font-semibold text-[#143967]">
           {title}
         </figcaption>
       </figure>
@@ -38,7 +38,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
         <p className="text-left text-[10px] text-[#626262]">{department}</p>
 
         <div className="flex items-center justify-between">
-          <p className="text-left text-[10px] text-[#B0B0B0]"> {date}</p>
+          <p className="text-left text-[10px] text-[#B0B0B0]"> {date.slice(0, 10)}</p>
           <div className="flex">
             <div className="mr-1 flex items-center justify-center">
               <Image
