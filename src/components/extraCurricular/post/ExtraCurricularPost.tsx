@@ -5,7 +5,7 @@ import Image from "next/image";
 interface ExtraCurricularPostProps {
   date: string;
   department: string;
-  thumbnail: string;
+  thumbnail?: string;
   title: string;
 }
 
@@ -14,7 +14,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
     <article>
       <figure className="relative h-48 w-full">
         <Image
-          src={thumbnail}
+          src={thumbnail ? thumbnail : "/images/extracurricular/default.png"}
           alt="썸네일 사진"
           width={0}
           height={0}
@@ -24,7 +24,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
             width: "100%",
             objectFit: "fill",
           }}
-          placeholder="blur"
+          // placeholder="blur"
         />
         {/* <button className="absolute top-3 right-3">
           <Image src="/images/extracurricular/favorite.png" alt="찜" width={11} height={11} />

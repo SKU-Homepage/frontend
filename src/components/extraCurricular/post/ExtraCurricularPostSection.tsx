@@ -1,26 +1,47 @@
 "use client";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+
+import { useInfiniteQuery } from "@tanstack/react-query";
+
 import ExtraCurricularPost from "./ExtraCurricularPost";
 import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 
 const ExtraCurricularPostSection = () => {
-  const { data } = useSuspenseQuery({
+  const { ref, inView } = useInView();
+
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["extra-curricular-posts"],
-    queryFn: getExtraCurricularPosts,
+    queryFn: ({ pageParam = 0 }) => getExtraCurricularPosts(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => (lastPage.length < 10 ? undefined : allPages.length),
   });
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage]);
+
+  if (isLoading) {
+    return <p>Loading</p>;
+  }
 
   return (
     <section className="mt-9 grid w-full grid-cols-2 gap-5 px-[4.6%]">
-      {data.map((post) => (
-        <ExtraCurricularPost
-          key={post.id}
-          department={post.department}
-          title={post.title}
-          thumbnail={post.thumbnail}
-          date={post.date}
-        />
-      ))}
+      {data?.pages.flatMap((page) =>
+        page.map((post) => (
+          <ExtraCurricularPost
+            key={post.id}
+            department={post.department}
+            title={post.title}
+            thumbnail={post.thumbnail}
+            date={post.date}
+          />
+        ))
+      )}
+      <div ref={ref} className="h-0.5" />
     </section>
   );
 };
