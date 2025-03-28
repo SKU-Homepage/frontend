@@ -17,7 +17,7 @@ const TimeTable = ({ children }: ChildrenProp) => {
       </div>
       {children}
       <Link
-        href="#"
+        href="/schedule"
         className="mt-[9px] flex w-full items-center justify-end gap-[3px] text-end text-[9px] text-[#75869B] opacity-56"
       >
         <span>내 시간표 확인하기</span>

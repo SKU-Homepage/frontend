@@ -28,14 +28,14 @@ export const data = [
   {
     title: "수업시간표",
     description: "나만의 학교 수업 스케줄과 개인일정을 손쉽게 관리해 보세요.",
-    url: "/notice",
+    url: "/schedule",
     src: "/images/color-calendar.svg",
   },
   {
     title: "마이페이지",
     description: "나만의 페이지를 가져보세요.",
     url: "/profile",
-    src: "/images/my-icon.png",
+    src: "/images/my-icon.svg",
   },
   {
     title: "비교과프로그램",
