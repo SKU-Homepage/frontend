@@ -8,4 +8,4 @@ export { default as NoticeButtonSection } from "./button/NoticeButtonSection";
 
 export { default as NoticeKeywordButtonSection } from "./button/NoticeKeywordButtonSection";
 
-export { default as NoticeKeywordInputSection } from "./section/NoticeKeywordInputSection";
+export { default as NoticeKeywordInputSection } from "./input/NoticeKeywordInputSection";

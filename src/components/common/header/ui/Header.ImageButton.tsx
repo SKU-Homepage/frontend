@@ -23,7 +23,7 @@ const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) =
       {src ? (
         <Image src={src} width={18} height={21} alt={alt ? alt : '"삭제"'} />
       ) : (
-        <span>{msg}</span>
+        <span className="cursor-pointer font-[#143967] text-[15px] font-medium">{msg}</span>
       )}
     </Button>
   );

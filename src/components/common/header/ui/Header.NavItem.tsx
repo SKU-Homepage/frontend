@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from "next/navigation";
 
 import { cn } from "@/utils/cn";
 
@@ -19,10 +19,13 @@ const HeaderNavItem = ({ path, pathName }: HeaderNavItemProps) => {
 
   return (
     <li
-      className={
-        cn("flex-1 text-center text-base text-[#143967] font-medium border-b-[3px] rounded-xs cursor-pointer", {
-          'opacity-50': currentPathName !== path
-        })}
+      className={cn(
+        "flex-1 cursor-pointer rounded-xs pb-[10px] text-center text-base font-medium text-[#143967]",
+        {
+          "opacity-50": currentPathName !== path,
+          "border-b-[2px]": currentPathName === path,
+        }
+      )}
       onClick={() => router.push(`${path}`)}
     >
       {pathName}
