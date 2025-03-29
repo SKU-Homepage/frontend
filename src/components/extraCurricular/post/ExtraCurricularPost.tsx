@@ -7,9 +7,20 @@ interface ExtraCurricularPostProps {
   department: string;
   thumbnail?: string;
   title: string;
+  url: string;
+  like: boolean;
+  viewCount: number;
 }
 
-const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurricularPostProps) => {
+const ExtraCurricularPost = ({
+  date,
+  department,
+  thumbnail,
+  title,
+  viewCount,
+  like,
+  url,
+}: ExtraCurricularPostProps) => {
   return (
     <article>
       <figure className="relative h-38 w-full">
@@ -64,7 +75,7 @@ const ExtraCurricularPost = ({ date, department, thumbnail, title }: ExtraCurric
                   height: "7px",
                 }}
               />
-              <p className="ml-0.5 text-[6px]">10</p>
+              <p className="ml-0.5 text-[6px]">{viewCount}</p>
             </div>
           </div>
         </div>

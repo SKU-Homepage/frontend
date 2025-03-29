@@ -34,10 +34,13 @@ const ExtraCurricularPostSection = () => {
         page.map((post) => (
           <ExtraCurricularPost
             key={post.id}
-            department={post.department}
+            department={post.author}
             title={post.title}
             thumbnail={post.thumbnail}
             date={post.date}
+            viewCount={post.viewCount}
+            url={post.url}
+            like={post.like}
           />
         ))
       )}
