@@ -85,7 +85,14 @@ const ExtraCurricularPost = ({
           </div>
         </div>
       </article>
-      <ExtraCurricularModal isOpen={isOpen} onClose={setIsopen} />
+      <ExtraCurricularModal
+        isOpen={isOpen}
+        onClose={setIsopen}
+        title={title}
+        author={department}
+        date={date}
+        url={url}
+      />
     </>
   );
 };
