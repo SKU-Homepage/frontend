@@ -24,9 +24,9 @@ interface ExtraCurricularGetResponse {
 
 export async function getExtraCurricularPosts(
   page = 0,
-  search_keyword?: string,
   author: "ALL" | "GYOSU-HAKSEUB" | "JINLO_CHWIEOB" | "DAEHAK_HYEOKSIN" = "ALL",
-  sort_index: "DATE" | "VIEW_COUNT" | "LIKE_COUNT" = "DATE"
+  sort_index: "DATE" | "VIEW_COUNT" | "LIKE_COUNT" = "DATE",
+  search_keyword?: string
 ): Promise<ExtraCurricularPost[]> {
   // search_keyword 없는 경우
   if (search_keyword === undefined) {
