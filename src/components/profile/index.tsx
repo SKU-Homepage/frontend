@@ -97,7 +97,7 @@ const Services = () => {
     },
     {
       title: "수업 시간표",
-      url: "#",
+      url: "/schedule",
       src: "/images/note.svg",
     },
     {
