@@ -43,12 +43,11 @@ export default function ExtraCurricularModal({
             <div className="mt-3 text-[18px] font-bold text-[#143967]">
               <h1 className="">{title}</h1>
             </div>
+            <time className="text-[12px] font-[400] text-[#1439679E]">{date.slice(0, 10)}</time>
           </div>
         </Sheet.Header>
         <Sheet.Content>
-          <Sheet.Scroller>
-            <p>test</p>
-          </Sheet.Scroller>
+          <Sheet.Scroller></Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
     </Sheet>
