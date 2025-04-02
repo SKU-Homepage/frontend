@@ -10,6 +10,11 @@ export async function middleware(request: NextRequest) {
 // 미들웨어 적용 경로 설정
 export const config = {
   matcher: [
-    "/((?!login|getInfo).*)", // /login, /getInfo를 제외한 모든 경로에 적용
+    "/calendar",
+    "/extracurricular/:path",
+    "/",
+    "/profile",
+    "/schedule",
+    "/notice/:path", // /login, /getInfo를 제외한 모든 경로에 적용
   ],
 };
