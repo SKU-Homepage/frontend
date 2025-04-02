@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const CurrentSearched = ({ setSearchName }) => {
+const CurrentSearched = ({ setSearchName }: { setSearchName: (name: string) => void }) => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
   useEffect(() => {
