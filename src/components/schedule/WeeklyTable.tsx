@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 import { Button } from "@heroui/button";
 import { useState } from "react";
-import TimeTable from "./TimeTable";
+import TimeTable from "./LectureCard";
 
 const WeeklyTable = () => {
   const weeks = ["일", "월", "화", "수", "목", "금", "토"];
@@ -25,7 +25,21 @@ const WeeklyTable = () => {
         ))}
       </div>
       <div className="mt-[24.3px] text-[#143967]">
-        <TimeTable />
+        <TimeTable
+          data={{
+            subjectId: 0,
+            subject: "",
+            professor: "",
+            day: "",
+            startTime: "",
+            endTime: "",
+            classroom: "",
+            credit: "",
+            grade: "",
+            target: "",
+            division: "",
+          }}
+        />
       </div>
     </div>
   );

@@ -21,3 +21,5 @@ export const userInfo = atom<SubmitInfoType>({
 });
 
 export const isEditing = atom<boolean>(false);
+
+export const scheduleType = atom<"todo" | "weekly">("todo");

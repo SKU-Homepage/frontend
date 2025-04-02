@@ -12,6 +12,7 @@ export const Home = ({ children }: ChildrenProp) => {
           fill
           src="/images/home_background.png"
           alt="메인페이지 배경화면"
+          priority
         />
       </div>
       {children}

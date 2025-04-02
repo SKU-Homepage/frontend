@@ -1,18 +1,19 @@
 "use client";
 
-import { TimeTable } from "@/hooks/homeHooks";
 import Lecture, { EmptyLecture, LecturesContainer } from "./Lecture";
+import { Lecture as LectureType } from "@/hooks/scheduleHooks";
 
 const Lectures = ({ lectures }: LecturesProps) => {
   return (
     <LecturesContainer>
-      {lectures ? (
-        lectures.map((item: TimeTable) => (
+      {lectures?.length ? (
+        lectures.map((item: LectureType) => (
           <Lecture
-            key={item.subject}
+            key={item.subjectId}
             subject={item.subject}
             classroom={item.classroom}
-            classtime={item.classtime}
+            startTime={item.startTime}
+            endTime={item.endTime}
           />
         ))
       ) : (
@@ -23,7 +24,7 @@ const Lectures = ({ lectures }: LecturesProps) => {
 };
 
 interface LecturesProps {
-  lectures: TimeTable[] | null;
+  lectures: LectureType[] | null;
 }
 
 export default Lectures;

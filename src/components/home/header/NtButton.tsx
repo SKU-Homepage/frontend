@@ -9,7 +9,7 @@ const NtButton = () => {
   return (
     <Button
       onPress={() => router.push("/notifications")}
-      className="flex aspect-square w-[35px] justify-center rounded-md"
+      className="flex aspect-square w-[35px] justify-center rounded-md px-0"
       href="/notifications"
     >
       <Image src="/images/bell.png" width={20} height={21} alt="알림 버튼" />
