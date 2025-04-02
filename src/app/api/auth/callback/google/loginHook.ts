@@ -1,7 +1,4 @@
-"use server";
-
 import axios from "axios";
-import { cookies } from "next/headers";
 
 export const loginHook = async (code: string) => {
   try {
@@ -10,21 +7,20 @@ export const loginHook = async (code: string) => {
       {
         params: {
           code,
-          env: process.env.VITE_PUBLIC_LOGIN_ENV, //개발서버 0, 배포서버 1
+          env: process.env.NEXT_PUBLIC_LOGIN_ENV, //개발서버 0, 배포서버 1
         },
+        withCredentials: true,
       }
     );
 
-    (await cookies()).set("token", res.data.result.accessToken, {
-      httpOnly: true,
-      secure: true,
-      maxAge: 60 * 60 * 24 * 14,
-    });
-
-    return true;
+    const token = res.data.result.accessToken;
+    return token;
   } catch (error) {
-    if (axios.isAxiosError(error)) console.log(error?.response?.status || "로그인 실패 클라이언트");
-    else console.log(" 아니 왜");
-    return false;
+    if (axios.isAxiosError(error)) {
+      if (error?.response?.data.message === "이메일 형식이 skuniv가 아닙니다")
+        return "서경대학교 이메일 계정으로만 가입할 수 있습니다.";
+      else return error?.response?.data.message;
+    } else console.log(" 아니 왜");
+    return "알 수 없는 오류가 발생했습니다.";
   }
 };

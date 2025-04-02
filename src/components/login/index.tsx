@@ -3,13 +3,14 @@ import Image from "next/image";
 
 const Login = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex h-[100vh] items-center px-[7.4%]">
+    <div className="relative flex h-[100dvh] w-full max-w-[600px] items-center justify-center px-[7.4%]">
       <Image
         src="/images/login_background.png"
-        fill
+        width={600}
+        height={100}
         alt="로그인 배경"
         quality={100}
-        className="relative object-cover z-[-1]"
+        className="fixed z-[-1] h-full object-fill"
       />
       {children}
     </div>
@@ -18,7 +19,7 @@ const Login = ({ children }: ChildrenProp) => {
 
 const Content = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex flex-col items-center w-full gap-[20px]">
+    <div className="flex w-full max-w-[600px] flex-col items-center gap-[20px]">
       <Image src="/images/login_logo.svg" width={173} height={112} alt="로그인 로고" />
       {children}
     </div>

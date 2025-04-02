@@ -23,6 +23,15 @@ const nextConfig: NextConfig = {
       },
     },
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.skuniv.ac.kr",
+      },
+    ],
+  },
 };
 
 const withPWA = withPWAInit({

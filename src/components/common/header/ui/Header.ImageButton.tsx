@@ -1,12 +1,13 @@
 "use client";
 
+import { Button } from "@heroui/button";
 import Image from "next/image";
 
 interface HeaderImageButtonProps {
   src?: string;
   msg?: string;
   alt?: string;
-  onClick?: (boolean: boolean) => void;
+  onClick?: () => void;
 }
 
 /**
@@ -15,16 +16,16 @@ interface HeaderImageButtonProps {
  */
 const HeaderImageButton = ({ src, msg, alt, onClick }: HeaderImageButtonProps) => {
   return (
-    <button
+    <Button
       className="flex w-[10%] items-center justify-center"
-      onClick={() => onClick && onClick(true)}
+      onPress={() => onClick && onClick()}
     >
       {src ? (
         <Image src={src} width={18} height={21} alt={alt ? alt : '"삭제"'} />
       ) : (
-        <span>{msg}</span>
+        <span className="cursor-pointer font-[#143967] text-[15px] font-medium">{msg}</span>
       )}
-    </button>
+    </Button>
   );
 };
 
