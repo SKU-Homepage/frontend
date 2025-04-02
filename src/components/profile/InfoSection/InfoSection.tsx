@@ -1,5 +1,5 @@
 import P from "@/components/profile";
-import Tip from "../../common/Tip";
+import Tip from "../../common/tip/Tip";
 import UserInfoSection from "./UserInfoSection";
 
 const InfoSection = () => {

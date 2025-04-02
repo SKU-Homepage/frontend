@@ -3,7 +3,7 @@ import Image from "next/image";
 import DeleteBtn from "./DeleteBtn";
 
 const Notifications = ({ children }: ChildrenProp) => {
-  return <div className="h-full w-full overflow-y-auto pt-[73px]">{children}</div>;
+  return <div className="h-full w-full overflow-y-auto">{children}</div>;
 };
 
 const List = ({ children }: ChildrenProp) => {

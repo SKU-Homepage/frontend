@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 
 import EmptyHeart from "@/assets/images/notice/empty-heart.svg";
@@ -23,23 +25,26 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
 
   return (
     <button
-      className={cn("flex w-full h-16 justify-center items-center cursor-pointer rounded-xl mb-5", {
-        "bg-[#EEF0F1]": type === "normal",
-        " bg-[#436185]": type === "favorite",
-      })}
+      className={cn(
+        "mb-[15px] flex h-[70px] w-full cursor-pointer items-center justify-center rounded-xl",
+        {
+          "bg-[#EEF0F1]": type === "normal",
+          "bg-[#436185]": type === "favorite",
+        }
+      )}
       onClick={() => onClick()}
     >
-      <div className="flex flex-1 justify-center items-center h-[20px] relative">
+      <div className="relative flex h-[20px] flex-1 items-center justify-center">
         {type === "normal" ? (
-          <EmptyHeart className="block mb-5" />
+          <EmptyHeart className="mb-5 block" />
         ) : (
-          <EmptyHeart_Favorite className="block mb-5" />
+          <EmptyHeart_Favorite className="mb-5 block" />
         )}
       </div>
 
-      <div className="flex flex-col flex-4 h-full justify-evenly">
+      <div className="h-full flex-5 flex-col overflow-hidden">
         <p
-          className={cn("font-bold text-xs  text-left", {
+          className={cn("w-full truncate pt-[15px] text-left text-[14px] font-bold", {
             "text-[#143967]": type === "normal",
             "text-white": type === "favorite",
           })}
@@ -47,8 +52,8 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
           {noticeTitle}
         </p>
         <p
-          className={cn("font-bold text-xs  text-left", {
-            "text-[#143967]": type === "normal",
+          className={cn("pt-[3px] text-left text-[11px] font-bold", {
+            "text-[#1439679E]": type === "normal",
             "text-white": type === "favorite",
           })}
         >
@@ -56,11 +61,11 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
         </p>
       </div>
 
-      <div className="flex flex-1 h-[20px] relative">
+      <div className="relative flex h-[20px] flex-1">
         {type === "normal" ? (
-          <RigthArrow className="block ml-7" />
+          <RigthArrow className="ml-7 block" />
         ) : (
-          <RightArrow_Favorite className="block ml-7" width="100%" height="100%" />
+          <RightArrow_Favorite className="ml-7 block" width="100%" height="100%" />
         )}
       </div>
     </button>

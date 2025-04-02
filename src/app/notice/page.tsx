@@ -1,16 +1,28 @@
-"use client";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
-import { HeaderWithNav, NoticeButtonSection, TimeInformation } from "@/components/notice";
+import { Header, NoticeButtonSection, TimeInformation } from "@/components/notice";
+
+import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
+import { getQueryClient } from "@/utils/get-query-client";
+
+export const dynamic = "force-dynamic";
 
 export default function Notice() {
+  const queryClient = getQueryClient();
+
+  queryClient.prefetchInfiniteQuery({
+    queryKey: ["notice"],
+    queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
+    initialPageParam: 0,
+  });
+
   return (
     <>
-      <HeaderWithNav
-        title="공지사항"
-        mention="전체 학사 일정과 개인 일정을 추가하여 한눈에 정리할 수 있어요"
-      />
+      <Header />
       <TimeInformation />
-      <NoticeButtonSection />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <NoticeButtonSection />
+      </HydrationBoundary>
     </>
   );
 }

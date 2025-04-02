@@ -13,6 +13,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={noto_sans_kr.className}>
+      <head>
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+      </head>
       <body>
         <Providers>
           <MainWrapper>{children}</MainWrapper>

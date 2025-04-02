@@ -1,7 +1,7 @@
 import { privateApi } from "@/api/axios";
 import { queryOptions } from "@tanstack/react-query";
 
-export const getTodayTimeTable = async () => {
+export const getTodayTimeTable = async (): Promise<TimeTable[] | null> => {
   try {
     const baseURL = "/time-table/today";
     const res = await privateApi.get(baseURL);
@@ -16,7 +16,9 @@ export const useTimeTable = queryOptions({
   queryKey: ["time-table"],
   queryFn: getTodayTimeTable,
   staleTime: 1000 * 60 * 60,
-  enabled: false,
+  gcTime: 1000 * 60 * 60,
+  refetchOnMount: true,
+  refetchOnReconnect: "always",
 });
 
 export type TimeTable = {

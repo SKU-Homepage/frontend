@@ -1,17 +1,20 @@
 "use client";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Lectures from "./Lectures";
 import TableHeader from "./TableHeader";
 import { useTimeTable } from "@/hooks/homeHooks";
+import TableLoader from "./TableLoader";
 
 const TableBody = () => {
-  const { data } = useSuspenseQuery(useTimeTable);
+  const { data, isLoading } = useQuery(useTimeTable);
+
+  if (isLoading) return <TableLoader />;
 
   return (
     <>
       <TableHeader number={data?.length || 0} />
-      <Lectures lectures={data} />
+      <Lectures lectures={data || null} />
     </>
   );
 };

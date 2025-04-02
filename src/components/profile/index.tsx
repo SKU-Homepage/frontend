@@ -3,11 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Profile = ({ children }: ChildrenProp) => {
-  return (
-    <div className="flex h-full w-full flex-col overflow-y-auto pt-[73px] pb-[18px]">
-      {children}
-    </div>
-  );
+  return <div className="flex h-full w-full flex-col overflow-y-auto pb-[18px]">{children}</div>;
 };
 
 const Header = () => {
@@ -101,7 +97,7 @@ const Services = () => {
     },
     {
       title: "수업 시간표",
-      url: "#",
+      url: "/schedule",
       src: "/images/note.svg",
     },
     {
@@ -126,7 +122,10 @@ const Services = () => {
 
 const Service = ({ title, url, src }: WidgetProps) => {
   return (
-    <Link href={url} className="flex h-[47px] w-full justify-between px-[4.6%] last:bg-[#FFD095]">
+    <Link
+      href={url}
+      className="flex h-[47px] w-full justify-between px-[4.6%] transition-all duration-200 last:bg-[#FFD095] active:scale-95 active:bg-gray-200"
+    >
       <div className="flex items-center gap-[18px]">
         <div className="flex aspect-square w-[29px] items-center justify-center rounded-[4px] bg-[#E9EFF7]">
           <Image src={src} width={22} height={22} alt={title} />

@@ -6,7 +6,7 @@ interface HeaderWithBackButtonProps {
   msg?: string;
   title?: string;
   alt?: string;
-  onClick?: (boolean: boolean) => void;
+  onClick?: () => void;
 }
 
 /**
