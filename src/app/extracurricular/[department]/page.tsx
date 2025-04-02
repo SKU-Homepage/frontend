@@ -9,12 +9,17 @@ import ExtraCurricularPost from "@/components/extraCurricular/post/ExtraCurricul
 
 export default function ExtraCurricularByDepartmentPage() {
   const pathname = usePathname();
+  const department = (pathname?.split("/")[2] ?? "ALL") as
+    | "ALL"
+    | "GYOSU-HAKSEUB"
+    | "JINLO_CHWIEOB"
+    | "DAEHAK_HYEOKSIN";
 
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["extra-curricular-posts", pathname.split("/")[2]],
-    queryFn: ({ pageParam = 0 }) => getExtraCurricularPosts(pageParam, pathname.split("/")[2]),
+    queryFn: ({ pageParam = 0 }) => getExtraCurricularPosts(pageParam, department),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (lastPage.length < 10 ? undefined : allPages.length),
   });
