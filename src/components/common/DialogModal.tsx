@@ -6,11 +6,11 @@ const DialogModal = ({ children, setIsOpen, isOpen }: DialogModalProps) => {
     <Dialog
       as="div"
       open={isOpen}
-      className={`fixed inset-0 z-30 flex w-full items-center justify-center focus:outline-none ${isOpen ? "bg-black/30 p-4" : ""} `}
+      className={`fixed inset-0 z-50 flex w-full items-center justify-center focus:outline-none ${isOpen ? "bg-black/30 p-4" : ""} `}
       onClose={() => setIsOpen(false)}
       unmount={true}
     >
-      <div className="fixed inset-0 z-30 w-full overflow-y-auto">
+      <div className="fixed inset-0 z-60 w-full overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel
             transition
