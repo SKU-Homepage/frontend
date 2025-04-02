@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import TimeTable from "../../LectureCard";
 import AddBottomSheet from "../AddBottomSheet";
 import CurrentSearched from "./CurrentSearched";
-import { getMyTimeTables, Lecture, useLectures } from "@/hooks/scheduleHooks";
+import { Lecture, useLectures } from "@/hooks/scheduleHooks";
 import { useEffect, useState } from "react";
 import NonSearched from "../../NonSearched";
 

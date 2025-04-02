@@ -15,6 +15,8 @@ export default function Timetable() {
     setDetailModalOpen(true);
   };
 
+  if (isLoading) return <div>loading...</div>;
+
   return (
     <div className="mt-[25px]">
       <span className="mb-[11px] text-[12px] font-semibold text-[#143967]">2025년 1학기</span>
