@@ -12,7 +12,6 @@ import SwitchButton from "@/components/calendar/SwitchButton";
 import { calendarAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useAtom } from "jotai";
 
 export type CalendarResponse = {
