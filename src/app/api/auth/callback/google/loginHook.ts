@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 
 export const loginHook = async (code: string) => {
@@ -12,8 +13,15 @@ export const loginHook = async (code: string) => {
         withCredentials: true,
       }
     );
-
     const token = res.data.result.accessToken;
+    // const expiryDate = new Date(Number(new Date()) + 315360000000);
+    // setCookie("token", token, {
+    //   domain: "skuniv.co.kr",
+    //   expires: expiryDate,
+    //   secure: true,
+    //   sameSite: "none",
+    // });
+
     return token;
   } catch (error) {
     if (axios.isAxiosError(error)) {
