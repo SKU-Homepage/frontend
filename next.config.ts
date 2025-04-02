@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
-      include: /src\/assets\/.*\.svg$/,
+      include: [/src\/assets\/.*\.svg$/, /public\/images\/.*\.svg$/],
       use: ["@svgr/webpack"],
     });
     return config;
@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.skuniv.ac.kr",
+        hostname: "**",
       },
     ],
   },

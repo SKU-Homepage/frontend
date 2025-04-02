@@ -8,10 +8,9 @@ interface EventsProps {
 const Events = ({ events }: EventsProps) => {
   return (
     <div className="relative flex flex-col gap-[2px]">
-      {events.map((e) => (
+      {events?.map((e, index) => (
         <EventBar
-          key={e.id}
-          id={e.id}
+          key={index}
           title={e.title}
           single={e.single}
           adjacent={e.adjacent}

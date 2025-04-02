@@ -12,6 +12,7 @@ export const Home = ({ children }: ChildrenProp) => {
           fill
           src="/images/home_background.png"
           alt="메인페이지 배경화면"
+          priority
         />
       </div>
       {children}
@@ -48,7 +49,14 @@ const Widget = ({ title, description, src, url, onEditing }: WidgetProps) => {
         <p className="text-[12px] font-medium">{description}</p>
       </div>
       <div className="flex w-full justify-end">
-        <Image className="aspect-square w-[35%]" src={src} width={45} height={45} alt="공지사항" />
+        <Image
+          className="aspect-square w-[35%]"
+          quality={100}
+          src={src}
+          width={45}
+          height={45}
+          alt="공지사항"
+        />
       </div>
     </Link>
   );

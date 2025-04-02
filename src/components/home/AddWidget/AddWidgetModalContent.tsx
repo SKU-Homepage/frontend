@@ -36,7 +36,10 @@ const AddWidgetModalContent = ({ setIsOpen }: ModalContentProp) => {
         alt="위젯 추가 설정 이미지"
         className="animate-fade-in absolute top-[-65px]"
       />
-      <DialogTitle as="h3" className="flex flex-col items-center gap-[7px] text-[#143967]">
+      <DialogTitle
+        as="h3"
+        className="mt-[17px] flex flex-col items-center gap-[7px] text-[#143967]"
+      >
         <p className="text-[20px] font-semibold">위젯을 자유롭게 설정해보세요</p>
         <p className="text-[11px]">최근 학교 공지사항을 가장 빠르게 확인해보세요.</p>
       </DialogTitle>

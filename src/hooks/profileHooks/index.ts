@@ -1,12 +1,15 @@
-"use client";
-import { privateApi } from "@/api/axios";
+import { createPrivateApi } from "@/api/serverAxios";
 import { queryOptions } from "@tanstack/react-query";
 
 export const getMyProfile = async (): Promise<UserProfile | null> => {
-  const baseURL = "/mypage/sku";
-  const res = await privateApi.get(baseURL);
-  const data = res.data;
-  return data.result;
+  try {
+    const baseURL = "/mypage/sku";
+    const res = (await createPrivateApi()).get(baseURL);
+    const data = (await res).data;
+    return data.result;
+  } catch {
+    return null;
+  }
 };
 
 export const useProfile = queryOptions({

@@ -6,23 +6,25 @@ import useIsPWA from "@/utils/isPWA";
 
 export default function TabBar() {
   const pathname = usePathname();
+  const isPWA = useIsPWA();
 
-  if (!useIsPWA()) return;
-  if (pathname !== "/" && !pathname.includes("profile") && !pathname.includes("notice")) return;
+  const isValidPath =
+    pathname === "/" ||
+    ["/profile", "/notice", "/schedule", "/calendar"].some((path) => pathname.includes(path));
+
+  if (!isPWA || !isValidPath) return null;
 
   return (
     <T>
       <T.Content>
         {menuItems.map(({ label, href, src, alt }) => {
           const isActive = pathname === href;
-          const imageSrc = isActive ? `/images/active-${src}` : `/images/${src}`;
-
           return (
             <T.Item
               key={href}
               label={label}
               href={href}
-              src={imageSrc}
+              src={isActive ? `/images/active-${src}` : `/images/${src}`}
               alt={alt}
               isActive={isActive}
             />
