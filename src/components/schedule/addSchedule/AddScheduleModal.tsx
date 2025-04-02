@@ -8,20 +8,13 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
       {({ open }) => (
         <>
           {/* 오버레이: MenuItems가 아닌 배경만 흐리게 만듦 */}
-          {open && (
-            <div
-              className="fixed inset-0 z-40 bg-black/70"
-              // Headless UI Menu manages its open state internally,
-              // so clicking the overlay does not need to update external state.
-              onClick={() => {}}
-            />
-          )}
-          <div className="fixed right-[24px] bottom-[30px] z-50">
+          {open && <div className="fixed inset-0 z-40 bg-black/70" onClick={() => {}} />}
+          <div className="fixed right-[24px] bottom-[83px] z-50 sm:bottom-[30px]">
             <MenuButton
               className={cn(
                 `flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#143967] text-2xl font-bold text-white transition-all duration-500`,
                 {
-                  "rotate-585 bg-white text-[#143967]": open,
+                  "rotate-405 bg-white text-[#143967]": open,
                   "rotate-0": !open,
                 }
               )}
@@ -31,7 +24,7 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
             <MenuItems
               transition
               anchor="bottom end"
-              className="fixed top-auto! right-[24px]! bottom-[94px] left-auto! z-50 w-[50%] max-w-[300px]! origin-top-right justify-between rounded-xl border border-white/5 bg-white p-1 text-sm/6 text-[14px] font-semibold text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
+              className="fixed top-auto! right-[24px]! bottom-[147px] left-auto! z-50 w-[50%] max-w-[300px]! origin-top-right justify-between rounded-xl border border-white/5 bg-white p-1 text-sm/6 text-[14px] font-semibold text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 sm:bottom-[94px]"
             >
               <MenuItem>
                 <button

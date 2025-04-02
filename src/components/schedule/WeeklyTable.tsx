@@ -1,7 +1,7 @@
 import { cn } from "@/utils/cn";
 import { Button } from "@heroui/button";
 import { useState } from "react";
-import TimeTable from "./TimeTable";
+import TimeTable from "./LectureCard";
 
 const WeeklyTable = () => {
   const weeks = ["일", "월", "화", "수", "목", "금", "토"];
