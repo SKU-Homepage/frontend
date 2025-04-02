@@ -24,6 +24,7 @@ const formatDateString = (date: Dayjs) =>
 const today = dayjs();
 
 export type EventAtomType = {
+  isOpen: boolean;
   title: string;
   isAllDay: boolean;
   startDate: PickedDate;
@@ -32,6 +33,7 @@ export type EventAtomType = {
 };
 
 export const eventAtom = atom<EventAtomType>({
+  isOpen: false,
   title: "",
   isAllDay: false,
   startDate: {

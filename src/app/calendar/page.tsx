@@ -7,10 +7,12 @@ import FloatingActionButton from "@/components/calendar/FloatingActionButton";
 import Grid from "@/components/calendar/grid/Grid";
 import List from "@/components/calendar/list/List";
 import MonthAndYear from "@/components/calendar/MonthAndYear";
+import NewEventBottomSheet from "@/components/calendar/NewEventBottomSheet";
 import SwitchButton from "@/components/calendar/SwitchButton";
 import { calendarAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useAtom } from "jotai";
 
 export type CalendarResponse = {
@@ -25,8 +27,8 @@ export default function Schedule() {
   const { data } = useQuery<BaseResponse<CalendarResponse>>({
     queryKey: ["calendar", currentDate.getMonth()],
     queryFn: () =>
-      privateApi
-        .get("/calendars/sku", {
+      axios
+        .get("https://api.skuniv.co.kr/api/calendars/sku", {
           params: {
             year: currentDate.getFullYear(),
             month: currentDate.getMonth() + 1,
@@ -62,6 +64,9 @@ export default function Schedule() {
 
       {/* 목록 */}
       {viewMode === "list" && <List />}
+
+      {/* 새 일정 추가 */}
+      <NewEventBottomSheet />
     </div>
   );
 }

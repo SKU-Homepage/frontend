@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import { Dispatch, SetStateAction } from "react";
 import Picker from "react-mobile-picker";
 import { cn } from "@/utils/cn";
 import { PickedDate } from "@/stores/calendar";
@@ -29,7 +28,7 @@ const DatePicker = ({ date, onChange }: DatePickerProps) => {
           .map((day) => (
             <Picker.Item
               key={day}
-              value={`${today.year()}년 ${today.month() + 1}월 ${day}일(${days[today.day()]})`}
+              value={`${today.year()}년 ${today.month() + 1}월 ${day}일(${days[dayjs().date(day).day()]})`}
             >
               {({ selected }) => (
                 <span
