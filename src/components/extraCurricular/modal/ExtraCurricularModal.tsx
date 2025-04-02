@@ -17,8 +17,8 @@ export default function ExtraCurricularModal({
   onClose,
   title,
   author,
-  url,
-  date,
+  // url,
+  // date,
 }: ExtraCurricularModalProps) {
   return (
     <Sheet isOpen={isOpen} onClose={() => onClose(false)}>
