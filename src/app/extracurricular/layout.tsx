@@ -15,15 +15,15 @@ export default function ExtraCurricularLayout({ children }: { children: ReactNod
             pathName: "전체",
           },
           {
-            path: "/extracurricular/career-employment",
+            path: "/extracurricular/JINLO_CHWIEOB",
             pathName: "진로취업",
           },
           {
-            path: "/extracurricular/education-career",
+            path: "/extracurricular/GYOSU_HAKSEUB",
             pathName: "교수학습",
           },
           {
-            path: "/extracurricular/uni-innovation",
+            path: "/extracurricular/DAEHAK_HYEOKSIN",
             pathName: "대학혁신",
           },
         ]}

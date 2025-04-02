@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.skuniv.ac.kr",
+        hostname: "**",
       },
     ],
   },
