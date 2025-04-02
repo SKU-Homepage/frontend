@@ -52,7 +52,22 @@ export default function Timetable() {
         )}
       />
       <DialogModal isOpen={detailModalOpen} setIsOpen={setDetailModalOpen}>
-        <TimeTableDetailModal onClose={setDetailModalOpen} />
+        <TimeTableDetailModal
+          onClose={setDetailModalOpen}
+          data={{
+            subjectId: 0,
+            subject: "",
+            professor: "",
+            day: "",
+            startTime: "",
+            endTime: "",
+            classroom: "",
+            credit: "",
+            grade: "",
+            target: "",
+            division: "",
+          }}
+        />
       </DialogModal>
     </div>
   );
