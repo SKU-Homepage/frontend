@@ -1,24 +1,24 @@
 import dayjs from "dayjs";
 import { Dispatch, SetStateAction } from "react";
 import Picker from "react-mobile-picker";
-import { PickedDate } from "./FloatingActionButton";
 import { cn } from "@/utils/cn";
+import { PickedDate } from "@/stores/calendar";
 
 export const days = ["일", "월", "화", "수", "목", "금", "토", "일"];
 
-interface DatePickerProps<TDate> {
-  date: TDate;
-  setDate: Dispatch<SetStateAction<TDate>>;
+interface DatePickerProps {
+  date: PickedDate;
+  onChange: (value: PickedDate) => void;
 }
 
-const DatePicker = <TDate extends PickedDate>({ date, setDate }: DatePickerProps<TDate>) => {
+const DatePicker = ({ date, onChange }: DatePickerProps) => {
   const today = dayjs();
 
   return (
     <Picker
       wheelMode="normal"
       value={{ date: date.date, hour: date.hour, minute: date.minute }}
-      onChange={(value) => setDate((prev) => ({ ...prev, ...value }))}
+      onChange={onChange}
       height={120}
       className="relative px-[8px]"
     >

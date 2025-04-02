@@ -1,5 +1,6 @@
 "use client";
 
+import { privateApi } from "@/api/axios";
 import { BaseResponse } from "@/api/interfaces/BaseResponse";
 import EventSheet from "@/components/calendar/EventSheet";
 import FloatingActionButton from "@/components/calendar/FloatingActionButton";
@@ -10,7 +11,6 @@ import SwitchButton from "@/components/calendar/SwitchButton";
 import { calendarAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useAtom } from "jotai";
 
 export type CalendarResponse = {
@@ -25,8 +25,8 @@ export default function Schedule() {
   const { data } = useQuery<BaseResponse<CalendarResponse>>({
     queryKey: ["calendar", currentDate.getMonth()],
     queryFn: () =>
-      axios
-        .get("https://api.skuniv.co.kr/api/calendars/sku", {
+      privateApi
+        .get("/calendars/sku", {
           params: {
             year: currentDate.getFullYear(),
             month: currentDate.getMonth() + 1,
