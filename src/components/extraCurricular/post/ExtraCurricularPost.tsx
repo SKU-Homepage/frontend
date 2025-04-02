@@ -20,7 +20,7 @@ const ExtraCurricularPost = ({
   thumbnail,
   title,
   viewCount,
-  like,
+  // like,
   url,
 }: ExtraCurricularPostProps) => {
   const [isOpen, setIsopen] = useState<boolean>(false);
