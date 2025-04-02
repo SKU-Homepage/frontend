@@ -1,6 +1,6 @@
 "use client";
 
-import { privateApi } from "@/api/axios";
+import { publicApi } from "@/api/axios";
 import { BaseResponse } from "@/api/interfaces/BaseResponse";
 import EventSheet from "@/components/calendar/EventSheet";
 import FloatingActionButton from "@/components/calendar/FloatingActionButton";
@@ -27,8 +27,8 @@ export default function Schedule() {
   const { data } = useQuery<BaseResponse<CalendarResponse>>({
     queryKey: ["calendar", currentDate.getMonth()],
     queryFn: () =>
-      axios
-        .get("https://api.skuniv.co.kr/api/calendars/sku", {
+      publicApi
+        .get("/calendars/sku", {
           params: {
             year: currentDate.getFullYear(),
             month: currentDate.getMonth() + 1,

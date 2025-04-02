@@ -4,9 +4,9 @@ import { cn } from "@/utils/cn";
 import DatePicker from "./DatePicker";
 import ColorPicker from "./ColorPicker";
 import { useMutation } from "@tanstack/react-query";
-import { privateApi } from "@/api/axios";
 import { useAtom } from "jotai";
 import { eventAtom } from "@/stores/calendar";
+import { publicApi } from "@/api/axios";
 
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
@@ -16,13 +16,9 @@ export const NewEventBottomSheet = () => {
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
 
-  const {
-    isPending,
-    isError,
-    mutate: addEvent,
-  } = useMutation({
+  const { mutate: addEvent } = useMutation({
     mutationFn: () =>
-      privateApi
+      publicApi
         .post("/calendar/users", {
           title,
           start: {
