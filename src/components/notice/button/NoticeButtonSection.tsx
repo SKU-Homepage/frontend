@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 
 import NoticeBtn from "./NoticeBtn";
 import NoticeModal from "../modal/NoticeModal";
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { getNoticeByPageAndSearchKeyword } from "@/app/actions/notice";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 
 const NoticeButtonSection = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { ref, inView } = useInView();
 
-  const { data, fetchNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ["notice"],
-    queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ["notices"],
+    queryFn: ({ pageParam = 0 }) => getExtraCurricularPosts(pageParam),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => (allPages.length <= 9 ? allPages.length : undefined),
+    getNextPageParam: (lastPage, allPages) => (lastPage.length < 10 ? undefined : allPages.length),
   });
 
   useEffect(() => {
@@ -26,9 +26,13 @@ const NoticeButtonSection = () => {
     }
   }, [inView, fetchNextPage]);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <section className="px-6">
-      {data.pages.map((page) =>
+      {data?.pages.map((page) =>
         page.map((notice) => (
           <NoticeBtn
             key={notice.id}
