@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 
 import { cn } from "@/utils/cn";
+import useDebounce from "@/hooks/noticeHooks";
 
 const NoticeKeywordInput = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const debouncedValue = useDebounce<string>(inputValue, 600);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
