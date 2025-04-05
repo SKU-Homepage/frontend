@@ -6,7 +6,7 @@ import ColorPicker from "./ColorPicker";
 import { useMutation } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { eventAtom } from "@/stores/calendar";
-import { publicApi } from "@/api/axios";
+import { privateApi } from "@/api/axios";
 
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
@@ -18,7 +18,7 @@ export const NewEventBottomSheet = () => {
 
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
-      publicApi
+      privateApi
         .post("/calendar/users", {
           title,
           start: {
