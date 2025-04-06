@@ -3,10 +3,13 @@ import SlideUpModal from "@/components/common/SlideUpModal";
 import { cn } from "@/utils/cn";
 import DatePicker from "./DatePicker";
 import ColorPicker from "./ColorPicker";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { eventAtom } from "@/stores/calendar";
 import { privateApi } from "@/api/axios";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
 
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
@@ -16,24 +19,31 @@ export const NewEventBottomSheet = () => {
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
 
+  const queryClient = useQueryClient();
+
+  console.log(startDate);
+
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
       privateApi
         .post("/calendars/users", {
           title,
           start: {
-            date: "2025-04-02",
-            time: "00:00:00",
+            date: dayjs(startDate.date, "YYYY년 M월 D일(dd)").format("YYYY-MM-DD"),
+            time: `${startDate.hour}:${startDate.minute}:00`,
           },
           end: {
-            date: "2025-04-02",
-            time: "00:00:30",
+            date: dayjs(endDate.date, "YYYY년 M월 D일(dd)").format("YYYY-MM-DD"),
+            time: `${endDate.hour}:${endDate.minute}:00`,
           },
           allDay: isAllDay,
           labelColor: selectedColor,
         })
         .then((response) => response.data),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["calendar"],
+      });
       setEvent((prev) => ({ ...prev, isOpen: false }));
     },
   });
