@@ -1,5 +1,26 @@
 import dayjs from "dayjs";
 
+// Type definitions
+export interface InputEvent {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string;
+}
+
+export interface OutputEventItem {
+  id: string;
+  title: string;
+  single: boolean;
+  adjacent: "right" | "left" | "both" | "none";
+  order: number;
+  endDate: string;
+}
+
+export interface OutputFormat {
+  [date: string]: OutputEventItem[];
+}
+
 /**
  * Converts an array of input events to a date-indexed object with event items
  * @param events Array of InputEvent objects
@@ -135,31 +156,12 @@ const convertEvents = (events: InputEvent[]): OutputFormat => {
         single: isSingleDay,
         adjacent,
         order,
+        endDate: isSingleDay ? dates[0] : dates[dates.length - 1],
       });
     });
   });
 
   return result;
 };
-
-// Type definitions
-export interface InputEvent {
-  id: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-}
-
-export interface OutputEventItem {
-  id: string;
-  title: string;
-  single: boolean;
-  adjacent: "right" | "left" | "both" | "none";
-  order: number;
-}
-
-export interface OutputFormat {
-  [date: string]: OutputEventItem[];
-}
 
 export default convertEvents;
