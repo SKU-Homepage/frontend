@@ -14,7 +14,7 @@ export interface OutputEventItem {
   single: boolean;
   adjacent: "right" | "left" | "both" | "none";
   order: number;
-  endDate: string;
+  endDate?: string;
 }
 
 export interface OutputFormat {
