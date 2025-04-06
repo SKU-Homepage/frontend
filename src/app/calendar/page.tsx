@@ -48,7 +48,6 @@ export default function Schedule() {
           params: {
             year: calendar.currentDate.getFullYear(),
             month: calendar.currentDate.getMonth() + 1,
-            day: calendar.currentDate.getDay(),
           },
         })
         .then((response) => response.data),
@@ -64,7 +63,6 @@ export default function Schedule() {
           params: {
             year: calendar.currentDate.getFullYear(),
             month: calendar.currentDate.getMonth() + 1,
-            day: calendar.currentDate.getDay(),
           },
         })
         .then((response) => response.data),
