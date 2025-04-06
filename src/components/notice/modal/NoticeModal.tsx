@@ -1,6 +1,7 @@
 "use clinet";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Sheet } from "react-modal-sheet";
 
 interface NoticeModalProps {
@@ -20,8 +21,16 @@ export default function NoticeModal({
   url,
   title,
 }: NoticeModalProps) {
+  const [mountTarget, setMountTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const container = document.getElementById("modal-container");
+    if (container) {
+      setMountTarget(container);
+    }
+  }, []);
   return (
-    <Sheet isOpen={isOpen} onClose={() => onClose(false)}>
+    <Sheet isOpen={isOpen} onClose={() => onClose(false)} mountPoint={mountTarget ?? undefined}>
       <Sheet.Container>
         <Sheet.Header>
           <div className="px-6">
