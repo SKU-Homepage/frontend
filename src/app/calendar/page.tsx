@@ -11,6 +11,7 @@ import SwitchButton from "@/components/calendar/SwitchButton";
 import { calendarAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
 import convertEvents from "@/utils/convertEvents";
+import useIsPWA from "@/utils/isPWA";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 
@@ -37,6 +38,7 @@ export type PersonalEventResponse = {
 }[];
 
 export default function Schedule() {
+  const isPWA = useIsPWA();
   const [calendar] = useAtom(calendarAtom);
 
   // 학사일정
@@ -83,13 +85,14 @@ export default function Schedule() {
   return (
     <div
       className={cn(
-        "flex h-[calc(100vh_-_73px)] flex-col",
-        calendar.viewMode === "list" && "h-full"
+        "flex h-[calc(100vh_-_55px)] flex-col",
+        calendar.viewMode === "list" && "h-full",
+        isPWA && "h-[calc(100vh_-_55px_-_75px)]"
       )}
     >
       <div
         className={cn(
-          "z-[9] flex items-center justify-between bg-[#f6f6f6] p-[20px]",
+          "z-[9] flex h-[55px] items-center justify-between bg-white p-[20px] pt-0",
           calendar.viewMode === "list" &&
             "sticky top-[73px] w-full shadow-[0px_3.144px_17.135px_0px_rgba(165,176,189,0.22)]"
         )}

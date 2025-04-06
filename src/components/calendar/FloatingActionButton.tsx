@@ -17,19 +17,19 @@ const FloatingActionButton = ({ opened }: FloatingActionButtonProps) => {
       <motion.div
         onClick={() => setEvent((prev) => ({ ...prev, isOpen: true }))}
         animate={{
-          width: opened ? 50 : 150,
+          width: opened ? 50 : 125,
         }}
         transition={{
           duration: 0.03,
           ease: "linear",
         }}
         className={
-          "absolute right-[25px] bottom-[25px] z-20 flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[28px] bg-[#143967] px-[14px] py-[12px] transition-all duration-200"
+          "fixed right-[25px] bottom-[25px] z-20 flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[28px] bg-[#143967] px-[14px] py-[12px] transition-all duration-200"
         }
       >
         <span
           className={cn(
-            "text-[14px] font-[500] whitespace-nowrap text-white",
+            "text-[12px] font-[500] whitespace-nowrap text-white",
             opened && "text-[22px]"
           )}
         >

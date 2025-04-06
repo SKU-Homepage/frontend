@@ -5,7 +5,7 @@ import DatePicker from "./DatePicker";
 import ColorPicker from "./ColorPicker";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { eventAtom } from "@/stores/calendar";
+import { calendarAtom, eventAtom } from "@/stores/calendar";
 import { privateApi } from "@/api/axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -19,6 +19,7 @@ export const NewEventBottomSheet = () => {
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
 
+  const [calendar] = useAtom(calendarAtom);
   const queryClient = useQueryClient();
 
   const { mutate: addEvent } = useMutation({
@@ -40,7 +41,7 @@ export const NewEventBottomSheet = () => {
         .then((response) => response.data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["calendar"],
+        queryKey: ["calendar", calendar.currentDate.getMonth()],
       });
       setEvent((prev) => ({ ...prev, isOpen: false }));
     },
@@ -88,7 +89,7 @@ export const NewEventBottomSheet = () => {
             >
               <div
                 className={cn(
-                  "absolute z-[0] h-[16px] w-[20px] cursor-pointer rounded-[8px] bg-[#f6f6f6] transition-all duration-250",
+                  "absolute z-[0] h-[16px] w-[20px] cursor-pointer rounded-[8px] bg-white transition-all duration-250",
                   isAllDay && "translate-x-[16px]"
                 )}
                 onClick={() =>
