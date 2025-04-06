@@ -18,6 +18,7 @@ interface NoticeGetResponse {
   code: string;
   message: string;
   result: {
+    timestamp: string;
     skuNoticeList: Notice[];
   };
 }
