@@ -81,7 +81,7 @@ export default function Schedule() {
   ]);
 
   return (
-    <>
+    <div className="h-[calc(100vh_-_73px)]">
       <div
         className={cn(
           "z-[9] flex items-center justify-between bg-[#f6f6f6] p-[20px]",
@@ -107,6 +107,6 @@ export default function Schedule() {
         {/* 새 일정 추가 */}
         <NewEventBottomSheet />
       </div>
-    </>
+    </div>
   );
 }
