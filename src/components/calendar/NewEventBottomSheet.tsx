@@ -21,8 +21,6 @@ export const NewEventBottomSheet = () => {
 
   const queryClient = useQueryClient();
 
-  console.log(startDate);
-
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
       privateApi
