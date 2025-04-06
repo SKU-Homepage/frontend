@@ -7,7 +7,7 @@ interface EventsProps {
 
 const Events = ({ events }: EventsProps) => {
   return (
-    <div className="relative flex flex-col gap-[2px]">
+    <div className="relative flex flex-col">
       {events?.map((e) => (
         <EventBand
           key={e.id}

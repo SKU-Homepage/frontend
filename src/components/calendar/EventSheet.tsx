@@ -5,7 +5,7 @@ import ChevronDownWide from "../../../public/images/chevron_down_wide.svg";
 import Direction from "../../../public/images/direction.svg";
 import { calendarAtom } from "@/stores/calendar";
 import convertEvents from "@/utils/convertEvents";
-import { EVENT_COLORS } from "./grid/EventBand";
+import { BAR_OFFSET, BAR_SHRINK_OFFSET, EVENT_COLORS } from "./grid/EventBand";
 import { days } from "./DatePicker";
 import { Sheet, SheetRef } from "react-modal-sheet";
 import dayjs from "dayjs";
@@ -30,30 +30,48 @@ const EventSheet = ({ events }: EventSheetProps) => {
   const ref = useRef<SheetRef>(null);
   const containerRef = useRef(null);
 
-  const updateSheetHeight = () => {
-    if (containerRef.current) {
-      const transform = window.getComputedStyle(containerRef.current).transform;
-
-      // Extract just the Y value from translateY()
-      const translateY = transform.match(/translateY\(([^)]+)\)/);
-      if (translateY && translateY[1]) {
-        console.log("Sheet Y position:", translateY[1]);
-      } else {
-        // Fallback for matrix format
-        const matrix = transform.match(/matrix\([^)]*,\s*([^)]*)\)/);
-        if (matrix && matrix[1]) {
-          const monthView = document.querySelector(".react-calendar__month-view");
-          if (monthView) {
-            (monthView as HTMLElement).style.height = `calc(100% - 73px - 300px + ${matrix[1]}px)`; // Set your desired height here
-          }
-        }
-      }
-    }
-  };
-
   useEffect(() => {
-    updateSheetHeight();
-  }, [containerRef.current]);
+    const el = document.querySelector(".react-modal-sheet-container");
+    if (!el) return;
+
+    let id: number;
+
+    const tick = () => {
+      const t = getComputedStyle(el).transform;
+      const sheetY = parseFloat(t.split(",")[5]) || 0;
+      // console.log("translateY:", y);
+
+      const shrinkingRatio = (sheetY / 150) * BAR_SHRINK_OFFSET; // 애니메이션 비율
+
+      const monthView = document.querySelector(".react-calendar__month-view");
+      if (monthView) {
+        (monthView as HTMLElement).style.height = `calc(100% - 55px - 300px + ${sheetY}px)`; // Set your desired height here
+      }
+
+      const eventBand = document.querySelectorAll("#event-band");
+      if (eventBand) {
+        eventBand.forEach((el) => {
+          (el as HTMLElement).style.height = `${7 + shrinkingRatio}px`;
+
+          (el as HTMLElement).style.setProperty(
+            "--barTopOffset",
+            `${BAR_OFFSET + shrinkingRatio}px`
+          );
+
+          const eventTitle = el.querySelector("#event-title");
+          if (eventTitle) {
+            (eventTitle as HTMLElement).style.opacity = `${shrinkingRatio * 100}%`;
+          }
+        });
+      }
+
+      id = requestAnimationFrame(tick);
+    };
+
+    id = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <>
@@ -66,7 +84,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
         }}
         ref={ref}
         detent="full-height"
-        snapPoints={[300, 150, 25]}
+        snapPoints={[300, 100]}
         initialSnap={1}
         dragCloseThreshold={1}
         mountPoint={
@@ -82,20 +100,15 @@ const EventSheet = ({ events }: EventSheetProps) => {
           } else {
             setOpened(false);
           }
-
-          updateSheetHeight();
-        }}
-        onPan={() => {
-          updateSheetHeight();
         }}
       >
-        <Sheet.Container ref={containerRef} style={{ background: "#EEF0F1", border: "none" }}>
+        <Sheet.Container ref={containerRef} style={{ background: "white", borderRadius: 0 }}>
           <Sheet.Header>
             <div className="flex items-center justify-center pt-[12px]">
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
             </div>
           </Sheet.Header>
-          <div className="flex h-full w-full flex-1 flex-col pb-[60px]">
+          <div className="flex h-full w-full flex-1 flex-col pb-[70px]">
             <div className="px-[20px] py-[20px]">
               <span className="text-[16px] font-[600] text-[#143967]">
                 {calendar.currentDate.getDate()}일 {days[calendar.currentDate.getDay()]}요일{" "}
@@ -138,7 +151,7 @@ interface EventBarProps {
 
 const EventBar = ({ color, name, startDate, endDate }: EventBarProps) => {
   return (
-    <div className="flex h-[60px] shrink-0 items-center bg-[#f6f6f6] px-[20px]">
+    <div className="flex h-[60px] shrink-0 items-center bg-white px-[20px]">
       <div style={{ background: color }} className="h-full w-[8px]"></div>
       <div className="flex w-full items-center justify-between px-[20px] py-[16px]">
         <span className="text-[14px] font-[500] text-[#143967]">{name}</span>
