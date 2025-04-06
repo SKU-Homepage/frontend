@@ -24,6 +24,8 @@ const List = () => {
     calendar.currentDate.getMonth(),
   ])?.result;
 
+  const convertedCalendarData = convertEvents(cachedCalendarData ?? []);
+
   return (
     <div className="flex flex-col">
       {[...Array(dateInDayjs.daysInMonth())]
@@ -31,9 +33,7 @@ const List = () => {
         .map((day) => {
           const getDate = dateInDayjs.date(day);
 
-          const _events = cachedCalendarData
-            ? convertEvents(cachedCalendarData)?.[dayjs().date(day).format("YYYY-MM-DD")]
-            : [];
+          const _events = convertedCalendarData?.[dateInDayjs.date(day).format("YYYY-MM-DD")];
 
           return (
             <DayBlock
