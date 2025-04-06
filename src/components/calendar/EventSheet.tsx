@@ -28,6 +28,28 @@ const EventSheet = ({ events }: EventSheetProps) => {
   const [opened, setOpened] = useState(false);
 
   const ref = useRef<SheetRef>(null);
+  const containerRef = useRef(null);
+
+  const updateSheetHeight = () => {
+    if (containerRef.current) {
+      const transform = window.getComputedStyle(containerRef.current).transform;
+
+      // Extract just the Y value from translateY()
+      const translateY = transform.match(/translateY\(([^)]+)\)/);
+      if (translateY && translateY[1]) {
+        console.log("Sheet Y position:", translateY[1]);
+      } else {
+        // Fallback for matrix format
+        const matrix = transform.match(/matrix\([^)]*,\s*([^)]*)\)/);
+        if (matrix && matrix[1]) {
+          const monthView = document.querySelector(".react-calendar__month-view");
+          if (monthView) {
+            (monthView as HTMLElement).style.height = `calc(100% - 73px - 300px + ${matrix[1]}px)`; // Set your desired height here
+          }
+        }
+      }
+    }
+  };
 
   return (
     <>
@@ -38,6 +60,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
         onClose={() => {
           ref.current?.snapTo(1);
         }}
+        ref={ref}
         detent="full-height"
         snapPoints={[300, 150, 25]}
         initialSnap={1}
@@ -55,9 +78,14 @@ const EventSheet = ({ events }: EventSheetProps) => {
           } else {
             setOpened(false);
           }
+
+          updateSheetHeight();
+        }}
+        onPan={() => {
+          updateSheetHeight();
         }}
       >
-        <Sheet.Container style={{ background: "#EEF0F1", border: "none" }}>
+        <Sheet.Container ref={containerRef} style={{ background: "#EEF0F1", border: "none" }}>
           <Sheet.Header>
             <div className="flex items-center justify-center pt-[12px]">
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
