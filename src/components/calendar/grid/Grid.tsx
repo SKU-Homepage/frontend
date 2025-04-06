@@ -10,6 +10,7 @@ import convertEvents from "@/utils/convertEvents";
 import Events from "./Events";
 import { useAtom } from "jotai";
 import { calendarAtom } from "@/stores/calendar";
+import { useEffect } from "react";
 
 interface GridProps {
   events: ReturnType<typeof convertEvents>;
@@ -17,6 +18,34 @@ interface GridProps {
 
 const Grid = ({ events }: GridProps) => {
   const [calendar, setCalendarAtom] = useAtom(calendarAtom);
+
+  const rowCount = 5;
+
+  // useEffect(() => {
+  //   const updateRowHeights = () => {
+  //     const container = document.getElementsByClassName("react-calendar__month-view__days")[0] as
+  //       | HTMLElement
+  //       | undefined;
+
+  //     if (!container) return;
+
+  //     const containerHeight = container.clientHeight;
+  //     console.log(containerHeight);
+  //     const rows = Array.from(container.children) as HTMLElement[];
+  //     const rowHeight = (containerHeight - 300) / rowCount + 24;
+
+  //     rows.forEach((child) => {
+  //       child.style.height = `${rowHeight}px`;
+  //     });
+  //   };
+
+  //   updateRowHeights();
+
+  //   window.addEventListener("resize", updateRowHeights);
+  //   return () => {
+  //     window.removeEventListener("resize", updateRowHeights);
+  //   };
+  // }, []);
 
   return (
     <ReactCalendar
