@@ -19,7 +19,7 @@ export const NewEventBottomSheet = () => {
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
       privateApi
-        .post("/calendar/users", {
+        .post("/calendars/users", {
           title,
           start: {
             date: "2025-04-02",

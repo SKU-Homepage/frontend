@@ -3,6 +3,7 @@
 import { eventAtom } from "@/stores/calendar";
 import { cn } from "@/utils/cn";
 import { useAtom } from "jotai";
+import { motion } from "motion/react";
 
 interface FloatingActionButtonProps {
   opened: boolean;
@@ -13,17 +14,28 @@ const FloatingActionButton = ({ opened }: FloatingActionButtonProps) => {
 
   return (
     <>
-      <div
+      <motion.div
         onClick={() => setEvent((prev) => ({ ...prev, isOpen: true }))}
-        className={cn(
-          "fixed right-[25px] bottom-[25px] z-20 flex items-center justify-center rounded-[28px] bg-[#143967] px-[14px] py-[12px]",
-          !opened && "h-[50px] w-[50px]"
-        )}
+        animate={{
+          width: opened ? 50 : 150,
+        }}
+        transition={{
+          duration: 0.03,
+          ease: "linear",
+        }}
+        className={
+          "absolute right-[25px] bottom-[25px] z-20 flex h-[50px] w-[50px] items-center justify-center overflow-hidden rounded-[28px] bg-[#143967] px-[14px] py-[12px] transition-all duration-200"
+        }
       >
-        <span className={cn("text-[22px] font-[500] text-white", opened && "text-[14px]")}>
-          + {opened && "새 일정 추가하기"}
+        <span
+          className={cn(
+            "text-[14px] font-[500] whitespace-nowrap text-white",
+            opened && "text-[22px]"
+          )}
+        >
+          + {!opened && "새 일정 추가하기"}
         </span>
-      </div>
+      </motion.div>
     </>
   );
 };
