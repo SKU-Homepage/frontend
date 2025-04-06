@@ -1,6 +1,6 @@
 "use client";
 
-import { publicApi } from "@/api/axios";
+import { privateApi, publicApi } from "@/api/axios";
 import { BaseResponse } from "@/api/interfaces/BaseResponse";
 import EventSheet from "@/components/calendar/EventSheet";
 import Grid from "@/components/calendar/grid/Grid";
@@ -21,10 +21,26 @@ export type CalendarResponse = {
   startDate: string;
 }[];
 
+export type PersonalEventResponse = {
+  id: string;
+  title: string;
+  start: {
+    date: string;
+    time: string;
+  };
+  end: {
+    date: string;
+    time: string;
+  };
+  allDay: boolean;
+  labelColor: string;
+}[];
+
 export default function Schedule() {
   const [calendar] = useAtom(calendarAtom);
 
-  const { data } = useQuery<BaseResponse<CalendarResponse>>({
+  // 학사일정
+  const { data: calendarData } = useQuery<BaseResponse<CalendarResponse>>({
     queryKey: ["calendar", calendar.currentDate.getMonth()],
     queryFn: () =>
       publicApi
@@ -34,13 +50,37 @@ export default function Schedule() {
             month: calendar.currentDate.getMonth() + 1,
             day: calendar.currentDate.getDay(),
           },
-          withCredentials: true,
         })
         .then((response) => response.data),
     enabled: !!calendar.currentDate,
   });
 
-  const events = convertEvents(data?.result ?? []);
+  // 개인 일정
+  const { data: personalEvent } = useQuery<BaseResponse<PersonalEventResponse>>({
+    queryKey: ["personalEvent", calendar.currentDate.getMonth()],
+    queryFn: () =>
+      privateApi
+        .get("/calendars/users", {
+          params: {
+            year: calendar.currentDate.getFullYear(),
+            month: calendar.currentDate.getMonth() + 1,
+            day: calendar.currentDate.getDay(),
+          },
+        })
+        .then((response) => response.data),
+    enabled: !!calendar.currentDate,
+    retry: false,
+  });
+
+  const events = convertEvents([
+    ...(calendarData?.result ?? []),
+    ...(personalEvent?.result?.map((e) => ({
+      id: e.id,
+      title: e.title,
+      startDate: e.start.date,
+      endDate: e.end.date,
+    })) ?? []),
+  ]);
 
   return (
     <>
@@ -57,10 +97,10 @@ export default function Schedule() {
       <div className="relative flex h-full flex-col">
         {/* 달력 */}
         {calendar.viewMode === "grid" && (
-          <>
+          <div id="calendar">
             <Grid events={events} />
             <EventSheet events={events} />
-          </>
+          </div>
         )}
 
         {/* 목록 */}

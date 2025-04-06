@@ -7,12 +7,12 @@ import { calendarAtom } from "@/stores/calendar";
 import convertEvents from "@/utils/convertEvents";
 import { EVENT_COLORS } from "./grid/EventBand";
 import { days } from "./DatePicker";
-import { Sheet } from "react-modal-sheet";
+import { Sheet, SheetRef } from "react-modal-sheet";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import FloatingActionButton from "./FloatingActionButton";
 import { cn } from "@/utils/cn";
-import { useState } from "react";
+import { useRef, useState } from "react";
 dayjs.extend(isBetween);
 
 interface EventSheetProps {
@@ -27,19 +27,26 @@ const EventSheet = ({ events }: EventSheetProps) => {
 
   const [opened, setOpened] = useState(false);
 
+  const ref = useRef<SheetRef>(null);
+
   return (
     <>
       <FloatingActionButton opened={opened} />
 
       <Sheet
         isOpen={true}
-        onClose={() => {}}
+        onClose={() => {
+          ref.current?.snapTo(1);
+        }}
         detent="full-height"
-        snapPoints={[300, 150]}
+        snapPoints={[300, 150, 25]}
         initialSnap={1}
-        dragSnapToOrigin
-        dragCloseThreshold={0.1}
+        dragCloseThreshold={1}
+        mountPoint={
+          typeof document !== "undefined" ? document.getElementById("calendar")! : undefined
+        }
         style={{
+          position: "absolute",
           zIndex: 15,
         }}
         onSnap={(index) => {
@@ -56,8 +63,8 @@ const EventSheet = ({ events }: EventSheetProps) => {
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
             </div>
           </Sheet.Header>
-          <div className="flex w-full flex-1 flex-col pb-[50px]">
-            <div className="py-[20px] pl-[20px]">
+          <div className="flex h-full w-full flex-1 flex-col pb-[60px]">
+            <div className="px-[20px] py-[20px]">
               <span className="text-[16px] font-[600] text-[#143967]">
                 {calendar.currentDate.getDate()}일 {days[calendar.currentDate.getDay()]}요일{" "}
                 {today.format("YYYY-MM-DD") === currentDateInDayjs.format("YYYY-MM-DD")
@@ -65,7 +72,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
                   : ""}
               </span>
             </div>
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col gap-[2px] overflow-y-auto">
               {events?.[currentDateInDayjs.format("YYYY-MM-DD")]?.length > 0 ? (
                 events[currentDateInDayjs.format("YYYY-MM-DD")].map((event) => (
                   <EventBar
@@ -99,7 +106,7 @@ interface EventBarProps {
 
 const EventBar = ({ color, name, startDate, endDate }: EventBarProps) => {
   return (
-    <div className="flex h-[60px] items-center bg-[#f6f6f6] px-[20px]">
+    <div className="flex h-[60px] shrink-0 items-center bg-[#f6f6f6] px-[20px]">
       <div style={{ background: color }} className="h-full w-[8px]"></div>
       <div className="flex w-full items-center justify-between px-[20px] py-[16px]">
         <span className="text-[14px] font-[500] text-[#143967]">{name}</span>
