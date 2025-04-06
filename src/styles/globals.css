@@ -72,10 +72,6 @@
   -webkit-touch-callout: none;
 }
 
-body {
-  background: #f6f6f6;
-}
-
 .ReactModal__Body--open {
   overflow: hidden;
 }

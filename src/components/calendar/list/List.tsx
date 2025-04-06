@@ -12,16 +12,16 @@ import { CalendarResponse } from "@/app/calendar/page";
 import convertEvents from "@/utils/convertEvents";
 
 const List = () => {
-  const [{ currentDate }] = useAtom(calendarAtom);
+  const [calendar] = useAtom(calendarAtom);
 
-  const dateInDayjs = dayjs(currentDate);
+  const dateInDayjs = dayjs(calendar.currentDate);
 
   const today = dayjs();
 
   const queryClient = useQueryClient();
   const cachedCalendarData = queryClient.getQueryData<BaseResponse<CalendarResponse>>([
     "calendar",
-    currentDate.getMonth(),
+    calendar.currentDate.getMonth(),
   ])?.result;
 
   return (
@@ -35,22 +35,18 @@ const List = () => {
             ? convertEvents(cachedCalendarData)?.[dayjs().date(day).format("YYYY-MM-DD")]
             : [];
 
-          console.log(_events);
-
           return (
             <DayBlock
               key={day}
               rawDate={getDate}
               day={`${day}일 ${days[getDate.day()]}요일`}
               today={dayjs().date(day) === today}
-              events={[
-                {
-                  id: 1,
-                  title: "[졸업] 졸업전시회",
-                  startDate: "25.01.08",
-                  endDate: "25.01.10",
-                },
-              ]}
+              events={_events?.map((e) => ({
+                id: e.id,
+                title: e.title,
+                startDate: getDate.format("YYYY-MM-DD"),
+                endDate: e.endDate,
+              }))}
             />
           );
         })}
@@ -63,7 +59,7 @@ interface DayBlockProps {
   rawDate: Dayjs;
   today?: boolean;
   events: {
-    id: number;
+    id: string;
     title: string;
     startDate: string;
     endDate: string;
@@ -110,17 +106,19 @@ const DayBlock = ({ day, rawDate, today, events }: DayBlockProps) => {
         </span>
       </div>
       <div className="h-[1.5px] w-full bg-[#44608142]"></div>
-      <div className="flex flex-col py-[20px]">
-        {events?.map((event) => (
-          <div key={event.id} className="flex items-center gap-[10px]">
-            <SilverDot />
-            <span className="text-[14px] font-[500] text-[#143967]">{event.title}</span>
-            <span className="text-[11px] font-[400] text-[#143967]">
-              {event.startDate} ~ {event.endDate}
-            </span>
-          </div>
-        ))}
-      </div>
+      {events?.length > 0 && (
+        <div className="flex flex-col py-[20px]">
+          {events?.map((event) => (
+            <div key={event.id} className="flex items-center gap-[10px]">
+              <SilverDot />
+              <span className="text-[14px] font-[500] text-[#143967]">{event.title}</span>
+              <span className="text-[11px] font-[400] text-[#143967]">
+                {event.startDate} ~ {event.endDate}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

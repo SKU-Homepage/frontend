@@ -15,8 +15,8 @@ export const data = [
   },
   {
     title: "캠퍼스맵",
-    description: "언제 어디서나 학교 건물과 위치를 파악해 보세요.",
-    url: "/notice",
+    description: "현재 준비중입니다.",
+    url: "#",
     src: "/images/school.svg",
   },
   {
@@ -40,7 +40,7 @@ export const data = [
   {
     title: "비교과프로그램",
     description: "찾아보기 어렵고 귀찮았던 비교과 프로그램을 쉽게 확인해 보세요.",
-    url: "/notice",
+    url: "/extracurricular",
     src: "/images/book.svg",
   },
 ];

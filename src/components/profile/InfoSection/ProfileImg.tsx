@@ -1,12 +1,9 @@
 "use client";
 
-import { useProfile } from "@/hooks/profileHooks";
-import { useSuspenseQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useState, useRef } from "react";
 
 const ProfileImg = () => {
-  void useSuspenseQuery(useProfile);
   const [img, setImg] = useState("/images/ex.svg");
   const fileInputRef = useRef<HTMLInputElement>(null);
 

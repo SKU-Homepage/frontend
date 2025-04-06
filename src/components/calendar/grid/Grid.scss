@@ -75,7 +75,7 @@
 .react-calendar__tile--now {
   background: none;
   & abbr {
-    color: #fff;
+    color: #fff !important;
     background: #4f68e9 !important;
   }
 }

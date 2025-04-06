@@ -10,31 +10,34 @@ import convertEvents from "@/utils/convertEvents";
 import Events from "./Events";
 import { useAtom } from "jotai";
 import { calendarAtom } from "@/stores/calendar";
-import { CalendarResponse } from "@/app/calendar/page";
 
 interface GridProps {
-  events: CalendarResponse | undefined;
+  events: ReturnType<typeof convertEvents>;
 }
 
 const Grid = ({ events }: GridProps) => {
-  const [{ currentDate }, setCalendarAtom] = useAtom(calendarAtom);
+  const [calendar, setCalendarAtom] = useAtom(calendarAtom);
 
   return (
     <ReactCalendar
+      key={calendar.currentDate.getMonth()} // 월 바뀔 때마다 강제 리렌더링
       calendarType="gregory"
       locale="ko"
       view="month"
-      value={currentDate}
-      onChange={(value) => setCalendarAtom((prev) => ({ ...prev, currentDate: value as Date }))}
+      value={calendar.currentDate}
+      onChange={(value) => {
+        console.log(value);
+        setCalendarAtom((prev) => ({ ...prev, currentDate: value as Date }));
+      }}
       selectRange={false}
       showNavigation={false}
       formatDay={(locale, date) => dayjs(date).format("D")}
       tileContent={({ date }) => {
-        const _events = events ? convertEvents(events)?.[dayjs(date).format("YYYY-MM-DD")] : [];
+        const _events = events ? events[dayjs(date).format("YYYY-MM-DD")] : [];
 
         return (
           <div className="react-calendar__event">
-            {events && events?.length > 0 ? <Events events={_events} /> : null}
+            {_events && _events?.length > 0 ? <Events events={_events} /> : null}
           </div>
         );
       }}

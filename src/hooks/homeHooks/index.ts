@@ -1,11 +1,11 @@
-import { createPrivateApi } from "@/api/serverAxios";
 import { queryOptions } from "@tanstack/react-query";
 import { Lecture } from "../scheduleHooks";
+import { privateApi } from "@/api/axios";
 
 export const getTodayTimeTable = async (): Promise<Lecture[] | null> => {
   try {
     const baseURL = "/time-table/today";
-    const res = await (await createPrivateApi()).get(baseURL);
+    const res = await privateApi.get(baseURL);
     return res.data.result.timeTables;
   } catch {
     return null;

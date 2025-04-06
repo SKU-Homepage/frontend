@@ -31,17 +31,17 @@ const WidgetSection = () => {
     {
       title: "내 시간표",
       src: "/images/gray-calendar.svg",
-      url: "#",
+      url: "/schedule",
     },
     {
       title: "키워드 알림",
       src: "/images/gray-speaker.svg",
-      url: "#",
+      url: "/notice/keyword",
     },
     {
       title: "공지사항 찜 목록",
       src: "/images/gray-heart.svg",
-      url: "#",
+      url: "/notice/favorite",
     },
   ];
 
@@ -102,7 +102,7 @@ const Services = () => {
     },
     {
       title: "비교과 프로그램",
-      url: "#",
+      url: "/extracurricular",
       src: "/images/book.svg",
     },
     {
