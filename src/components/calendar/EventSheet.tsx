@@ -12,7 +12,7 @@ import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import FloatingActionButton from "./FloatingActionButton";
 import { cn } from "@/utils/cn";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 dayjs.extend(isBetween);
 
 interface EventSheetProps {
@@ -50,6 +50,10 @@ const EventSheet = ({ events }: EventSheetProps) => {
       }
     }
   };
+
+  useEffect(() => {
+    updateSheetHeight();
+  }, [containerRef.current]);
 
   return (
     <>
