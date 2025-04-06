@@ -44,7 +44,7 @@ const NoticeButtonSection = () => {
         ))
       )}
       <NoticeModal isOpen={isOpen} onClose={setIsOpen} />
-      <div ref={ref}></div>
+      <div ref={ref} className="h-0.5"></div>
     </section>
   );
 };
