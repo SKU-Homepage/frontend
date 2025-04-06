@@ -81,7 +81,12 @@ export default function Schedule() {
   ]);
 
   return (
-    <div className="flex h-[calc(100vh_-_73px)] flex-col">
+    <div
+      className={cn(
+        "flex h-[calc(100vh_-_73px)] flex-col",
+        calendar.viewMode === "list" && "h-full"
+      )}
+    >
       <div
         className={cn(
           "z-[9] flex items-center justify-between bg-[#f6f6f6] p-[20px]",
