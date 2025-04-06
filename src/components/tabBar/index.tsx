@@ -2,17 +2,15 @@
 
 import { usePathname } from "next/navigation";
 import T from "./Containers";
-import useIsPWA from "@/utils/isPWA";
 
 export default function TabBar() {
   const pathname = usePathname();
-  const isPWA = useIsPWA();
 
   const isValidPath =
     pathname === "/" ||
     ["/profile", "/notice", "/schedule", "/calendar"].some((path) => pathname.includes(path));
 
-  if (!isPWA || !isValidPath) return null;
+  if (!isValidPath) return null;
 
   return (
     <T>
