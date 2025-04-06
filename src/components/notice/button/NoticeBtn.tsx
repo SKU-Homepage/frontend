@@ -40,7 +40,7 @@ const NoticeBtn = ({ noticeTitle, department, type, url, date }: NoticeBtnProps)
             "bg-[#436185]": type === "favorite",
           }
         )}
-        // onClick={() => onClick()}
+        onClick={() => setIsOpen(true)}
       >
         <div className="relative flex h-[20px] flex-1 items-center justify-center">
           {type === "normal" ? (
