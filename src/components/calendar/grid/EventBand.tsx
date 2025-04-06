@@ -3,16 +3,16 @@ import { OutputEventItem } from "@/utils/convertEvents";
 
 type EventProps = OutputEventItem;
 
-const EVENT_COLORS = ["#5387E5", "#FF9272", "#9CA8D4"] as const;
+export const EVENT_COLORS = ["#5387E5", "#FF9272", "#9CA8D4"] as const;
 
 const BAR_HEIGHT = 14 as const;
 
-const EventBar = ({ title, single, adjacent, order }: EventProps) => {
+const EventBand = ({ title, single, adjacent, order }: EventProps) => {
   return (
     <div
       className={cn("absolute w-full", {
-        "rounded-r-[2px]": adjacent === "left",
-        "rounded-l-[2px]": adjacent === "right",
+        "right-[1px] rounded-r-[2px]": adjacent === "left",
+        "left-[1px] rounded-l-[2px]": adjacent === "right",
         "rounded-none": adjacent === "both",
         "rounded-[2px]": adjacent === "none",
       })}
@@ -23,7 +23,7 @@ const EventBar = ({ title, single, adjacent, order }: EventProps) => {
       }}
     >
       {single || adjacent === "right" ? (
-        <div className="text-[9.432px] font-[500] text-white leading-[-0.377px] whitespace-nowrap">
+        <div className="text-[9.432px] leading-[-0.377px] font-[500] whitespace-nowrap text-white">
           {title}
         </div>
       ) : null}
@@ -31,4 +31,4 @@ const EventBar = ({ title, single, adjacent, order }: EventProps) => {
   );
 };
 
-export default EventBar;
+export default EventBand;

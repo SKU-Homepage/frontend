@@ -1,18 +1,28 @@
 "use client";
 
 import { eventAtom } from "@/stores/calendar";
+import { cn } from "@/utils/cn";
 import { useAtom } from "jotai";
 
-const FloatingActionButton = () => {
+interface FloatingActionButtonProps {
+  opened: boolean;
+}
+
+const FloatingActionButton = ({ opened }: FloatingActionButtonProps) => {
   const [, setEvent] = useAtom(eventAtom);
 
   return (
     <>
       <div
         onClick={() => setEvent((prev) => ({ ...prev, isOpen: true }))}
-        className="fixed right-[25px] bottom-[25px] flex items-center justify-center rounded-[28px] bg-[#143967] px-[14px] py-[12px]"
+        className={cn(
+          "fixed right-[25px] bottom-[25px] z-20 flex items-center justify-center rounded-[28px] bg-[#143967] px-[14px] py-[12px]",
+          !opened && "h-[50px] w-[50px]"
+        )}
       >
-        <span className="text-[12px] font-[500] text-white">+ 새 일정 추가하기</span>
+        <span className={cn("text-[22px] font-[500] text-white", opened && "text-[14px]")}>
+          + {opened && "새 일정 추가하기"}
+        </span>
       </div>
     </>
   );

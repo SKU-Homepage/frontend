@@ -5,18 +5,18 @@ import { cn } from "@/utils/cn";
 import { useAtom } from "jotai";
 
 const SwitchButton = () => {
-  const [{ viewMode }] = useAtom(calendarAtom);
+  const [calendar] = useAtom(calendarAtom);
 
   return (
     <div className="relative flex items-center rounded-[27px] bg-[#7a8ea75c] p-[2px]">
       <div
         className={cn(
           "absolute z-[0] h-[30px] w-[50px] rounded-[25px] bg-[#f6f6f6] transition-all duration-300",
-          viewMode === "list" && "translate-x-[46px]"
+          calendar.viewMode === "list" && "translate-x-[46px]"
         )}
       ></div>
-      <Chip name="달력" label="grid" active={viewMode === "grid"} />
-      <Chip name="목록" label="list" active={viewMode === "list"} />
+      <Chip name="달력" label="grid" active={calendar.viewMode === "grid"} />
+      <Chip name="목록" label="list" active={calendar.viewMode === "list"} />
     </div>
   );
 };
