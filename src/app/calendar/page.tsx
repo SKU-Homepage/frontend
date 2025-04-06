@@ -81,7 +81,7 @@ export default function Schedule() {
   ]);
 
   return (
-    <div className="h-[calc(100vh_-_73px)]">
+    <div className="flex h-[calc(100vh_-_73px)] flex-col">
       <div
         className={cn(
           "z-[9] flex items-center justify-between bg-[#f6f6f6] p-[20px]",
@@ -92,7 +92,7 @@ export default function Schedule() {
         <MonthAndYearPicker />
         <SwitchButton />
       </div>
-      <div className="relative flex h-full flex-col">
+      <div className="relative flex h-full flex-1 flex-col">
         {/* 달력 */}
         {calendar.viewMode === "grid" && (
           <div id="calendar">
