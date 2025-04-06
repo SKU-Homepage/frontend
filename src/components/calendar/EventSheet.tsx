@@ -73,7 +73,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
                     color={EVENT_COLORS?.[event.order - 1]}
                     name={event.title}
                     startDate={currentDateInDayjs.format("YYYY-MM-DD")}
-                    endDate={event.endDate}
+                    endDate={event.endDate!}
                   />
                 ))
               ) : (
