@@ -10,7 +10,6 @@ import convertEvents from "@/utils/convertEvents";
 import Events from "./Events";
 import { useAtom } from "jotai";
 import { calendarAtom } from "@/stores/calendar";
-import { useEffect } from "react";
 
 interface GridProps {
   events: ReturnType<typeof convertEvents>;
@@ -18,8 +17,6 @@ interface GridProps {
 
 const Grid = ({ events }: GridProps) => {
   const [calendar, setCalendarAtom] = useAtom(calendarAtom);
-
-  const rowCount = 5;
 
   // useEffect(() => {
   //   const updateRowHeights = () => {
