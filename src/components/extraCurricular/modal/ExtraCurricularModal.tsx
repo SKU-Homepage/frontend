@@ -48,7 +48,7 @@ export default function ExtraCurricularModal({
         </Sheet.Header>
         <Sheet.Content>
           <Sheet.Scroller>
-            <iframe src={url} />
+            <iframe src={url} className="min-h-screen w-full" />
           </Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
