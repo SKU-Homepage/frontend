@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Sheet } from "react-modal-sheet";
 
 interface NoticeModalProps {
-  department: string;
+  author: string;
   url: string;
   date: string;
   title: string;
@@ -15,7 +15,7 @@ interface NoticeModalProps {
 export default function NoticeModal({
   isOpen,
   onClose,
-  department,
+  author,
   date,
   url,
   title,
@@ -38,7 +38,7 @@ export default function NoticeModal({
               />
             </div>
             <div className="mt-3 flex w-[90px] justify-center rounded-[4px] bg-[#75869B]">
-              <p className="text-[11px] font-medium text-[#FFFFFF]">{department}</p>
+              <p className="text-[11px] font-medium text-[#FFFFFF]">{author}</p>
             </div>
             <div className="mt-3 text-[18px] font-bold text-[#143967]">
               <h1 className="">{title}</h1>

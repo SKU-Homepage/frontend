@@ -13,11 +13,11 @@ import EmptyHeart_Favorite from "@/assets/images/notice/heart-favortie.svg";
 
 type ButtonType = "favorite" | "normal";
 interface NoticeBtnProps {
-  noticeTitle: string;
-  department: string;
+  noticeTitle?: string;
+  department?: string;
   date: string;
   url: string;
-  type: ButtonType;
+  type?: ButtonType;
 }
 
 const NoticeBtn = ({ noticeTitle, department, type, url, date }: NoticeBtnProps) => {
@@ -82,7 +82,7 @@ const NoticeBtn = ({ noticeTitle, department, type, url, date }: NoticeBtnProps)
         onClose={setIsOpen}
         title={noticeTitle}
         date={date}
-        department={department}
+        author={department}
         url={url}
       />
     </>
