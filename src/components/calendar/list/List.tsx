@@ -45,7 +45,7 @@ const List = () => {
                 id: e.id,
                 title: e.title,
                 startDate: getDate.format("YYYY-MM-DD"),
-                endDate: e.endDate,
+                endDate: e.endDate!,
               }))}
             />
           );
