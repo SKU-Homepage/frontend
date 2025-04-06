@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const Home = ({ children }: ChildrenProp) => {
   return (
-    <div className="relative flex h-full w-full flex-col items-center overflow-y-auto px-[4.6%] pt-[73px]">
+    <div className="relative flex h-full w-full flex-col items-center overflow-y-auto px-[4.6%] pt-[73px] pb-[73px]">
       <div className="absolute top-0 h-[343px] w-full max-w-[600px]">
         <Image
           className="z-[-1] h-full"
@@ -20,10 +20,10 @@ export const Home = ({ children }: ChildrenProp) => {
   );
 };
 
-const Header = () => {
+const Header = ({ name }: { name: string }) => {
   return (
     <header className="flex w-full flex-col pt-[36px] pb-[21px] leading-normal text-[#fff]">
-      <span className="text-[18.86px] font-bold">안녕하세요! 서경대님!</span>
+      <span className="text-[18.86px] font-bold">안녕하세요! {name}님!</span>
       <span className="text-[18.86px] font-medium">오늘도 열심히 준비해볼까요?</span>
     </header>
   );

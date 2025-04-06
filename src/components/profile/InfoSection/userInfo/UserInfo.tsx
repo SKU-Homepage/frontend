@@ -1,10 +1,13 @@
 "use client";
 
 import { useProfile } from "@/hooks/profileHooks";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import UserInfoLoader from "./UserInfoLoader";
 
 const UserInfo = () => {
-  const { data } = useSuspenseQuery(useProfile);
+  const { data, isLoading } = useQuery(useProfile);
+
+  if (isLoading) return <UserInfoLoader />;
 
   return (
     <div className="mb-[7px] flex flex-col justify-end gap-[10px] leading-normal">

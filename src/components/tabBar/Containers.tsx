@@ -7,14 +7,14 @@ import { useState } from "react";
 
 export const Containers = ({ children }: ChildrenProp) => {
   return (
-    <div className="flex z-10 bg-[#fff] pt-[10px] items-start h-[75px] fixed bottom-0 w-full shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
+    <div className="fixed bottom-0 z-10 flex h-[75px] w-full max-w-[600px] items-start bg-[#fff] pt-[10px] shadow-[4px_0px_7px_0px_rgba(0,0,0,0.04)]">
       {children}
     </div>
   );
 };
 
 const Content = ({ children }: ChildrenProp) => {
-  return <div className="flex justify-center w-full h-full">{children}</div>;
+  return <div className="flex h-full w-full justify-center">{children}</div>;
 };
 
 const Item = ({ src, alt, href, label, isActive }: ItemProps) => {
@@ -28,7 +28,7 @@ const Item = ({ src, alt, href, label, isActive }: ItemProps) => {
         }, 200);
       }}
       href={href}
-      className="flex flex-col w-[24%] gap-[4px] items-center"
+      className="flex w-[24%] flex-col items-center gap-[4px]"
     >
       <Image
         src={src}
