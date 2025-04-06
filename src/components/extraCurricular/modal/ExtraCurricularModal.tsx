@@ -17,7 +17,7 @@ export default function ExtraCurricularModal({
   onClose,
   title,
   author,
-  // url,
+  url,
   date,
 }: ExtraCurricularModalProps) {
   return (
@@ -47,7 +47,9 @@ export default function ExtraCurricularModal({
           </div>
         </Sheet.Header>
         <Sheet.Content>
-          <Sheet.Scroller></Sheet.Scroller>
+          <Sheet.Scroller>
+            <iframe src={url} />
+          </Sheet.Scroller>
         </Sheet.Content>
       </Sheet.Container>
     </Sheet>
