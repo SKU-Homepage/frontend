@@ -11,13 +11,13 @@ export const data = [
     title: "공지사항",
     description: "업데이트된 학교 소식을 받아주세요.",
     url: "/notice",
-    src: "/images/color-speaker.svg",
+    src: "/images/color-speaker.png",
   },
   {
     title: "캠퍼스맵",
     description: "현재 준비중입니다.",
     url: "#",
-    src: "/images/school.svg",
+    src: "/images/school.png",
   },
   {
     title: "학사일정",

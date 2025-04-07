@@ -13,7 +13,7 @@ const List = ({ children }: ChildrenProp) => {
 const Item = () => {
   return (
     <div className="flex gap-[15px] py-[18px] pl-[6.6%]">
-      <Image src="/images/color-speaker.svg" width={23} height={23} alt="공지사항" />
+      <Image src="/images/color-speaker.png" width={23} height={23} alt="공지사항" />
       <div className="flex w-[80%] flex-col overflow-hidden text-[#143967]">
         <div className="flex justify-between text-[11px]">
           <h3 className="opacity-62">공지사항 키워드 알림</h3>

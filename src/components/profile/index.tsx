@@ -83,12 +83,12 @@ const Services = () => {
     {
       title: "공지사항",
       url: "/notice",
-      src: "/images/color-speaker.svg",
+      src: "/images/color-speaker.png",
     },
     {
       title: "캠퍼스맵",
       url: "#",
-      src: "/images/school.svg",
+      src: "/images/school.png",
     },
     {
       title: "학사일정",
