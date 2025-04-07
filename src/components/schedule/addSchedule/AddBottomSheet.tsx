@@ -65,7 +65,7 @@ export default function AddBottomSheet({ selectedLectures }: AddBottomSheetProps
       {isExpanded ? <Sheet.Backdrop onTap={handleClose} /> : <></>}
       <Sheet.Container
         className={cn(`left-auto! max-w-xl justify-center`, {
-          "animate-pulse": isPulsing,
+          "animate-dooguen": isPulsing,
         })}
       >
         <Sheet.Header className="flex flex-col items-center justify-center gap-[9px] py-[7px]">

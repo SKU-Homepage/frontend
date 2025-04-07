@@ -4,7 +4,7 @@
   --animate-fade-in: fade-in 0.5s ease-out;
   --animate-fade-in-scale: fade-in-scale 0.5s ease-out;
   --animate-wiggle: wiggle 0.8s infinite ease-in-out;
-  --animate-pulse: pulse 0.3s ease-in-out;
+  --animate-dooguen: pulse 0.3s ease-in-out;
 
   @keyframes fade-in {
     0% {
@@ -17,7 +17,7 @@
     }
   }
 
-  @keyframes pulse {
+  @keyframes dooguen {
     0% {
       transform: translateY(320px) scale(1);
     }
