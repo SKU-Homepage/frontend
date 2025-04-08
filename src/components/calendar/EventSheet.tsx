@@ -8,16 +8,18 @@ import convertEvents from "@/utils/convertEvents";
 import { BAR_OFFSET, BAR_SHRINK_OFFSET, EVENT_COLORS } from "./grid/EventBand";
 import { days } from "./DatePicker";
 import { Sheet, SheetRef } from "react-modal-sheet";
-import dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
 import FloatingActionButton from "./FloatingActionButton";
 import { cn } from "@/utils/cn";
 import { useEffect, useRef, useState } from "react";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 dayjs.extend(isBetween);
 
 interface EventSheetProps {
   events: ReturnType<typeof convertEvents>;
 }
+
+const SNAP_POINTS = [300, 84];
 
 const EventSheet = ({ events }: EventSheetProps) => {
   const [calendar] = useAtom(calendarAtom);
@@ -39,13 +41,15 @@ const EventSheet = ({ events }: EventSheetProps) => {
     const tick = () => {
       const t = getComputedStyle(el).transform;
       const sheetY = parseFloat(t.split(",")[5]) || 0;
-      // console.log("translateY:", y);
+      // console.log("translateY:", sheetY);
 
-      const shrinkingRatio = (sheetY / 150) * BAR_SHRINK_OFFSET; // 애니메이션 비율
+      const shrinkingRatio = sheetY > 150 ? BAR_SHRINK_OFFSET : (sheetY / 150) * BAR_SHRINK_OFFSET; // 애니메이션 비율
 
       const monthView = document.querySelector(".react-calendar__month-view");
+      const defaultSheetHeight = SNAP_POINTS[0] - SNAP_POINTS[1];
       if (monthView) {
-        (monthView as HTMLElement).style.height = `calc(100% - 55px - 300px + ${sheetY}px)`; // Set your desired height here
+        (monthView as HTMLElement).style.height =
+          `calc(100% - 54px - 300px + ${sheetY > defaultSheetHeight ? defaultSheetHeight : sheetY}px)`; // Set your desired height here
       }
 
       const eventBand = document.querySelectorAll("#event-band");
@@ -82,14 +86,14 @@ const EventSheet = ({ events }: EventSheetProps) => {
         onClose={() => {
           ref.current?.snapTo(1);
         }}
-        ref={ref}
         detent="full-height"
-        snapPoints={[300, 100]}
+        snapPoints={SNAP_POINTS}
         initialSnap={1}
+        dragSnapToOrigin
         dragCloseThreshold={1}
-        mountPoint={
-          typeof document !== "undefined" ? document.getElementById("calendar")! : undefined
-        }
+        // mountPoint={
+        //   typeof document !== "undefined" ? document.getElementById("calendar")! : undefined
+        // }
         style={{
           position: "absolute",
           zIndex: 15,
@@ -108,7 +112,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
             </div>
           </Sheet.Header>
-          <div className="flex h-full w-full flex-1 flex-col pb-[70px]">
+          <div className="flex h-full w-full flex-1 flex-col pb-[40px]">
             <div className="px-[20px] py-[20px]">
               <span className="text-[16px] font-[600] text-[#143967]">
                 {calendar.currentDate.getDate()}일 {days[calendar.currentDate.getDay()]}요일{" "}

@@ -85,14 +85,13 @@ export default function Schedule() {
   return (
     <div
       className={cn(
-        "flex h-[calc(100vh_-_55px)] flex-col",
-        calendar.viewMode === "list" && "h-full",
-        isPWA && "h-[calc(100vh_-_55px_-_75px)]"
+        "flex h-[calc(100vh_-_73px)] flex-col",
+        isPWA && "h-[calc(100vh_-_54px_-_75px)]"
       )}
     >
       <div
         className={cn(
-          "z-[9] flex h-[55px] items-center justify-between bg-white p-[20px] pt-0",
+          "z-[9] flex h-[54px] items-center justify-between bg-white p-[20px] pt-0",
           calendar.viewMode === "list" &&
             "sticky top-[73px] w-full shadow-[0px_3.144px_17.135px_0px_rgba(165,176,189,0.22)]"
         )}

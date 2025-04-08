@@ -1,7 +1,9 @@
 import dayjs from "dayjs";
 import Picker from "react-mobile-picker";
 import { cn } from "@/utils/cn";
-import { PickedDate } from "@/stores/calendar";
+import { eventAtom, PickedDate } from "@/stores/calendar";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 
 export const days = ["일", "월", "화", "수", "목", "금", "토", "일"];
 
@@ -10,14 +12,38 @@ interface DatePickerProps {
   onChange: (value: PickedDate) => void;
 }
 
+function parseDateAndHourStringIntoDayjs({ date, hour, minute }: PickedDate) {
+  return dayjs(`${date} ${hour}:${minute}:00`, "YYYY년 M월 D일(dd) HH:mm:ss");
+}
+
+let watchValue: PickedDate;
+
 const DatePicker = ({ date, onChange }: DatePickerProps) => {
   const today = dayjs();
+  const [{ startDate, endDate }, setEvent] = useAtom(eventAtom);
+
+  function isEndDateBeforeStartDate() {
+    if (
+      !parseDateAndHourStringIntoDayjs(endDate).isBefore(parseDateAndHourStringIntoDayjs(startDate))
+    ) {
+      setEvent((prev) => ({ ...prev, canAdd: true }));
+    } else {
+      setEvent((prev) => ({ ...prev, canAdd: false }));
+    }
+  }
+
+  useEffect(() => {
+    isEndDateBeforeStartDate();
+  }, [watchValue]);
 
   return (
     <Picker
       wheelMode="normal"
       value={{ date: date.date, hour: date.hour, minute: date.minute }}
-      onChange={onChange}
+      onChange={(value) => {
+        watchValue = value;
+        onChange(value);
+      }}
       height={120}
       className="relative px-[8px]"
     >
@@ -48,7 +74,7 @@ const DatePicker = ({ date, onChange }: DatePickerProps) => {
       <Picker.Column name="hour" className="!flex-1">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(
           (hour) => (
-            <Picker.Item key={hour} value={hour}>
+            <Picker.Item key={hour} value={String(hour).padStart(2, "0")}>
               {({ selected }) => (
                 <span
                   className={cn(
@@ -56,7 +82,7 @@ const DatePicker = ({ date, onChange }: DatePickerProps) => {
                     selected && "text-[#143967]"
                   )}
                 >
-                  {hour}
+                  {String(hour).padStart(2, "0")}
                 </span>
               )}
             </Picker.Item>
@@ -71,7 +97,7 @@ const DatePicker = ({ date, onChange }: DatePickerProps) => {
         {[...Array(60)]
           .map((_, index) => index)
           .map((minute) => (
-            <Picker.Item key={minute} value={minute}>
+            <Picker.Item key={minute} value={String(minute).padStart(2, "0")}>
               {({ selected }) => (
                 <span
                   className={cn(
@@ -79,7 +105,7 @@ const DatePicker = ({ date, onChange }: DatePickerProps) => {
                     selected && "text-[#143967]"
                   )}
                 >
-                  {minute}
+                  {String(minute).padStart(2, "0")}
                 </span>
               )}
             </Picker.Item>

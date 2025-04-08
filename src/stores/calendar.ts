@@ -14,8 +14,8 @@ export const calendarAtom = atom<CalendarAtomType>({
 
 export interface PickedDate {
   date: string;
-  hour: number;
-  minute: number;
+  hour: string;
+  minute: string;
 }
 
 const formatDateString = (date: Dayjs) =>
@@ -30,6 +30,7 @@ export type EventAtomType = {
   startDate: PickedDate;
   endDate: PickedDate;
   selectedColor: string;
+  canAdd: boolean;
 };
 
 export const eventAtom = atom<EventAtomType>({
@@ -38,14 +39,15 @@ export const eventAtom = atom<EventAtomType>({
   isAllDay: false,
   startDate: {
     date: formatDateString(today),
-    hour: today.hour(),
-    minute: today.minute(),
+    hour: String(today.hour()).padStart(2, "0"),
+    minute: String(today.minute()).padStart(2, "0"),
   },
   // TODO 종료 날짜 = 시작 날짜 + 1시간
   endDate: {
     date: formatDateString(today),
-    hour: today.hour(),
-    minute: today.minute(),
+    hour: String(today.hour()).padStart(2, "0"),
+    minute: String(today.minute()).padStart(2, "0"),
   },
   selectedColor: "#FF9272",
+  canAdd: false,
 });
