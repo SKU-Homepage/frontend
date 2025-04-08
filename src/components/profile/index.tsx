@@ -46,7 +46,7 @@ const WidgetSection = () => {
   ];
 
   return (
-    <div className="mt-[11px] mb-[30px] flex w-full justify-center gap-[2.2%] px-[4.6%]">
+    <div className="mt-[11px] mb-[10px] flex w-full justify-center gap-[2.2%] px-[4.6%]">
       {serviceWidgets.map(({ title, src, url }) => (
         <Widget key={title} url={url} title={title} src={src} />
       ))}
@@ -58,7 +58,7 @@ const Widget = ({ src, title, url }: WidgetProps) => {
   return (
     <Link
       href={url}
-      className="flex aspect-[111/78] flex-1 flex-col items-center justify-center gap-[8px] rounded-[9px] shadow-[1px_1px_3.9px_0px_rgba(68,96,129,0.09)]"
+      className="flex aspect-[111/78] flex-1 flex-col items-center justify-center gap-[8px] rounded-[9px] shadow-[1px_1px_3.9px_0px_rgba(68,96,129,0.09)] transition-all duration-200 active:scale-95 active:bg-gray-200"
     >
       <Image src={src} width={23} height={23} alt={title} />
       <p className="text-[11px] leading-[11.8px]">{title}</p>
@@ -72,9 +72,7 @@ const ServiceSection = ({ children }: ChildrenProp) => {
 
 const ServiceHeader = () => {
   return (
-    <header className="mb-[27px] ml-[4.6%] text-[17px] leading-normal font-semibold">
-      전체 서비스
-    </header>
+    <h2 className="mb-[5px] ml-[4.6%] text-[16px] leading-normal font-semibold">전체 서비스</h2>
   );
 };
 
