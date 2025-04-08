@@ -4,72 +4,32 @@ import DialogModal from "../common/DialogModal";
 import TimeTableDetailModal from "./TimeTableDetailModal";
 import { Lecture } from "@/hooks/scheduleHooks";
 import { cn } from "@/utils/cn";
+import { useLongPress } from "use-long-press";
 
 const LectureCard = ({ data, enrollMode, setSelectedLectures, isSelected }: TimeTableProps) => {
   const [showDetailModal, setShowDetailModal] = useState(false);
-  const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
-  const [wasLongPressed, setWasLongPressed] = useState(false);
 
-  // 길게 눌렀을 때 실행될 함수
   const handleLongPress = () => {
-    setWasLongPressed(true); // 길게 눌렀음을 기록
-
     setSelectedLectures?.((prev) => {
       if (isSelected) {
-        // 현재 선택되어 있다면 제거
         return prev.filter((lecture: Lecture) => lecture.subjectId !== data.subjectId);
       } else {
-        // 선택되어 있지 않다면 추가
         return [...prev, data];
       }
     });
   };
 
-  const handleMouseDown = () => {
-    setWasLongPressed(false); // 새 클릭 시작 시 초기화
-    const timer = setTimeout(() => {
-      handleLongPress(); // 1초 이상 누르면 실행
-    }, 500);
-    setPressTimer(timer);
-  };
-
-  const handleMouseUp = () => {
-    if (pressTimer) {
-      clearTimeout(pressTimer); // 1초 전에 떼면 실행 안 됨
-      setPressTimer(null);
-    }
-  };
-
-  const handlePress = () => {
-    if (!wasLongPressed) {
-      setShowDetailModal(true); // 길게 누르지 않았을 때만 실행
-    }
-  };
-
-  const handleTouchStart = () => {
-    setWasLongPressed(false);
-    const timer = setTimeout(() => {
-      handleLongPress();
-    }, 500);
-    setPressTimer(timer);
-  };
-
-  const handleTouchEnd = () => {
-    if (pressTimer) {
-      clearTimeout(pressTimer);
-      setPressTimer(null);
-    }
-  };
+  const bind = useLongPress(handleLongPress, {
+    onCancel: () => setShowDetailModal(true),
+    threshold: 500,
+    captureEvent: true,
+    cancelOnMovement: true,
+  });
 
   return (
     <>
       <Button
-        onPress={handlePress} // 길게 누르면 실행 안 됨
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart} // 모바일 터치 대응
-        onTouchEnd={handleTouchEnd}
+        {...bind()}
         className={cn(
           `event flex h-auto w-full flex-none items-center justify-between rounded-[5px] bg-[#E7EAED8C] p-[13px] text-[11px] font-medium`,
           {
@@ -86,9 +46,11 @@ const LectureCard = ({ data, enrollMode, setSelectedLectures, isSelected }: Time
         </div>
         <span className="">{data.classroom}</span>
       </Button>
+
       <DialogModal isOpen={showDetailModal} setIsOpen={setShowDetailModal}>
         <TimeTableDetailModal
           setSelectedLectures={setSelectedLectures}
+          isSelected={isSelected}
           data={data}
           onClose={setShowDetailModal}
           enrollMode={enrollMode}

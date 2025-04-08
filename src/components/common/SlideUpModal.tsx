@@ -32,7 +32,7 @@ export default function SlideUpModal({
             className={cn(
               `w-full max-w-xl rounded-t-[20px] bg-white p-[20px] pb-[50px] shadow-lg`,
               {
-                "h-[100dvh]": fullScreen,
+                "h-[100dvh] rounded-[0px]": fullScreen,
               }
             )}
           >
