@@ -27,7 +27,7 @@ const List = () => {
   const convertedCalendarData = convertEvents(cachedCalendarData ?? []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex h-[calc(100vh_-_73px)] flex-col overflow-y-auto">
       {[...Array(dateInDayjs.daysInMonth())]
         .map((_, index) => index + 1)
         .map((day) => {
@@ -70,7 +70,7 @@ const DayBlock = ({ day, rawDate, today, events }: DayBlockProps) => {
   const [, setEvent] = useAtom(eventAtom);
 
   return (
-    <div className="bg-[#E9EFF7] px-[20px] py-[16px]">
+    <div className={cn("bg-[#E9EFF7] px-[20px] py-[16px]", events?.length > 0 && "bg-[#F3F7FD]")}>
       <div className="flex items-center justify-between">
         <span
           className={cn(
@@ -90,13 +90,13 @@ const DayBlock = ({ day, rawDate, today, events }: DayBlockProps) => {
               isAllDay: false,
               startDate: {
                 date: `${rawDate.year()}년 ${rawDate.month() + 1}월 ${rawDate.date()}일(${days[rawDate.day()]})`,
-                hour: rawDate.hour(),
-                minute: rawDate.minute(),
+                hour: String(rawDate.hour()).padStart(2, "0"),
+                minute: String(rawDate.minute()).padStart(2, "0"),
               },
               endDate: {
                 date: `${rawDate.year()}년 ${rawDate.month() + 1}월 ${rawDate.date()}일(${days[rawDate.day()]})`,
-                hour: rawDate.hour(),
-                minute: rawDate.minute(),
+                hour: String(rawDate.hour()).padStart(2, "0"),
+                minute: String(rawDate.minute()).padStart(2, "0"),
               },
               isOpen: true,
             }))
@@ -109,10 +109,10 @@ const DayBlock = ({ day, rawDate, today, events }: DayBlockProps) => {
       {events?.length > 0 && (
         <div className="flex flex-col py-[20px]">
           {events?.map((event) => (
-            <div key={event.id} className="flex items-center gap-[10px]">
-              <SilverDot />
+            <div key={event.id} className="flex items-start gap-[10px] leading-6">
+              <SilverDot className="mt-3 shrink-0" />
               <span className="text-[14px] font-[500] text-[#143967]">{event.title}</span>
-              <span className="text-[11px] font-[400] text-[#143967]">
+              <span className="text-[11px] font-[400] whitespace-nowrap text-[#143967]">
                 {event.startDate} ~ {event.endDate}
               </span>
             </div>

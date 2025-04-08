@@ -11,10 +11,14 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 
+function parseDateStringIntoDayjs(dateString: string) {
+  return dayjs(dateString, "YYYY년 M월 D일(dd)");
+}
+
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
-  const [{ isOpen, title, isAllDay, startDate, endDate, selectedColor }, setEvent] =
+  const [{ isOpen, title, isAllDay, startDate, endDate, selectedColor, canAdd }, setEvent] =
     useAtom(eventAtom);
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
@@ -28,11 +32,11 @@ export const NewEventBottomSheet = () => {
         .post("/calendars/users", {
           title,
           start: {
-            date: dayjs(startDate.date, "YYYY년 M월 D일(dd)").format("YYYY-MM-DD"),
+            date: parseDateStringIntoDayjs(startDate.date).format("YYYY-MM-DD"),
             time: `${startDate.hour}:${startDate.minute}:00`,
           },
           end: {
-            date: dayjs(endDate.date, "YYYY년 M월 D일(dd)").format("YYYY-MM-DD"),
+            date: parseDateStringIntoDayjs(endDate.date).format("YYYY-MM-DD"),
             time: `${endDate.hour}:${endDate.minute}:00`,
           },
           allDay: isAllDay,
@@ -75,7 +79,7 @@ export const NewEventBottomSheet = () => {
             placeholder="제목 입력하기"
             className="ml-[30px] w-full resize-none outline-none placeholder:text-[14px] placeholder:font-[400] placeholder:text-[#14396769]"
             value={title}
-            onChange={(e) => setEvent((prev) => ({ ...prev, title: e.target.value }))}
+            onChange={(e) => setEvent((prev) => ({ ...prev, title: e.target.value.trim() }))}
           ></textarea>
         </div>
         <div className="rounded-[10px] bg-[#d7dee569]">
@@ -136,7 +140,7 @@ export const NewEventBottomSheet = () => {
             )}
           >
             <span>종료</span>
-            <span>
+            <span className={cn(!canAdd && "text-red-500")}>
               {endDate.date} {!isAllDay && `${endDate.hour}:${endDate.minute}`}
             </span>
           </div>
@@ -150,7 +154,8 @@ export const NewEventBottomSheet = () => {
       </div>
       <button
         onClick={() => addEvent()}
-        className="mt-[32px] flex w-full cursor-pointer items-center justify-center rounded-[10px] bg-[#143967] py-[16px] text-[14px] font-[600] text-white"
+        className="mt-[32px] flex w-full cursor-pointer items-center justify-center rounded-[10px] bg-[#143967] py-[16px] text-[14px] font-[600] text-white disabled:bg-[#BDC6D0]"
+        disabled={!canAdd || title.length === 0}
       >
         일정 등록하기
       </button>
