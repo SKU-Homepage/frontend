@@ -12,14 +12,19 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
           <div className="fixed right-[24px] bottom-[83px] z-50 sm:bottom-[30px]">
             <MenuButton
               className={cn(
-                `flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#143967] text-2xl font-bold text-white transition-all duration-500`,
+                `flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#143967] transition-all duration-500`,
                 {
-                  "rotate-405 bg-white text-[#143967]": open,
+                  "rotate-405 bg-white": open,
                   "rotate-0": !open,
                 }
               )}
             >
-              +
+              <Image
+                src={open ? "/images/active-plus.png" : "/images/plus.png"}
+                width={10}
+                height={10}
+                alt="일정 추가"
+              />
             </MenuButton>
             <MenuItems
               transition
