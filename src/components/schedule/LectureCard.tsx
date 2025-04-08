@@ -8,8 +8,10 @@ import { useLongPress } from "use-long-press";
 
 const LectureCard = ({ data, enrollMode, setSelectedLectures, isSelected }: TimeTableProps) => {
   const [showDetailModal, setShowDetailModal] = useState(false);
+  const [didLongPress, setDidLongPress] = useState(false);
 
   const handleLongPress = () => {
+    setDidLongPress(true); // 롱프레스가 발생했음을 저장
     setSelectedLectures?.((prev) => {
       if (isSelected) {
         return prev.filter((lecture: Lecture) => lecture.subjectId !== data.subjectId);
@@ -19,17 +21,24 @@ const LectureCard = ({ data, enrollMode, setSelectedLectures, isSelected }: Time
     });
   };
 
+  const handleClick = () => {
+    if (didLongPress) return; // 롱프레스가 발생했으면 클릭 무시
+    setShowDetailModal(true);
+  };
+
   const bind = useLongPress(handleLongPress, {
-    onCancel: () => setShowDetailModal(true),
     threshold: 500,
     captureEvent: true,
     cancelOnMovement: true,
+    onStart: () => setDidLongPress(false), // 새 터치마다 초기화
+    onCancel: () => setDidLongPress(false), // 롱프레스 실패 시 초기화
   });
 
   return (
     <>
       <Button
         {...bind()}
+        onPress={handleClick}
         className={cn(
           `event flex h-auto w-full flex-none items-center justify-between rounded-[5px] bg-[#E7EAED8C] p-[13px] text-[11px] font-medium`,
           {
