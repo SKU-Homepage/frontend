@@ -105,7 +105,7 @@ const Services = () => {
     },
     {
       title: "문의사항",
-      url: "#",
+      url: "http://pf.kakao.com/_HJtxfn",
       src: "/images/warning.svg",
     },
   ];
