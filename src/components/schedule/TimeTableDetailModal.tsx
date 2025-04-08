@@ -7,11 +7,13 @@ const TimeTableDetailModal = ({
   data,
   onClose,
   enrollMode,
+  isSelected,
 }: TimeTableDetailModalProps) => {
   const selectLecture = () => {
     let isError = false;
     if (setSelectedLectures) {
       setSelectedLectures((prev: Lecture[]) => {
+        if (isSelected) return prev.filter((lecture) => lecture.subjectId !== data.subjectId);
         if (prev.some((lecture) => lecture.subjectId === data.subjectId)) {
           isError = true;
           return prev; // 중복 방지
@@ -48,7 +50,13 @@ const TimeTableDetailModal = ({
           </span>
         </div>
       </div>
-      {enrollMode && <Button msg="강의 선택하기" color="dark" handleClick={selectLecture} />}
+      {enrollMode && (
+        <Button
+          msg={isSelected ? "선택 취소하기" : "강의 선택하기"}
+          color="dark"
+          handleClick={selectLecture}
+        />
+      )}
     </div>
   );
 };
@@ -58,6 +66,7 @@ interface TimeTableDetailModalProps {
   onClose: (isOpen: boolean) => void;
   setSelectedLectures?: React.Dispatch<React.SetStateAction<Lecture[]>>;
   enrollMode?: boolean;
+  isSelected?: boolean;
 }
 
 export default TimeTableDetailModal;
