@@ -18,32 +18,6 @@ interface GridProps {
 const Grid = ({ events }: GridProps) => {
   const [calendar, setCalendarAtom] = useAtom(calendarAtom);
 
-  // useEffect(() => {
-  //   const updateRowHeights = () => {
-  //     const container = document.getElementsByClassName("react-calendar__month-view__days")[0] as
-  //       | HTMLElement
-  //       | undefined;
-
-  //     if (!container) return;
-
-  //     const containerHeight = container.clientHeight;
-  //     console.log(containerHeight);
-  //     const rows = Array.from(container.children) as HTMLElement[];
-  //     const rowHeight = (containerHeight - 300) / rowCount + 24;
-
-  //     rows.forEach((child) => {
-  //       child.style.height = `${rowHeight}px`;
-  //     });
-  //   };
-
-  //   updateRowHeights();
-
-  //   window.addEventListener("resize", updateRowHeights);
-  //   return () => {
-  //     window.removeEventListener("resize", updateRowHeights);
-  //   };
-  // }, []);
-
   return (
     <ReactCalendar
       key={calendar.currentDate.getMonth()} // 월 바뀔 때마다 강제 리렌더링
@@ -52,7 +26,6 @@ const Grid = ({ events }: GridProps) => {
       view="month"
       value={calendar.currentDate}
       onChange={(value) => {
-        console.log(value);
         setCalendarAtom((prev) => ({ ...prev, currentDate: value as Date }));
       }}
       selectRange={false}
@@ -61,11 +34,11 @@ const Grid = ({ events }: GridProps) => {
       tileContent={({ date }) => {
         const _events = events ? events[dayjs(date).format("YYYY-MM-DD")] : [];
 
-        return (
+        return _events && _events?.length > 0 ? (
           <div className="react-calendar__event">
-            {_events && _events?.length > 0 ? <Events events={_events} /> : null}
+            <Events events={_events} />
           </div>
-        );
+        ) : null;
       }}
     />
   );

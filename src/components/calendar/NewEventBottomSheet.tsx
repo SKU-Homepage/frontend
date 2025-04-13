@@ -104,6 +104,7 @@ export const NewEventBottomSheet = () => {
                       hour: prev.startDate.hour,
                       minute: prev.startDate.minute,
                     },
+                    canAdd: true,
                   }))
                 }
               ></div>

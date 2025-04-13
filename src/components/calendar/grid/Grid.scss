@@ -50,7 +50,7 @@
 .react-calendar__month-view__days__day {
   color: #446081;
   text-align: center;
-  font-size: 14.148px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -62,7 +62,7 @@
 }
 
 .react-calendar__tile {
-  padding: 12px 0px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
