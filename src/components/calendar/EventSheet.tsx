@@ -19,7 +19,7 @@ interface EventSheetProps {
   events: ReturnType<typeof convertEvents>;
 }
 
-const SNAP_POINTS = [300, 84];
+const SNAP_POINTS = [290, 84];
 
 const EventSheet = ({ events }: EventSheetProps) => {
   const [calendar] = useAtom(calendarAtom);
@@ -49,7 +49,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
       const defaultSheetHeight = SNAP_POINTS[0] - SNAP_POINTS[1];
       if (monthView) {
         (monthView as HTMLElement).style.height =
-          `calc(100% - 54px - 300px + ${sheetY > defaultSheetHeight ? defaultSheetHeight : sheetY}px)`; // Set your desired height here
+          `calc(100% - 54px - 300px + ${sheetY > defaultSheetHeight ? defaultSheetHeight : sheetY}px)`; // 달력 높이
       }
 
       const eventBand = document.querySelectorAll("#event-band");
@@ -66,7 +66,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
           if (eventTitle) {
             (eventTitle as HTMLElement).style.opacity = `${shrinkingRatio * 100}%`;
           }
-        });
+        }); // 이벤트 띠 동적 높이
       }
 
       id = requestAnimationFrame(tick);
@@ -106,7 +106,14 @@ const EventSheet = ({ events }: EventSheetProps) => {
           }
         }}
       >
-        <Sheet.Container ref={containerRef} style={{ background: "white", borderRadius: 0 }}>
+        <Sheet.Container
+          ref={containerRef}
+          style={{
+            background: "white",
+            borderRadius: 0,
+            boxShadow: "rgba(24, 24, 24, 0.1) 0px -2px 12px 0px",
+          }}
+        >
           <Sheet.Header>
             <div className="flex items-center justify-center pt-[12px]">
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
@@ -155,7 +162,7 @@ interface EventBarProps {
 
 const EventBar = ({ color, name, startDate, endDate }: EventBarProps) => {
   return (
-    <div className="flex h-[60px] shrink-0 items-center bg-white px-[20px]">
+    <div className="flex min-h-[60px] shrink-0 items-center bg-white px-[20px]">
       <div style={{ background: color }} className="h-full w-[8px]"></div>
       <div className="flex w-full items-center justify-between px-[20px] py-[16px]">
         <span className="text-[14px] font-[500] text-[#143967]">{name}</span>

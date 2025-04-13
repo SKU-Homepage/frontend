@@ -5,10 +5,12 @@ import DatePicker from "./DatePicker";
 import ColorPicker from "./ColorPicker";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { calendarAtom, eventAtom } from "@/stores/calendar";
+import { eventAtom } from "@/stores/calendar";
 import { privateApi } from "@/api/axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { toast } from "react-toastify";
+import Toast from "./Toast";
 dayjs.extend(customParseFormat);
 
 function parseDateStringIntoDayjs(dateString: string) {
@@ -23,7 +25,6 @@ export const NewEventBottomSheet = () => {
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
 
-  const [calendar] = useAtom(calendarAtom);
   const queryClient = useQueryClient();
 
   const { mutate: addEvent } = useMutation({
@@ -45,9 +46,13 @@ export const NewEventBottomSheet = () => {
         .then((response) => response.data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["calendar", calendar.currentDate.getMonth()],
+        queryKey: ["personalEvent"],
       });
       setEvent((prev) => ({ ...prev, isOpen: false }));
+      toast(<Toast message="일정 등록 완료!" />);
+    },
+    onError: () => {
+      toast(<Toast message="오류가 발생하였습니다." error />);
     },
   });
 
@@ -105,6 +110,7 @@ export const NewEventBottomSheet = () => {
                       hour: prev.startDate.hour,
                       minute: prev.startDate.minute,
                     },
+                    canAdd: true,
                   }))
                 }
               ></div>
