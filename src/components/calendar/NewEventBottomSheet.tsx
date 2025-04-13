@@ -9,6 +9,8 @@ import { eventAtom } from "@/stores/calendar";
 import { privateApi } from "@/api/axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { toast } from "react-toastify";
+import Toast from "./Toast";
 dayjs.extend(customParseFormat);
 
 function parseDateStringIntoDayjs(dateString: string) {
@@ -47,6 +49,10 @@ export const NewEventBottomSheet = () => {
         queryKey: ["personalEvent"],
       });
       setEvent((prev) => ({ ...prev, isOpen: false }));
+      toast(<Toast message="일정 등록 완료!" />);
+    },
+    onError: () => {
+      toast(<Toast message="오류가 발생하였습니다." error />);
     },
   });
 
