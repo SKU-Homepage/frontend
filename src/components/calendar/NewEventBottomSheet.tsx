@@ -3,18 +3,29 @@ import SlideUpModal from "@/components/common/SlideUpModal";
 import { cn } from "@/utils/cn";
 import DatePicker from "./DatePicker";
 import ColorPicker from "./ColorPicker";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { eventAtom } from "@/stores/calendar";
 import { privateApi } from "@/api/axios";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import { toast } from "react-toastify";
+import Toast from "./Toast";
+dayjs.extend(customParseFormat);
+
+function parseDateStringIntoDayjs(dateString: string) {
+  return dayjs(dateString, "YYYY년 M월 D일(dd)");
+}
 
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
-  const [{ isOpen, title, isAllDay, startDate, endDate, selectedColor }, setEvent] =
+  const [{ isOpen, title, isAllDay, startDate, endDate, selectedColor, canAdd }, setEvent] =
     useAtom(eventAtom);
 
   const [dateSelectorType, setDateSelectorType] = useState<"start" | "end">("start");
+
+  const queryClient = useQueryClient();
 
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
@@ -32,7 +43,14 @@ export const NewEventBottomSheet = () => {
         labelColor: selectedColor,
       }),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["personalEvent"],
+      });
       setEvent((prev) => ({ ...prev, isOpen: false }));
+      toast(<Toast message="일정 등록 완료!" />);
+    },
+    onError: () => {
+      toast(<Toast message="오류가 발생하였습니다." error />);
     },
   });
 
@@ -64,7 +82,7 @@ export const NewEventBottomSheet = () => {
             placeholder="제목 입력하기"
             className="ml-[30px] w-full resize-none outline-none placeholder:text-[14px] placeholder:font-[400] placeholder:text-[#14396769]"
             value={title}
-            onChange={(e) => setEvent((prev) => ({ ...prev, title: e.target.value }))}
+            onChange={(e) => setEvent((prev) => ({ ...prev, title: e.target.value.trim() }))}
           ></textarea>
         </div>
         <div className="rounded-[10px] bg-[#d7dee569]">
@@ -78,7 +96,7 @@ export const NewEventBottomSheet = () => {
             >
               <div
                 className={cn(
-                  "absolute z-[0] h-[16px] w-[20px] cursor-pointer rounded-[8px] bg-[#f6f6f6] transition-all duration-250",
+                  "absolute z-[0] h-[16px] w-[20px] cursor-pointer rounded-[8px] bg-white transition-all duration-250",
                   isAllDay && "translate-x-[16px]"
                 )}
                 onClick={() =>
@@ -90,6 +108,7 @@ export const NewEventBottomSheet = () => {
                       hour: prev.startDate.hour,
                       minute: prev.startDate.minute,
                     },
+                    canAdd: true,
                   }))
                 }
               ></div>
@@ -125,7 +144,7 @@ export const NewEventBottomSheet = () => {
             )}
           >
             <span>종료</span>
-            <span>
+            <span className={cn(!canAdd && "text-red-500")}>
               {endDate.date} {!isAllDay && `${endDate.hour}:${endDate.minute}`}
             </span>
           </div>
@@ -139,7 +158,8 @@ export const NewEventBottomSheet = () => {
       </div>
       <button
         onClick={() => addEvent()}
-        className="mt-[32px] flex w-full cursor-pointer items-center justify-center rounded-[10px] bg-[#143967] py-[16px] text-[14px] font-[600] text-white"
+        className="mt-[32px] flex w-full cursor-pointer items-center justify-center rounded-[10px] bg-[#143967] py-[16px] text-[14px] font-[600] text-white disabled:bg-[#BDC6D0]"
+        disabled={!canAdd || title.length === 0}
       >
         일정 등록하기
       </button>

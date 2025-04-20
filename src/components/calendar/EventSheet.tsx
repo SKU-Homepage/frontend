@@ -5,19 +5,21 @@ import ChevronDownWide from "../../../public/images/chevron_down_wide.svg";
 import Direction from "../../../public/images/direction.svg";
 import { calendarAtom } from "@/stores/calendar";
 import convertEvents from "@/utils/convertEvents";
-import { EVENT_COLORS } from "./grid/EventBand";
+import { BAR_OFFSET, BAR_SHRINK_OFFSET, EVENT_COLORS } from "./grid/EventBand";
 import { days } from "./DatePicker";
-import { Sheet } from "react-modal-sheet";
-import dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
+import { Sheet, SheetRef } from "react-modal-sheet";
 import FloatingActionButton from "./FloatingActionButton";
 import { cn } from "@/utils/cn";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 dayjs.extend(isBetween);
 
 interface EventSheetProps {
   events: ReturnType<typeof convertEvents>;
 }
+
+const SNAP_POINTS = [290, 84];
 
 const EventSheet = ({ events }: EventSheetProps) => {
   const [calendar] = useAtom(calendarAtom);
@@ -27,19 +29,73 @@ const EventSheet = ({ events }: EventSheetProps) => {
 
   const [opened, setOpened] = useState(false);
 
+  const ref = useRef<SheetRef>(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = document.querySelector(".react-modal-sheet-container");
+    if (!el) return;
+
+    let id: number;
+
+    const tick = () => {
+      const t = getComputedStyle(el).transform;
+      const sheetY = parseFloat(t.split(",")[5]) || 0;
+      // console.log("translateY:", sheetY);
+
+      const shrinkingRatio = sheetY > 150 ? BAR_SHRINK_OFFSET : (sheetY / 150) * BAR_SHRINK_OFFSET; // 애니메이션 비율
+
+      const monthView = document.querySelector(".react-calendar__month-view");
+      const defaultSheetHeight = SNAP_POINTS[0] - SNAP_POINTS[1];
+      if (monthView) {
+        (monthView as HTMLElement).style.height =
+          `calc(100% - 54px - 300px + ${sheetY > defaultSheetHeight ? defaultSheetHeight : sheetY}px)`; // 달력 높이
+      }
+
+      const eventBand = document.querySelectorAll("#event-band");
+      if (eventBand) {
+        eventBand.forEach((el) => {
+          (el as HTMLElement).style.height = `${7 + shrinkingRatio}px`;
+
+          (el as HTMLElement).style.setProperty(
+            "--barTopOffset",
+            `${BAR_OFFSET + shrinkingRatio}px`
+          );
+
+          const eventTitle = el.querySelector("#event-title");
+          if (eventTitle) {
+            (eventTitle as HTMLElement).style.opacity = `${shrinkingRatio * 100}%`;
+          }
+        }); // 이벤트 띠 동적 높이
+      }
+
+      id = requestAnimationFrame(tick);
+    };
+
+    id = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <>
       <FloatingActionButton opened={opened} />
 
       <Sheet
         isOpen={true}
-        onClose={() => {}}
+        onClose={() => {
+          ref.current?.snapTo(1);
+        }}
         detent="full-height"
-        snapPoints={[300, 150]}
+        snapPoints={SNAP_POINTS}
         initialSnap={1}
         dragSnapToOrigin
-        dragCloseThreshold={0.1}
+        dragCloseThreshold={1}
+        // mountPoint={
+        //   typeof document !== "undefined" ? document.getElementById("calendar")! : undefined
+        // }
         style={{
+          position: "absolute",
           zIndex: 15,
         }}
         onSnap={(index) => {
@@ -50,14 +106,21 @@ const EventSheet = ({ events }: EventSheetProps) => {
           }
         }}
       >
-        <Sheet.Container style={{ background: "#EEF0F1", border: "none" }}>
+        <Sheet.Container
+          ref={containerRef}
+          style={{
+            background: "white",
+            borderRadius: 0,
+            boxShadow: "rgba(24, 24, 24, 0.1) 0px -2px 12px 0px",
+          }}
+        >
           <Sheet.Header>
             <div className="flex items-center justify-center pt-[12px]">
               <ChevronDownWide className={cn(!opened && "rotate-180")} />
             </div>
           </Sheet.Header>
-          <div className="flex w-full flex-1 flex-col pb-[50px]">
-            <div className="py-[20px] pl-[20px]">
+          <div className="flex h-full w-full flex-1 flex-col pb-[40px]">
+            <div className="px-[20px] py-[20px]">
               <span className="text-[16px] font-[600] text-[#143967]">
                 {calendar.currentDate.getDate()}일 {days[calendar.currentDate.getDay()]}요일{" "}
                 {today.format("YYYY-MM-DD") === currentDateInDayjs.format("YYYY-MM-DD")
@@ -65,7 +128,7 @@ const EventSheet = ({ events }: EventSheetProps) => {
                   : ""}
               </span>
             </div>
-            <div className="flex flex-col gap-[2px]">
+            <div className="flex flex-col gap-[2px] overflow-y-auto">
               {events?.[currentDateInDayjs.format("YYYY-MM-DD")]?.length > 0 ? (
                 events[currentDateInDayjs.format("YYYY-MM-DD")].map((event) => (
                   <EventBar
@@ -99,7 +162,7 @@ interface EventBarProps {
 
 const EventBar = ({ color, name, startDate, endDate }: EventBarProps) => {
   return (
-    <div className="flex h-[60px] items-center bg-[#f6f6f6] px-[20px]">
+    <div className="flex min-h-[60px] shrink-0 items-center bg-white px-[20px]">
       <div style={{ background: color }} className="h-full w-[8px]"></div>
       <div className="flex w-full items-center justify-between px-[20px] py-[16px]">
         <span className="text-[14px] font-[500] text-[#143967]">{name}</span>

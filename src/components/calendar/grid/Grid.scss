@@ -1,7 +1,12 @@
+#calendar {
+  display: flex;
+  flex: 1;
+}
+
 .react-calendar {
   width: 100%;
   border: none;
-  background: #f6f6f6;
+  background: white;
   & abbr {
     text-decoration: none;
   }
@@ -13,6 +18,21 @@
     Noto Sans KR Fallback;
 }
 
+.react-calendar,
+.react-calendar__viewContainer,
+.react-calendar__month-view {
+  height: 100%;
+}
+
+.react-calendar__month-view {
+  height: calc(100% - 73px - 75px - 300px + 150px);
+}
+
+.react-calendar__month-view > div {
+  align-items: unset !important;
+  height: 100%;
+}
+
 .react-calendar__month-view__weekdays__weekday {
   color: #446081;
   text-align: center;
@@ -22,10 +42,15 @@
   line-height: normal;
 }
 
+.react-calendar__month-view__days {
+  height: 100%;
+  align-content: stretch;
+}
+
 .react-calendar__month-view__days__day {
   color: #446081;
   text-align: center;
-  font-size: 14.148px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -37,12 +62,11 @@
 }
 
 .react-calendar__tile {
-  padding: 12px 0px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   & abbr {
-    margin-bottom: 6px;
     width: 36px;
     height: 36px;
     display: flex;
@@ -82,5 +106,4 @@
 
 .react-calendar__event {
   width: 100%;
-  height: 60px;
 }

@@ -83,3 +83,7 @@ input[type="color" i]::-webkit-color-swatch-wrapper {
 input[type="color" i]::-webkit-color-swatch {
   border: none;
 }
+
+.Toastify__progress-bar--wrp {
+  visibility: hidden;
+}

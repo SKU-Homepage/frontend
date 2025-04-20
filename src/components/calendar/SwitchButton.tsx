@@ -11,7 +11,7 @@ const SwitchButton = () => {
     <div className="relative flex items-center rounded-[27px] bg-[#7a8ea75c] p-[2px]">
       <div
         className={cn(
-          "absolute z-[0] h-[30px] w-[50px] rounded-[25px] bg-[#f6f6f6] transition-all duration-300",
+          "absolute z-[0] h-[30px] w-[50px] rounded-[25px] bg-white transition-all duration-300",
           calendar.viewMode === "list" && "translate-x-[46px]"
         )}
       ></div>

@@ -26,7 +26,6 @@ const Grid = ({ events }: GridProps) => {
       view="month"
       value={calendar.currentDate}
       onChange={(value) => {
-        console.log(value);
         setCalendarAtom((prev) => ({ ...prev, currentDate: value as Date }));
       }}
       selectRange={false}
@@ -35,11 +34,11 @@ const Grid = ({ events }: GridProps) => {
       tileContent={({ date }) => {
         const _events = events ? events[dayjs(date).format("YYYY-MM-DD")] : [];
 
-        return (
+        return _events && _events?.length > 0 ? (
           <div className="react-calendar__event">
-            {_events && _events?.length > 0 ? <Events events={_events} /> : null}
+            <Events events={_events} />
           </div>
-        );
+        ) : null;
       }}
     />
   );
