@@ -13,10 +13,6 @@ import { toast } from "react-toastify";
 import Toast from "./Toast";
 dayjs.extend(customParseFormat);
 
-function parseDateStringIntoDayjs(dateString: string) {
-  return dayjs(dateString, "YYYY년 M월 D일(dd)");
-}
-
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
@@ -29,21 +25,19 @@ export const NewEventBottomSheet = () => {
 
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
-      privateApi
-        .post("/calendars/users", {
-          title,
-          start: {
-            date: parseDateStringIntoDayjs(startDate.date).format("YYYY-MM-DD"),
-            time: `${startDate.hour}:${startDate.minute}:00`,
-          },
-          end: {
-            date: parseDateStringIntoDayjs(endDate.date).format("YYYY-MM-DD"),
-            time: `${endDate.hour}:${endDate.minute}:00`,
-          },
-          allDay: isAllDay,
-          labelColor: selectedColor,
-        })
-        .then((response) => response.data),
+      privateApi.post("/calendar/users", {
+        title,
+        start: {
+          date: "2025-04-02",
+          time: "00:00:00",
+        },
+        end: {
+          date: "2025-04-02",
+          time: "00:00:30",
+        },
+        allDay: isAllDay,
+        labelColor: selectedColor,
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["personalEvent"],

@@ -105,3 +105,11 @@ export type Schedule = {
   startTime: string;
   endTime: string;
 };
+
+export type PersonalSchedule = {
+  subject: string;
+  day: string;
+  startTime: string;
+  endTime: string;
+  classroom: string;
+};
