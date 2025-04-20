@@ -13,10 +13,6 @@ import { toast } from "react-toastify";
 import Toast from "./Toast";
 dayjs.extend(customParseFormat);
 
-function parseDateStringIntoDayjs(dateString: string) {
-  return dayjs(dateString, "YYYY년 M월 D일(dd)");
-}
-
 export const NewEventBottomSheet = () => {
   const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);
 
