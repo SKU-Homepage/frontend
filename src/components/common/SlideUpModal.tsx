@@ -16,7 +16,12 @@ export default function SlideUpModal({
   fullScreen,
 }: SlideUpModalProps) {
   return (
-    <Dialog as="div" open={isOpen} className="relative z-25 w-full" onClose={setIsOpen}>
+    <Dialog
+      as="div"
+      open={isOpen}
+      className="relative z-99 w-full"
+      onClose={() => setIsOpen(null as unknown as boolean)}
+    >
       <div className={`fixed inset-0 ${isOpen ? "bg-black/50" : ""}`} aria-hidden="true" />
       <div className="fixed inset-0 flex items-end justify-center">
         <TransitionChild

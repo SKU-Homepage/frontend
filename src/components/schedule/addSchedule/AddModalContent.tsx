@@ -1,15 +1,15 @@
-import ModalBody from "./modalComponents/ModalBody";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
-const AddModalContent = ({ onClose }: AddModalContentProps) => {
+const AddModalContent = ({ title, onClose, children }: AddModalContentProps) => {
   return (
     <>
       <header className="relative flex items-center justify-center">
-        <h1 className="text-[20px] font-semibold text-[#143967]">학교 수업 추가하기</h1>
-        <button onClick={() => onClose(false)} className="absolute right-0 rotate-45 text-[40px]">
+        <h1 className="text-[20px] font-semibold text-[#143967]">{title}</h1>
+        <button onClick={() => onClose(null)} className="absolute right-0 rotate-45 text-[40px]">
           +
         </button>
       </header>
-      <ModalBody />
+      {children}
     </>
   );
 };
@@ -17,5 +17,7 @@ const AddModalContent = ({ onClose }: AddModalContentProps) => {
 export default AddModalContent;
 
 interface AddModalContentProps {
-  onClose: (isOpen: boolean) => void;
+  title: string;
+  onClose: Dispatch<SetStateAction<"school" | "personal" | null>>;
+  children: ReactNode;
 }

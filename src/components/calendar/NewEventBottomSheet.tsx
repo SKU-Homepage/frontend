@@ -18,21 +18,19 @@ export const NewEventBottomSheet = () => {
 
   const { mutate: addEvent } = useMutation({
     mutationFn: () =>
-      privateApi
-        .post("/calendar/users", {
-          title,
-          start: {
-            date: "2025-04-02",
-            time: "00:00:00",
-          },
-          end: {
-            date: "2025-04-02",
-            time: "00:00:30",
-          },
-          allDay: isAllDay,
-          labelColor: selectedColor,
-        })
-        .then((response) => response.data),
+      privateApi.post("/calendar/users", {
+        title,
+        start: {
+          date: "2025-04-02",
+          time: "00:00:00",
+        },
+        end: {
+          date: "2025-04-02",
+          time: "00:00:30",
+        },
+        allDay: isAllDay,
+        labelColor: selectedColor,
+      }),
     onSuccess: () => {
       setEvent((prev) => ({ ...prev, isOpen: false }));
     },

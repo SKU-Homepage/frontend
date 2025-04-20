@@ -1,6 +1,7 @@
 import { cn } from "@/utils/cn";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
   return (
@@ -9,7 +10,7 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
         <>
           {/* 오버레이: MenuItems가 아닌 배경만 흐리게 만듦 */}
           {open && <div className="fixed inset-0 z-40 bg-black/70" onClick={() => {}} />}
-          <div className="fixed right-[24px] bottom-[83px] z-50 sm:bottom-[30px]">
+          <div className="fixed right-[24px] bottom-[83px] z-24 sm:bottom-[30px]">
             <MenuButton
               className={cn(
                 `flex h-[48px] w-[48px] items-center justify-center rounded-full bg-[#143967] transition-all duration-500`,
@@ -33,7 +34,7 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
             >
               <MenuItem>
                 <button
-                  onClick={() => setShowModal(true)}
+                  onClick={() => setShowModal("school")}
                   className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-gray-200"
                 >
                   <Image
@@ -47,7 +48,10 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
                 </button>
               </MenuItem>
               <MenuItem>
-                <button className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-gray-200">
+                <button
+                  onClick={() => setShowModal("personal")}
+                  className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-gray-200"
+                >
                   <Image
                     src="/images/black-memo.png"
                     width={25}
@@ -67,5 +71,5 @@ export default function AddScheduleBtn({ setShowModal }: AddScheduleBtnProps) {
 }
 
 interface AddScheduleBtnProps {
-  setShowModal: (show: boolean) => void;
+  setShowModal: Dispatch<SetStateAction<"school" | "personal" | null>>;
 }
