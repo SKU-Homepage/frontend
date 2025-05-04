@@ -29,7 +29,7 @@ const NoticeButtonSection = () => {
 
   return (
     <section className="px-6">
-      {data?.pages.map((page) =>
+      {data?.pages?.map((page) =>
         page.map((notice) => (
           <NoticeBtn
             key={notice.id}
