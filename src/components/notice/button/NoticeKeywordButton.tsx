@@ -11,7 +11,7 @@ const NoticeKeywordButton = ({ keyword }: NoticeKeywordBtnProps) => {
     <div className="mb-6 flex h-8 w-full items-center justify-between border-b-2 border-[#75869B21] pb-6">
       <p className="ml-1.5 text-[16px] font-medium text-[#143967]">{keyword}</p>
       <button className="mr-1.5 cursor-pointer">
-        <Image src={trashIcon} alt="trash-icon" />
+        <Image src={trashIcon} alt="trash-icon" width={16} height={16} />
       </button>
     </div>
   );
