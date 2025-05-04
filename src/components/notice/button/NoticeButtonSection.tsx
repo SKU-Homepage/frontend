@@ -5,14 +5,13 @@ import { useEffect } from "react";
 import NoticeBtn from "./NoticeBtn";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import { getExtraCurricularPosts } from "@/api/extracurricular-service";
-
+import { getNoticeByPageAndSearchKeyword } from "@/api/notice-service";
 const NoticeButtonSection = () => {
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["notices"],
-    queryFn: ({ pageParam = 0 }) => getExtraCurricularPosts(pageParam),
+    queryFn: ({ pageParam = 0 }) => getNoticeByPageAndSearchKeyword(pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (lastPage.length < 10 ? undefined : allPages.length),
   });
