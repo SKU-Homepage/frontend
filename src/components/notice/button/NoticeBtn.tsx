@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/utils/cn";
-
-import EmptyHeart from "@/assets/images/notice/empty-heart.svg";
-import RigthArrow from "@/assets/images/notice/direction.svg";
-import RightArrow_Favorite from "@/assets/images/notice/arrow-favorite.svg";
-import EmptyHeart_Favorite from "@/assets/images/notice/heart-favortie.svg";
+import Image from "next/image";
 
 import NoticeModal from "../modal/NoticeModal";
 
@@ -42,11 +38,17 @@ const NoticeBtn = ({ noticeTitle, department, type, date, url }: NoticeBtnProps)
         onClick={() => setIsOpen(true)}
       >
         <div className="relative flex h-[20px] flex-1 items-center justify-center">
-          {type === "normal" ? (
-            <EmptyHeart className="mb-5 block" />
-          ) : (
-            <EmptyHeart_Favorite className="mb-5 block" />
-          )}
+          <Image
+            src={
+              type === "normal"
+                ? "/images/notice/empty-heart.svg"
+                : "/images/notice/heart-favortie.svg"
+            }
+            alt="하트 아이콘"
+            width={20}
+            height={20}
+            className="mb-5 block"
+          />
         </div>
 
         <div className="h-full flex-5 flex-col overflow-hidden">
@@ -69,11 +71,17 @@ const NoticeBtn = ({ noticeTitle, department, type, date, url }: NoticeBtnProps)
         </div>
 
         <div className="relative flex h-[20px] flex-1">
-          {type === "normal" ? (
-            <RigthArrow className="ml-7 block" />
-          ) : (
-            <RightArrow_Favorite className="ml-7 block" width="100%" height="100%" />
-          )}
+          <Image
+            src={
+              type === "normal"
+                ? "/images/notice/direction.svg"
+                : "/images/notice/arrow-favorite.svg"
+            }
+            alt="화살표 아이콘"
+            width={20}
+            height={20}
+            className="ml-7 block"
+          />
         </div>
       </button>
       <NoticeModal
