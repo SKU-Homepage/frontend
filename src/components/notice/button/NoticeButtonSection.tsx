@@ -1,16 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import NoticeBtn from "./NoticeBtn";
-import NoticeModal from "../modal/NoticeModal";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { getExtraCurricularPosts } from "@/api/extracurricular-service";
 
 const NoticeButtonSection = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const { ref, inView } = useInView();
 
   const { data, fetchNextPage, isLoading } = useInfiniteQuery({
@@ -39,11 +36,11 @@ const NoticeButtonSection = () => {
             noticeTitle={notice.title}
             type="normal"
             department={notice.author}
-            onClick={() => setIsOpen(true)}
+            date={notice.date}
+            url={notice.url}
           />
         ))
       )}
-      <NoticeModal isOpen={isOpen} onClose={setIsOpen} />
       <div ref={ref}></div>
     </section>
   );
