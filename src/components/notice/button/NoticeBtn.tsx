@@ -18,12 +18,12 @@ interface NoticeBtnProps {
 const NoticeBtn = ({ noticeTitle, department, type, date, url }: NoticeBtnProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  if (
-    typeof noticeTitle === "undefined" ||
-    typeof department === "undefined" ||
-    typeof type === "undefined"
-  )
-    throw new Error("noticeTitle, department, type 중 입력을 안하신 값이 있습니다.");
+  // if (
+  //   typeof noticeTitle === "undefined" ||
+  //   typeof department === "undefined" ||
+  //   typeof type === "undefined"
+  // )
+  //   throw new Error("noticeTitle, department, type 중 입력을 안하신 값이 있습니다.");
 
   return (
     <>
