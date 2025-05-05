@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { cn } from "@/utils/cn";
+
+import NoticeModal from "../modal/NoticeModal";
 
 import EmptyHeart from "@/assets/images/notice/empty-heart.svg";
 import RigthArrow from "@/assets/images/notice/direction.svg";
@@ -12,10 +15,13 @@ interface NoticeBtnProps {
   noticeTitle: string;
   department: string;
   type: ButtonType;
-  onClick: () => void;
+  date: string;
+  url: string;
 }
 
-const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) => {
+const NoticeBtn = ({ noticeTitle, department, type, date, url }: NoticeBtnProps) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   if (
     typeof noticeTitle === "undefined" ||
     typeof department === "undefined" ||
@@ -32,7 +38,7 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
           "bg-[#436185]": type === "favorite",
         }
       )}
-      onClick={() => onClick()}
+      onClick={() => setIsOpen(true)}
     >
       <div className="relative flex h-[20px] flex-1 items-center justify-center">
         {type === "normal" ? (
@@ -68,6 +74,14 @@ const NoticeBtn = ({ noticeTitle, department, type, onClick }: NoticeBtnProps) =
           <RightArrow_Favorite className="ml-7 block" width="100%" height="100%" />
         )}
       </div>
+      <NoticeModal
+        isOpen={isOpen}
+        onClose={setIsOpen}
+        title={noticeTitle}
+        author={department}
+        date={date}
+        url={url}
+      />
     </button>
   );
 };
