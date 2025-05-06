@@ -1,7 +1,7 @@
 "use client";
 
 import { HeaderWithBackButton, HeaderWithTitleAndMention } from "@/components/common";
-import { NoticeBtn } from "@/components/notice";
+// import { NoticeBtn } from "@/components/notice";
 
 export default function FavoriteNotificationPage() {
   return (
