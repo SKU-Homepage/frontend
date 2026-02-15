@@ -2,7 +2,10 @@
 import { heroui } from "@heroui/theme";
 
 /** @type {import('tailwindcss').Config} */
-export const content = ["./node_modules/@heroui/theme/dist/components/(button|ripple|spinner).js"];
+export const content = [
+  "./src/**/*.{js,ts,jsx,tsx}",
+  "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+];
 export const theme = {
   extend: {},
 };

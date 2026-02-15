@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import Providers from "@/utils/Providers";
 import { noto_sans_kr } from "@/styles/fonts/noto_sans_kr";
 import TabBar from "@/components/tabBar";
-import MainWrapper from "@/utils/MainWrapper";
 import Script from "next/script";
 
 export default function RootLayout({
@@ -19,7 +18,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <MainWrapper>{children}</MainWrapper>
+          {children}
           <TabBar />
         </Providers>
         <Script src="/service-worker.js" />
