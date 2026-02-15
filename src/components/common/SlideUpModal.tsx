@@ -20,7 +20,7 @@ export default function SlideUpModal({
       as="div"
       open={isOpen}
       className="relative z-99 w-full"
-      onClose={() => setIsOpen(null as unknown as boolean)}
+      onClose={() => setIsOpen(false)}
     >
       <div className={`fixed inset-0 ${isOpen ? "bg-black/50" : ""}`} aria-hidden="true" />
       <div className="fixed inset-0 flex items-end justify-center">

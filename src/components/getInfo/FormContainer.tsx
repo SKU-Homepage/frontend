@@ -5,26 +5,37 @@ import InputContainer from "./InputContainer";
 import ButtonSection from "./ButtonSection";
 import { useAtom } from "jotai";
 import { userInfo } from "@/stores/atoms";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const FormContainer = () => {
   const [userInfoState] = useAtom(userInfo);
   const inputRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const prevVisibleCountRef = useRef(0);
 
-  const checkVisible = useCallback(
-    (index: number, el: HTMLDivElement | null) => {
-      inputRefs.current[index] = el;
-      const visibleIndex = Object.values(userInfoState).findIndex((val) => val === "" || val === 0);
+  const checkVisible = useCallback((index: number, el: HTMLDivElement | null) => {
+    inputRefs.current[index] = el;
+  }, []);
 
-      if (visibleIndex > 0 && inputRefs.current[visibleIndex]) {
-        inputRefs.current[visibleIndex]?.scrollIntoView({
+  useEffect(() => {
+    const values = Object.values(userInfoState);
+    const visibleCount = values.findIndex((val) => val === "" || val === 0);
+    const effectiveCount = visibleCount === -1 ? values.length : visibleCount;
+
+    if (effectiveCount > prevVisibleCountRef.current) {
+      const targetIndex = effectiveCount;
+      // Dialog 닫힘(200ms) + 포커스 복원 완료 후 스크롤 덮어쓰기
+      const timer = setTimeout(() => {
+        inputRefs.current[targetIndex]?.scrollIntoView({
           behavior: "smooth",
           block: "center",
         });
-      }
-    },
-    [userInfoState]
-  );
+      }, 250);
+      prevVisibleCountRef.current = effectiveCount;
+      return () => clearTimeout(timer);
+    }
+
+    prevVisibleCountRef.current = effectiveCount;
+  }, [userInfoState]);
 
   return (
     <div className="mt-[42px] flex w-full flex-col gap-[35px]">
