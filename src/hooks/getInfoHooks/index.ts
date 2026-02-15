@@ -3,6 +3,10 @@ import { SubmitInfoType } from "@/constants/userInfo";
 import { AxiosError } from "axios";
 
 export const postUserInfo = async (userInfo: SubmitInfoType) => {
+  if (process.env.NODE_ENV === "development") {
+    return { success: true, data: true };
+  }
+
   const baseURL = "/mypage/sku/signup";
 
   try {

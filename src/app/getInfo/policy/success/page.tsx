@@ -1,13 +1,10 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import confetti from "canvas-confetti";
 import Image from "next/image";
 
 export default function Success() {
-  const router = useRouter();
-
   useEffect(() => {
     const duration = 2 * 1000; // 2초
     const animationEnd = Date.now() + duration;
@@ -42,16 +39,16 @@ export default function Success() {
       });
     }, 250);
 
-    // 애니메이션 종료 후 루트 페이지로 이동
+    // 애니메이션 종료 후 React Native로 완료 메시지 전송
     const timeout = setTimeout(() => {
-      router.replace("/");
+      window.ReactNativeWebView?.postMessage(JSON.stringify({ type: "INFO_COMPLETE" }));
     }, duration);
 
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [router]);
+  }, []);
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center gap-[16px] bg-gray-900">
