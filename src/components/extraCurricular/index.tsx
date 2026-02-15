@@ -1,1 +1,1 @@
-export { default as ExtraCurricularPostSection } from "./post/ExtraCurricularPostSection";
+export { default as ExtraCurricularContent } from "./post/ExtraCurricularContent";

@@ -20,71 +20,68 @@ const ExtraCurricularPost = ({
   thumbnail,
   title,
   viewCount,
-  // like,
   url,
 }: ExtraCurricularPostProps) => {
-  const [isOpen, setIsopen] = useState<boolean>(false);
+  const [isOpen, setIsopen] = useState(false);
+
   return (
     <>
-      <article onClick={() => setIsopen(true)}>
-        <figure className="relative h-38 w-full">
+      <article onClick={() => setIsopen(true)} className="cursor-pointer">
+        <div className="relative h-[130px] w-full overflow-hidden rounded-[8px] bg-[#F0F2F5]">
           <Image
-            src={thumbnail ? thumbnail : "/images/extracurricular/default.png"}
-            alt="썸네일 사진"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{
-              height: "130px",
-              width: "100%",
-              objectFit: "fill",
-            }}
-            // placeholder="blur"
+            src={thumbnail || "/images/extracurricular/default.png"}
+            alt="썸네일"
+            fill
+            sizes="50vw"
+            className="object-cover"
           />
-          {/* <button className="absolute top-3 right-3">
-          <Image src="/images/extracurricular/favorite.png" alt="찜" width={11} height={11} />
-        </button> */}
-          <figcaption className="mt-1 truncate text-left text-[14px] font-semibold text-[#143967]">
-            {title}
-          </figcaption>
-        </figure>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+            className="absolute top-[10px] right-[10px] flex h-[24px] w-[24px] items-center justify-center rounded-[4px] bg-white/80"
+          >
+            <Image
+              src="/images/extracurricular/favorite.png"
+              alt="즐겨찾기"
+              width={11}
+              height={14}
+            />
+          </button>
+        </div>
 
-        <div>
-          <p className="text-left text-[10px] text-[#626262]">{department}</p>
+        <p className="mt-[8px] truncate text-[14px] font-semibold text-[#143967]">
+          {title}
+        </p>
+        <p className="mt-[2px] text-[10px] text-[#626262]">{department}</p>
 
-          <div className="flex items-center justify-between">
-            <p className="text-left text-[10px] text-[#B0B0B0]"> {date.slice(0, 10)}</p>
-            <div className="flex">
-              <div className="mr-1 flex items-center justify-center">
-                <Image
-                  src="/images/extracurricular/favoriteCount.png"
-                  width={5}
-                  height={7}
-                  alt="찜 갯수"
-                  style={{
-                    width: "7px",
-                    height: "7px",
-                  }}
-                />
-                <p className="ml-0.5 text-[6px]">10</p>
-              </div>
-              <div className="flex">
-                <Image
-                  src="/images/extracurricular/showCount.png"
-                  width={5}
-                  height={7}
-                  alt="보기 갯수"
-                  style={{
-                    width: "7px",
-                    height: "7px",
-                  }}
-                />
-                <p className="ml-0.5 text-[6px]">{viewCount}</p>
-              </div>
+        <div className="mt-[4px] flex items-center justify-between">
+          <p className="text-[10px] text-[#B0B0B0]">
+            {date.slice(0, 10).replaceAll("-", ".")}
+          </p>
+          <div className="flex items-center gap-[6px]">
+            <div className="flex items-center gap-[2px]">
+              <Image
+                src="/images/extracurricular/favoriteCount.png"
+                width={7}
+                height={7}
+                alt="찜"
+              />
+              <span className="text-[8px] text-[#B0B0B0]">10</span>
+            </div>
+            <div className="flex items-center gap-[2px]">
+              <Image
+                src="/images/extracurricular/showCount.png"
+                width={7}
+                height={7}
+                alt="조회"
+              />
+              <span className="text-[8px] text-[#B0B0B0]">{viewCount}</span>
             </div>
           </div>
         </div>
       </article>
+
       <ExtraCurricularModal
         isOpen={isOpen}
         onClose={setIsopen}

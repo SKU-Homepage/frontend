@@ -1,7 +1,8 @@
 import { AxiosResponse } from "axios";
 import { privateApi } from "./axios";
+import { createPrivateApi } from "./serverAxios";
 
-interface ExtraCurricularPost {
+export interface ExtraCurricularPost {
   id: number;
   title: string;
   author: string;
@@ -42,6 +43,26 @@ export async function getExtraCurricularPosts(
   const res: AxiosResponse<ExtraCurricularGetResponse> =
     await privateApi.get<ExtraCurricularGetResponse>(
       `/ec-notices/sku?page=${page}&author=${author}&sort_index=${sort_index}&search_keyword=${search_keyword}`
+    );
+
+  return res.data.result.ecNoticeList;
+}
+
+export async function getExtraCurricularPostsServer(
+  page = 0,
+  author: "ALL" | "GYOSU-HAKSEUB" | "JINLO_CHWIEOB" | "DAEHAK_HYEOKSIN" = "ALL"
+): Promise<ExtraCurricularPost[]> {
+  if (process.env.NODE_ENV === "development") {
+    const { mockExtraCurricularPosts } = await import(
+      "@/mocks/data/extracurricular"
+    );
+    return mockExtraCurricularPosts;
+  }
+
+  const serverApi = await createPrivateApi();
+  const res: AxiosResponse<ExtraCurricularGetResponse> =
+    await serverApi.get<ExtraCurricularGetResponse>(
+      `/ec-notices/sku?page=${page}&author=${author}&sort_index=DATE`
     );
 
   return res.data.result.ecNoticeList;
